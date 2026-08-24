@@ -423,6 +423,7 @@ a { color: inherit; }
 .china-map { display: block; min-width:0; }
 .china-map-canvas { position: relative; min-height: 480px; overflow: hidden; background: radial-gradient(circle, rgba(42,24,46,.32) 1.1px, transparent 1.8px) 0 0/12px 12px, linear-gradient(115deg, rgba(229,218,249,.52), transparent 45%); }
 .china-map-canvas svg { width: 100%; height: 100%; }
+.map-roller { transform-origin:center center; transform-style:preserve-3d; transition:transform 1100ms cubic-bezier(.22,.61,.36,1); will-change:transform; }
 .map-stage { transform-origin: 0 0; transition: transform 1100ms cubic-bezier(.22,.61,.36,1); }
 .map-stage.reduced { transition: none; }
 .china-outline { fill: rgba(247,246,243,.34); stroke: #6d6170; stroke-width: 1.1; vector-effect: non-scaling-stroke; }
