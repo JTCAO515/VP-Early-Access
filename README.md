@@ -13,7 +13,7 @@ qualifying answers, and state that the iOS and Android apps are in development.
 | Framework | Next.js 16 (App Router), React 19, TypeScript | Same major versions as VP-V4 |
 | Styling | Hand-written CSS in `app/globals.css` | One page, no utility-framework dependency |
 | Fonts | `next/font` (Instrument Serif) | Self-hosted at build time — `fonts.googleapis.com` is unreachable from mainland China |
-| Storage | Pluggable provider (`console` / `feishu` / `webhook`) | Data lands in a table the operator can open from the mainland |
+| Storage | Pluggable provider (`console` / `jotform` / `webhook`) | Server-side waitlist delivery |
 
 No client-side analytics or third-party scripts are loaded.
 
@@ -33,8 +33,8 @@ log, so the page is fully usable before any account exists.
 Set `WAITLIST_PROVIDER` in `.env.local`:
 
 - **`console`** — dev default. Logs to stdout, stores nothing.
-- **`feishu`** — writes one row per signup into a Feishu / Lark Bitable table.
-  Setup walkthrough: [`docs/setup-feishu.md`](docs/setup-feishu.md).
+- **`jotform`** — writes one submission per signup to a JotForm form.
+  Setup walkthrough: [`docs/setup-jotform.md`](docs/setup-jotform.md).
 - **`webhook`** — POSTs the JSON payload to `WAITLIST_WEBHOOK_URL`.
 
 The visitor's browser only ever talks to this site's own `/api/waitlist`. The
@@ -64,10 +64,7 @@ any answer value not defined in `QUESTIONS`.
 has an EN/中文 toggle in the nav. Nothing else needs to be touched to change
 wording, questions, cities, or the itinerary shown in the mockups.
 
-`ACCESS_WINDOW` is the line under the closing call to action. Waitlist pages
-convert better with a concrete window ("early access opens this autumn") than
-with an open-ended promise — that is a public commitment about the launch date,
-so it ships deliberately vague and should be set by the project owner.
+`ACCESS_WINDOW` is the line under the closing call to action.
 
 ## Deployment
 
@@ -76,19 +73,10 @@ Vercel, Cloudflare Pages, Netlify, or any Node host. Set the environment
 variables from `.env.example` in the host's dashboard — no secret belongs in this
 repository.
 
-> **Mainland reachability is a hosting question, not a code question.** Vercel's
-> default domains are not reliably reachable from mainland China. If mainland
-> visitors are in scope, host on a provider that is (or put a mainland CDN with a
-> filed ICP licence in front). The storage provider choice does not solve this.
-
 ## Notes on the map
 
-`components/Constellation.tsx` draws a city network — nodes and arcs — rather
-than a national outline. Publishing a map of China in the mainland requires an
-approved base map and a review number under 《地图管理条例》, and a hand-drawn
-border would be both a legal and an accuracy risk. If an approved base map is
-ever licensed it can be dropped in behind the nodes; the coordinates in
-`CITY_POINTS` stay valid.
+The destination map is generated offline from Natural Earth 1:50m public-domain
+country geometry. Runtime uses the committed SVG paths only.
 
 ## Checks
 

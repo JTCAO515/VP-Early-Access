@@ -1,11 +1,11 @@
 import type { WaitlistSubmission } from "../types";
-import { saveToFeishu } from "./feishu";
+import { saveToJotForm } from "./jotform";
 
-export type ProviderName = "console" | "feishu" | "webhook";
+export type ProviderName = "console" | "jotform" | "webhook";
 
 function providerName(): ProviderName {
   const raw = process.env.WAITLIST_PROVIDER?.trim().toLowerCase();
-  return raw === "feishu" || raw === "webhook" ? raw : "console";
+  return raw === "jotform" || raw === "webhook" ? raw : "console";
 }
 
 async function saveToWebhook(entry: WaitlistSubmission): Promise<void> {
@@ -24,8 +24,8 @@ async function saveToWebhook(entry: WaitlistSubmission): Promise<void> {
 export async function saveSubmission(entry: WaitlistSubmission): Promise<ProviderName> {
   const name = providerName();
   switch (name) {
-    case "feishu":
-      await saveToFeishu(entry);
+    case "jotform":
+      await saveToJotForm(entry);
       break;
     case "webhook":
       await saveToWebhook(entry);

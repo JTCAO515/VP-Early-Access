@@ -2,115 +2,13 @@
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
   "lastUpdated": "2026-08-24T00:00:00Z",
-  "currentPhase": "G2-implementation-complete",
+  "currentPhase": "task-3-in-progress",
   "status": "active",
-  "objective": "Ship a public early access page for VisePanda that collects an email plus at most three qualifying answers into a mainland-accessible online table, and states that the iOS and Android apps are in development.",
-  "acceptedIssue": "direct operator request 2026-08-24: build the VP Early Access page in a new repository",
+  "objective": "Deliver the operator-approved Early Access rewrite with a 12-city interactive China map, server-side Open-Meteo weather and JotForm storage.",
   "owner": "JTCAO515",
-  "fromAgent": "claude-opus-5 (architect)",
-  "intendedNextAgent": "operator, then codex for follow-up issues",
-  "assumptions": [
-    "Audience is both mainland and overseas visitors, so the page ships bilingual EN/ZH with a nav toggle and never calls a third-party service from the visitor's browser.",
-    "The operator owns the Feishu account; no account was created on their behalf.",
-    "No real launch date has been approved, so ACCESS_WINDOW ships as a non-binding phrase.",
-    "Signup counts, press logos and testimonials were omitted rather than fabricated."
-  ],
-  "decisions": [
-    "Custom-designed form posting to an own-origin route handler, instead of embedding a Tencent/Wenjuanxing iframe. Keeps the VisePanda design intact, keeps submission latency off a China-hosted service for overseas visitors, and makes the submit event instrumentable.",
-    "Storage is a provider adapter (console | feishu | webhook). Default console so the page runs with zero configuration; feishu is the intended production provider.",
-    "The map is a node-and-arc city constellation, not a national outline. Publishing a China map in the mainland requires an approved base map and a review number under the Map Management Regulations.",
-    "Fonts are self-hosted via next/font because fonts.googleapis.com is unreachable from mainland China.",
-    "All copy is centralised in lib/copy.ts as { en, zh } pairs."
-  ],
-  "architectureContracts": [
-    "POST /api/waitlist accepts { email, timing?, source?, feature?, lang?, company? } and returns { ok: true } or { error: 'email' | 'rate' | 'server' }.",
-    "A honeypot hit returns 200 { ok: true } and is never persisted.",
-    "Answer values not present in QUESTIONS in lib/copy.ts are dropped to an empty string, never persisted raw.",
-    "The Feishu Bitable table must expose exactly these text columns: Email, Timing, Source, Feature, Lang, Referrer, User Agent, Submitted At.",
-    "Secrets are supplied only through environment variables and never committed."
-  ],
-  "changedFiles": [
-    "app/layout.tsx",
-    "app/page.tsx",
-    "app/globals.css",
-    "app/api/waitlist/route.ts",
-    "components/EarlyAccessPage.tsx",
-    "components/WaitlistForm.tsx",
-    "components/Constellation.tsx",
-    "components/Simulator.tsx",
-    "components/MobileShowcase.tsx",
-    "components/icons.tsx",
-    "lib/copy.ts",
-    "lib/types.ts",
-    "lib/validate.ts",
-    "lib/ratelimit.ts",
-    "lib/providers/index.ts",
-    "lib/providers/feishu.ts",
-    "README.md",
-    "docs/setup-feishu.md"
-  ],
-  "verification": [
-    {
-      "command": "pnpm typecheck",
-      "status": "passed",
-      "summary": "tsc --noEmit clean.",
-      "artifact": null
-    },
-    {
-      "command": "pnpm build",
-      "status": "passed",
-      "summary": "Next.js 16 production build succeeds; / is static, /api/waitlist is dynamic.",
-      "artifact": null
-    },
-    {
-      "command": "curl -X POST /api/waitlist (valid, invalid email, honeypot, unknown answer value, rate limit)",
-      "status": "passed",
-      "summary": "200 for valid, 400 error=email for malformed address, 200 with no persistence for a honeypot hit, unknown answer values dropped to empty string, 429 from the 6th request in a minute.",
-      "artifact": null
-    },
-    {
-      "command": "browser verification at 1440x900 and 375x812, EN and ZH",
-      "status": "passed",
-      "summary": "No console errors, no horizontal overflow, form step 1 to step 2 to success flow works, Chinese headings break cleanly.",
-      "artifact": null
-    },
-    {
-      "command": "feishu provider end-to-end write",
-      "status": "not-run",
-      "summary": "Blocked on operator credentials. The provider is implemented and typechecked but has never written a real Bitable row.",
-      "artifact": null
-    }
-  ],
-  "blockers": [
-    "The Feishu provider cannot be verified end to end until the operator creates the app and supplies the four environment variables."
-  ],
-  "risks": [
-    "Vercel's default domains are not reliably reachable from mainland China. If mainland visitors are in scope, hosting must be chosen accordingly; the storage provider does not solve reachability.",
-    "The rate limiter is in-memory and per instance. It resets on deploy and does not coordinate across serverless instances.",
-    "The page currently carries no social proof. Waitlist pages convert materially better with a real signup counter or early-user quotes, which can only be added once they exist."
-  ],
-  "operatorActions": [
-    "Create the Feishu app and Bitable table by following docs/setup-feishu.md, then set the six environment variables in the hosting dashboard. Do not paste the App Secret into chat or into the repository.",
-    "Decide and set ACCESS_WINDOW in lib/copy.ts to a real launch window, or confirm it should stay non-binding.",
-    "Decide the hosting provider, taking mainland reachability and any ICP filing requirement into account.",
-    "Confirm the contact address in the footer (currently hello@visepanda.com) and the production domain for NEXT_PUBLIC_SITE_URL."
-  ],
-  "rollback": "Set WAITLIST_PROVIDER=console and redeploy: the page keeps working and signups go to the server log instead of Feishu. To remove the page entirely, take down the deployment; nothing in VP-V4 depends on this repository.",
-  "mandatoryReadingOrder": [
-    "README.md",
-    "docs/setup-feishu.md",
-    "lib/copy.ts",
-    "app/api/waitlist/route.ts",
-    "lib/providers/index.ts"
-  ],
-  "nextAction": {
-    "description": "Operator completes docs/setup-feishu.md and sets WAITLIST_PROVIDER=feishu, then confirms one real signup lands in the Bitable table.",
-    "expectedObservation": "A row appears in the Feishu Bitable table with the submitted email and answers.",
-    "command": "curl -i -X POST http://localhost:3000/api/waitlist -H 'Content-Type: application/json' -d '{\"email\":\"check@example.com\"}'"
-  },
-  "provenance": {
-    "designReference": "operator-supplied three-section design sheet (destination overview, execution-logic simulator, mobile app availability)",
-    "brandTokens": "JTCAO515/VP-V4 app/globals.css (ink #2a182e, paper #f7f6f3, lilac #c9a9fa)",
-    "conversionPatterns": "public waitlist-landing-page research, 2026"
-  }
+  "changedFiles": ["scripts/build-map.mjs", "lib/map-geometry.ts", "lib/weather.ts", "components/ChinaMap.tsx", "app/page.tsx", "lib/providers/jotform.ts", "lib/providers/index.ts", "lib/copy.ts", "app/globals.css", "components/EarlyAccessPage.tsx", ".env.example", "README.md", "docs/setup-jotform.md"],
+  "verification": [{"command":"pnpm check","status":"passed","summary":"typecheck and production build passed","artifact":null},{"command":"API regression matrix","status":"passed","summary":"valid 200, invalid email 400, honeypot 200, invalid option 200, sixth request 429 after server restart","artifact":null},{"command":"browser desktop/mobile EN/ZH matrix","status":"not-run","summary":"not run before current handoff","artifact":null},{"command":"JotForm live write","status":"not-run","summary":"awaiting operator environment variables","artifact":null}],
+  "operatorActions": ["Set JOTFORM_API_KEY, JOTFORM_FORM_ID and six JOTFORM_FIELD_* variables only in the hosting environment.", "Bind earlyaccess.go2china.space DNS and Vercel domain.", "Decide confirmation-email behavior."],
+  "rollback": "Set WAITLIST_PROVIDER=console and redeploy; revert map/provider commits if needed.",
+  "nextAction": {"description":"Run frozen API and browser acceptance, then commit on a feature branch and open a PR.","expectedObservation":"All task-3 map interactions and frozen waitlist API checks pass.","command":"pnpm check"}
 }

@@ -1,17 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ACCESS_WINDOW, CITIES, COPY, type Lang } from "@/lib/copy";
-import Constellation from "./Constellation";
+import { ACCESS_WINDOW, COPY, type Lang } from "@/lib/copy";
+import type { CityWeather } from "@/lib/weather";
+import ChinaMap from "./ChinaMap";
 import MobileShowcase from "./MobileShowcase";
 import Simulator from "./Simulator";
 import WaitlistForm from "./WaitlistForm";
 import { ArrowRight } from "./icons";
 
-/** Cities shown as reached in the rail, matching the highlighted nodes. */
-const ACTIVE_CITIES = new Set<string>(["Beijing", "Taipei"]);
-
-export default function EarlyAccessPage() {
+export default function EarlyAccessPage({ weather }: { weather: CityWeather[] }) {
   const [lang, setLang] = useState<Lang>("en");
 
   // Keep the document language in sync so :lang() rules and screen readers agree.
@@ -62,15 +60,7 @@ export default function EarlyAccessPage() {
           <p className="section-lede">{t.destinations.lede[lang]}</p>
 
           <div className="destinations-body">
-            <Constellation />
-            <ul className="city-rail">
-              {CITIES.map((city) => (
-                <li key={city} data-active={ACTIVE_CITIES.has(city)}>
-                  <span className="node" />
-                  {city}
-                </li>
-              ))}
-            </ul>
+            <ChinaMap lang={lang} weather={weather} />
           </div>
         </div>
       </section>
@@ -98,7 +88,8 @@ export default function EarlyAccessPage() {
           <span>
             © {new Date().getFullYear()} {t.brand}. {t.footer.rights[lang]}
           </span>
-          <a href="mailto:hello@visepanda.com">{t.footer.contact[lang]}</a>
+          <a href="https://go2china.space">{t.footer.mainSite[lang]}</a>
+          <a href="mailto:jtcao@go2china.space">{t.footer.contact[lang]}</a>
         </div>
       </footer>
     </div>
