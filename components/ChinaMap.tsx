@@ -47,6 +47,7 @@ export default function ChinaMap({ lang, weather }: Props) {
   return <section className="china-map" ref={ref} aria-label={lang === "zh" ? "中国目的地地图" : "China destination map"}>
     <div className="china-map-canvas">
       <svg className="map-roller" style={{ transform: `perspective(1100px) rotateY(${reduced ? 0 : roll}deg)` }} viewBox={`0 0 ${MAP_VIEWBOX.width} ${MAP_VIEWBOX.height}`} role="img" aria-label={lang === "zh" ? "包含香港、澳门和台湾的中国轮廓与目的地点位" : "China outline with Hong Kong, Macao and Taiwan destination markers"}>
+        <defs><pattern id="map-dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.15" fill="#8b7b90" fillOpacity=".42" /></pattern></defs>
         <g className={reduced ? "map-stage reduced" : "map-stage"} style={{ transform }}>
           {Object.values(CHINA_OUTLINE_PATHS).map((path, index) => <path key={index} d={path} className="china-outline" />)}
           {MAP_CITIES.map((item, index) => { const marker = project(item.lat, item.lon); return <circle key={item.id} className={index === active ? "city-marker active" : "city-marker"} cx={marker.x} cy={marker.y} r="5" onClick={() => focus(index)} />; })}
