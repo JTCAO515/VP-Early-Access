@@ -28,6 +28,8 @@
 - Product Demo interaction matrix — passed at 1440×900 and 375×812 in English and Chinese.
 - Console errors — none.
 - Horizontal page overflow — none at both viewport sizes.
+- GitHub/Vercel production status — passed for commit `1056877`; `https://vp-early-access.vercel.app/` returns 200 with the new Demo content.
+- Custom-domain route — blocked: `https://www.go2china.space/earlyaccess` returns HTTP 410. The separate project that controls `go2china.space` must own this path rewrite; this repository cannot bind a domain path directly.
 - Frozen waitlist API regression — not run in this slice; unchanged and recorded passed in the previous handoff.
 - China-map regression — passed: 37 markers/four outline paths rendered; five-second autoplay advanced, manual selection paused playback, and reduced-motion prevented autoplay.
 - Live JotForm submission — not run; no user email was transmitted during QA.
@@ -35,7 +37,7 @@
 ## Operator actions
 
 1. Confirm the JotForm public URL remains current.
-2. Confirm the Vercel custom-domain binding for `go2china.space/earlyaccess`.
+2. Authorize a separate `/earlyaccess` route or rewrite in the project that controls `go2china.space`; VP-V4 stayed read-only in this task.
 3. Replace the CSS POI/dish image placeholders with approved local assets in a later image pass.
 
 ## Rollback
@@ -44,4 +46,4 @@ Revert the interactive product Demo commit. The frozen API and direct JotForm CT
 
 ## Next action
 
-Verify the GitHub-main Vercel deployment and custom-domain route after release.
+Add and verify the `/earlyaccess` route in the separate project that controls `go2china.space`.

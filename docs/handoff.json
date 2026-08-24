@@ -2,8 +2,8 @@
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
   "lastUpdated": "2026-08-24T14:10:00Z",
-  "currentPhase": "interactive-product-demo-complete",
-  "status": "ready-for-release",
+  "currentPhase": "interactive-product-demo-deployed",
+  "status": "deployed-with-domain-blocker",
   "objective": "Present VisePanda's planned product depth through an interactive browser-framed Early Access demo covering Chatbot, Trip Canvas, long-term traveler memory, Explore tools and user profile controls.",
   "owner": "JTCAO515",
   "changedFiles": [
@@ -47,17 +47,29 @@
       "status": "not-run",
       "summary": "Not submitted; public CTAs continue to link directly to the operator-provided JotForm URL.",
       "artifact": null
+    },
+    {
+      "command": "GitHub/Vercel production status and HTTP smoke test",
+      "status": "passed",
+      "summary": "Commit 1056877 received a successful Vercel status; vp-early-access.vercel.app returned 200 with the new product demo content.",
+      "artifact": "https://vp-early-access.vercel.app/"
+    },
+    {
+      "command": "Custom-domain route smoke test",
+      "status": "blocked",
+      "summary": "https://www.go2china.space/earlyaccess returned HTTP 410. Path routing must be added in the separate project that controls go2china.space; this repository cannot bind a domain path directly.",
+      "artifact": "https://www.go2china.space/earlyaccess"
     }
   ],
   "operatorActions": [
     "Confirm the public JotForm URL remains current.",
-    "Confirm the Vercel custom-domain binding for go2china.space/earlyaccess.",
+    "Add an /earlyaccess rewrite or route in the separate Vercel project that controls go2china.space; VP-V4 remains read-only for this task.",
     "Replace CSS POI and dish image placeholders with approved project-local assets in a later image pass."
   ],
   "rollback": "Revert the interactive product demo commit to restore the prior Early Access feature sections; the waitlist API and direct JotForm CTA remain isolated.",
   "nextAction": {
-    "description": "Verify the GitHub-main Vercel deployment and the custom-domain route after release.",
-    "expectedObservation": "The deployed Early Access page shows the interactive VisePanda demo and all JotForm CTAs retain the configured URL.",
-    "command": "vercel inspect"
+    "description": "Authorize a separate change in the project that controls go2china.space to route /earlyaccess to the deployed Early Access app.",
+    "expectedObservation": "https://www.go2china.space/earlyaccess returns 200 and shows the same release as vp-early-access.vercel.app.",
+    "command": "curl -I https://www.go2china.space/earlyaccess"
   }
 }
