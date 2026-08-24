@@ -13,7 +13,7 @@ const serif = Instrument_Serif({
   variable: "--font-serif",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://earlyaccess.go2china.space";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://earlyaccess.go2china.space";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
