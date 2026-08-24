@@ -56,8 +56,5 @@ export default function ChinaMap({ lang, weather }: Props) {
         {activeWeather ? <small>{weatherLabel(activeWeather.code, lang)} · {Math.round(activeWeather.temperature)}°C</small> : null}
       </aside>
     </div>
-    <div className="city-map-list" role="list">
-      {MAP_CITIES.map((item, index) => <button key={item.id} type="button" aria-pressed={index === active} onClick={() => focus(index)}>{String(index + 1).padStart(2, "0")} <span>{item.name[lang]}</span></button>)}
-    </div>
   </section>;
 }

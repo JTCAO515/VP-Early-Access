@@ -17,8 +17,9 @@ export const CITIES = [
 ] as const;
 
 export const MAP_CITIES = [
-  { id: "beijing", lat: 39.9042, lon: 116.4074, name: { en: "Beijing", zh: "北京" }, place: { en: "The Great Wall (Mutianyu)", zh: "慕田峪长城" } },
-  { id: "shanghai", lat: 31.2304, lon: 121.4737, name: { en: "Shanghai", zh: "上海" }, place: { en: "The Bund", zh: "外滩" } },
+  { id: "beijing", lat: 39.9042, lon: 116.4074, name: { en: "Beijing", zh: "北京" }, place: { en: "The Great Wall (Mutianyu)", zh: "慕田峪长城" } }, { id: "tianjin", lat: 39.3434, lon: 117.3616, name: { en: "Tianjin", zh: "天津" }, place: { en: "Ancient Culture Street", zh: "古文化街" } }, { id: "shijiazhuang", lat: 38.0428, lon: 114.5149, name: { en: "Shijiazhuang", zh: "石家庄" }, place: { en: "Zhengding Ancient City", zh: "正定古城" } }, { id: "taiyuan", lat: 37.8706, lon: 112.5489, name: { en: "Taiyuan", zh: "太原" }, place: { en: "Jinci Temple", zh: "晋祠" } }, { id: "hohhot", lat: 40.8426, lon: 111.7492, name: { en: "Hohhot", zh: "呼和浩特" }, place: { en: "Dazhao Temple", zh: "大召寺" } },
+  { id: "shenyang", lat: 41.8057, lon: 123.4315, name: { en: "Shenyang", zh: "沈阳" }, place: { en: "Mukden Palace", zh: "沈阳故宫" } }, { id: "changchun", lat: 43.8171, lon: 125.3235, name: { en: "Changchun", zh: "长春" }, place: { en: "Puppet Emperor's Palace", zh: "伪满皇宫博物院" } }, { id: "harbin", lat: 45.8038, lon: 126.535, name: { en: "Harbin", zh: "哈尔滨" }, place: { en: "Saint Sophia Cathedral", zh: "圣索菲亚教堂" } },
+  { id: "shanghai", lat: 31.2304, lon: 121.4737, name: { en: "Shanghai", zh: "上海" }, place: { en: "The Bund", zh: "外滩" } }, { id: "nanjing", lat: 32.0603, lon: 118.7969, name: { en: "Nanjing", zh: "南京" }, place: { en: "Sun Yat-sen Mausoleum", zh: "中山陵" } }, { id: "hangzhou", lat: 30.2741, lon: 120.1551, name: { en: "Hangzhou", zh: "杭州" }, place: { en: "West Lake", zh: "西湖" } }, { id: "hefei", lat: 31.8206, lon: 117.2272, name: { en: "Hefei", zh: "合肥" }, place: { en: "Lord Bao Park", zh: "包公园" } }, { id: "fuzhou", lat: 26.0745, lon: 119.2965, name: { en: "Fuzhou", zh: "福州" }, place: { en: "Three Lanes and Seven Alleys", zh: "三坊七巷" } }, { id: "nanchang", lat: 28.682, lon: 115.8579, name: { en: "Nanchang", zh: "南昌" }, place: { en: "Tengwang Pavilion", zh: "滕王阁" } }, { id: "jinan", lat: 36.6512, lon: 117.1201, name: { en: "Jinan", zh: "济南" }, place: { en: "Baotu Spring", zh: "趵突泉" } }, { id: "zhengzhou", lat: 34.7466, lon: 113.6254, name: { en: "Zhengzhou", zh: "郑州" }, place: { en: "Yellow River Scenic Area", zh: "黄河风景名胜区" } }, { id: "wuhan", lat: 30.5928, lon: 114.3055, name: { en: "Wuhan", zh: "武汉" }, place: { en: "Yellow Crane Tower", zh: "黄鹤楼" } }, { id: "changsha", lat: 28.2282, lon: 112.9388, name: { en: "Changsha", zh: "长沙" }, place: { en: "Yuelu Mountain", zh: "岳麓山" } },
   { id: "guangzhou", lat: 23.1291, lon: 113.2644, name: { en: "Guangzhou", zh: "广州" }, place: { en: "Canton Tower", zh: "广州塔" } },
   { id: "shenzhen", lat: 22.5431, lon: 114.0579, name: { en: "Shenzhen", zh: "深圳" }, place: { en: "Window of the World", zh: "世界之窗" } },
   { id: "chengdu", lat: 30.5728, lon: 104.0668, name: { en: "Chengdu", zh: "成都" }, place: { en: "Giant Panda Breeding Base", zh: "大熊猫繁育研究基地" } },
@@ -29,6 +30,7 @@ export const MAP_CITIES = [
   { id: "hong-kong", lat: 22.3193, lon: 114.1694, name: { en: "Hong Kong", zh: "香港" }, place: { en: "Victoria Peak", zh: "太平山顶" } },
   { id: "macao", lat: 22.1987, lon: 113.5439, name: { en: "Macao", zh: "澳门" }, place: { en: "Ruins of St. Paul's", zh: "大三巴牌坊" } },
   { id: "taipei", lat: 25.033, lon: 121.5654, name: { en: "Taipei", zh: "台北" }, place: { en: "Taipei 101", zh: "台北 101" } },
+  { id: "haikou", lat: 20.044, lon: 110.1999, name: { en: "Haikou", zh: "海口" }, place: { en: "Qilou Old Street", zh: "骑楼老街" } }, { id: "nanning", lat: 22.817, lon: 108.3665, name: { en: "Nanning", zh: "南宁" }, place: { en: "Qingxiu Mountain", zh: "青秀山" } }, { id: "guiyang", lat: 26.647, lon: 106.6302, name: { en: "Guiyang", zh: "贵阳" }, place: { en: "Qingyan Ancient Town", zh: "青岩古镇" } }, { id: "xian", lat: 34.3416, lon: 108.9398, name: { en: "Xi'an", zh: "西安" }, place: { en: "Terracotta Warriors", zh: "兵马俑" } }, { id: "lanzhou", lat: 36.0611, lon: 103.8343, name: { en: "Lanzhou", zh: "兰州" }, place: { en: "Yellow River Mother", zh: "黄河母亲" } }, { id: "xining", lat: 36.6171, lon: 101.7782, name: { en: "Xining", zh: "西宁" }, place: { en: "Kumbum Monastery", zh: "塔尔寺" } }, { id: "yinchuan", lat: 38.4872, lon: 106.2309, name: { en: "Yinchuan", zh: "银川" }, place: { en: "Western Xia Tombs", zh: "西夏王陵" } }, { id: "urumqi", lat: 43.8256, lon: 87.6168, name: { en: "Urumqi", zh: "乌鲁木齐" }, place: { en: "Grand Bazaar", zh: "国际大巴扎" } }, { id: "lhasa", lat: 29.652, lon: 91.1721, name: { en: "Lhasa", zh: "拉萨" }, place: { en: "Potala Palace", zh: "布达拉宫" } },
 ] as const;
 
 /** Normalised 0-1 coordinates for the city constellation, x right / y down. */
@@ -191,7 +193,7 @@ export const COPY = {
     },
   },
   destinations: {
-    eyebrow: { en: "01 · Destination overview", zh: "01 · 目的地总览" },
+    eyebrow: { en: "Destination overview", zh: "目的地总览" },
     title: { en: "Twelve cities. One continuous plan.", zh: "十二座城市，一条连贯的行程。" },
     lede: {
       en: "Every leg is checked against real transport, opening hours and pacing before it reaches your itinerary.",
@@ -199,7 +201,7 @@ export const COPY = {
     },
   },
   simulator: {
-    eyebrow: { en: "02 · Execution-logic simulator", zh: "02 · 执行逻辑模拟器" },
+    eyebrow: { en: "Execution-logic simulator", zh: "执行逻辑模拟器" },
     title: { en: "Make the plan work before you leave.", zh: "让行程在出发前走通。" },
     lede: {
       en: "Start from the plan you already have. VisePanda validates it, fixes what breaks, and turns it into something you can execute.",
@@ -215,7 +217,7 @@ export const COPY = {
     footer: { en: "All checks complete. Your trip is ready to go.", zh: "检查已全部完成，行程可以出发。" },
   },
   mobile: {
-    eyebrow: { en: "03 · Mobile app availability", zh: "03 · 移动端进度" },
+    eyebrow: { en: "Mobile app availability", zh: "移动端进度" },
     title: { en: "Your trip, in your pocket.", zh: "把行程装进口袋。" },
     lede: {
       en: "The VisePanda app brings your Trip Canvas to life — day plans, real-time updates, and the next best step, wherever you are.",
