@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent } from "react";
 import { MAP_CITIES, type Lang } from "@/lib/copy";
+import { LANDMARK_ART } from "@/lib/landmarks";
 import { CHINA_OUTLINE_PATHS, CHINA_PROVINCE_PATHS, MAP_VIEWBOX } from "@/lib/map-geometry";
 import { type CityWeather, weatherLabel } from "@/lib/weather";
 
@@ -9,6 +10,9 @@ const CYCLE_MS = 5200;
 const LENS_RADIUS = 132;
 const LENS_SCALE = 2.6;
 const GRATICULE_STEP = 10;
+
+/** Sizes authored in screen units, divided back out of the lens magnification. */
+const g = (value: number) => value / LENS_SCALE;
 
 type Props = { lang: Lang; weather: CityWeather[] };
 type Point = { x: number; y: number };
@@ -113,7 +117,7 @@ export default function ChinaMap({ lang, weather }: Props) {
   }, [active, lens, toCanvasPixels]);
 
   const trackPointer = (event: PointerEvent<SVGSVGElement>) => {
-    if (!finePointer || event.pointerType !== "mouse") return;
+    if (!finePointer || event.pointerType === "touch") return;
     const position = toViewBox(event.clientX, event.clientY);
     if (!position) return;
     setLens(position);
@@ -172,6 +176,11 @@ export default function ChinaMap({ lang, weather }: Props) {
             {lens ? <clipPath id="lens-clip">
               <circle cx={lens.x} cy={lens.y} r={LENS_RADIUS} />
             </clipPath> : null}
+            {MAP_CITIES.map((item) => (
+              <symbol key={item.id} id={`lm-${item.id}`} viewBox="0 0 32 32" className="landmark-art">
+                {(LANDMARK_ART[item.id] ?? []).map((d, index) => <path key={index} d={d} />)}
+              </symbol>
+            ))}
             <radialGradient id="lens-glass" cx=".35" cy=".3" r=".85">
               <stop offset="0" stopColor="#fff" stopOpacity=".34" />
               <stop offset=".55" stopColor="#fff" stopOpacity=".04" />
@@ -219,23 +228,34 @@ export default function ChinaMap({ lang, weather }: Props) {
                       {lang === "zh" ? province.zh : province.en}
                     </text>
                   ))}
-                  {MAP_CITIES.map((item, index) => (
-                    <g key={item.id} className={index === active ? "lens-city active" : "lens-city"}>
-                      <circle
-                        cx={CITY_POINTS[index].x}
-                        cy={CITY_POINTS[index].y}
-                        r={6 / LENS_SCALE}
-                        onClick={() => focus(index)}
-                      />
-                      <text
-                        x={CITY_POINTS[index].x + 9 / LENS_SCALE}
-                        y={CITY_POINTS[index].y + 4 / LENS_SCALE}
-                        fontSize={12 / LENS_SCALE}
-                      >
-                        {item.name[lang]}
-                      </text>
-                    </g>
-                  ))}
+                  {MAP_CITIES.map((item, index) => {
+                    const marker = CITY_POINTS[index];
+                    return (
+                      <g key={item.id} className={index === active ? "lens-city active" : "lens-city"}>
+                        <rect
+                          className="lens-glyph-plate"
+                          x={marker.x - g(13)}
+                          y={marker.y - g(35)}
+                          width={g(26)}
+                          height={g(26)}
+                          rx={g(7)}
+                        />
+                        <use
+                          className="lens-glyph"
+                          href={`#lm-${item.id}`}
+                          x={marker.x - g(10)}
+                          y={marker.y - g(32)}
+                          width={g(20)}
+                          height={g(20)}
+                          strokeWidth={2.6}
+                        />
+                        <circle cx={marker.x} cy={marker.y} r={g(6)} onClick={() => focus(index)} />
+                        <text x={marker.x + g(9)} y={marker.y + g(4)} fontSize={g(12)}>
+                          {item.name[lang]}
+                        </text>
+                      </g>
+                    );
+                  })}
                 </g>
                 <circle cx={lens.x} cy={lens.y} r={LENS_RADIUS} fill="url(#lens-glass)" />
               </g>
@@ -250,6 +270,9 @@ export default function ChinaMap({ lang, weather }: Props) {
             className={`map-callout${pinned ? " pinned" : ""}${lens ? " tracking" : ""}`}
             style={{ left: `${callout.x}px`, top: `${callout.y}px` }}
           >
+            <span className="callout-art" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><use href={`#lm-${city.id}`} strokeWidth={1.3} /></svg>
+            </span>
             <strong>{city.name[lang]}</strong>
             <span>{city.place[lang]}</span>
             {activeWeather ? <small>{weatherLabel(activeWeather.code, lang)} · {Math.round(activeWeather.temperature)}°C</small> : null}

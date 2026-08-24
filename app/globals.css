@@ -459,13 +459,20 @@ a { color: inherit; }
 .city-marker.active { animation: marker-pulse 2.4s ease-in-out infinite; }
 @keyframes marker-pulse { 0%,100% { filter: drop-shadow(0 0 5px rgba(139,91,211,.55)); } 50% { filter: drop-shadow(0 0 12px rgba(139,91,211,.9)); } }
 .map-plate.lensing ~ .map-hint { opacity: 0; }
+
+.landmark-art { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+.lens-glyph { color: #3c3141; }
+.lens-city.active .lens-glyph { color: #6a34c0; }
+.lens-glyph-plate { fill: rgba(255,255,255,.94); stroke: rgba(60,49,65,.28); stroke-width: .5; }
+.lens-city.active .lens-glyph-plate { fill: #fff; stroke: rgba(123,69,207,.55); stroke-width: .8; }
 .map-hint { transition: opacity .25s ease; position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); margin: 0; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.78); border: 1px solid var(--line-soft); color: var(--ink-faint); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; pointer-events: none; }
 
 .map-callout { position: absolute; z-index: 2; width: 210px; padding: 12px; border: 1px solid #ded1ee; border-radius: 14px; background: rgba(255,255,255,.94); box-shadow: 0 14px 32px rgba(42,24,46,.14); transform: translate(-50%, calc(-100% - 16px)); transition: left 420ms cubic-bezier(.22,.61,.36,1), top 420ms cubic-bezier(.22,.61,.36,1); pointer-events: none; }
 .map-callout.tracking { transition: none; }
 .map-callout.pinned { border-color: #9b6de0; box-shadow: 0 16px 36px rgba(107,58,178,.22); }
 .map-callout::after { content:""; position:absolute; left:50%; bottom:-6px; width:11px; height:11px; margin-left:-5.5px; border-right:1px solid #ded1ee; border-bottom:1px solid #ded1ee; border-radius:0 0 3px 0; background:rgba(255,255,255,.94); transform:rotate(45deg); }
-.map-callout::before{content:"";display:block;height:62px;margin:-2px -2px 10px;border-radius:9px;background:linear-gradient(135deg,#35243b 0%,#9171c7 46%,#e5daf9 47%,#f8f6f2 100%)}
+.map-callout .callout-art{display:flex;align-items:center;justify-content:center;height:64px;margin:-2px -2px 10px;border-radius:9px;background:linear-gradient(135deg,#efe7fb 0%,#f8f6f2 55%,#e9dffa 100%);border:1px solid #ece3fa;font-size:0}
+.map-callout .callout-art svg{width:46px;height:46px;color:#4a3a58}
 .map-callout strong,.map-callout span,.map-callout small { display:block; }.map-callout strong{font-size:17px}.map-callout span{margin-top:5px;font-size:12px;color:var(--ink-soft)}.map-callout small{margin-top:7px;font-size:12px;color:#76579a}
 .city-map-list { display:flex; flex-direction:column; justify-content:center; border-left:1px solid var(--line-soft); }
 .city-map-list button { display:flex; gap:10px; align-items:center; min-height:34px; padding:0 10px; color:var(--ink-faint); text-align:left; font-size:12px; }
