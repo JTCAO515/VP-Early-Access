@@ -1,15 +1,8 @@
 export type Lang = "en" | "zh";
 
-/**
- * Soft launch window shown next to the closing CTA.
- *
- * Waitlist pages convert better with a concrete window than with an open-ended
- * "coming soon". This is a public promise about the launch date, so it is left
- * deliberately non-binding until the operator sets a real one.
- */
 export const ACCESS_WINDOW: Record<Lang, string> = {
-  en: "Invites go out in batches, earliest signups first.",
-  zh: "邀请分批发放，越早报名越靠前。",
+  en: "Early access opens this fall.",
+  zh: "早期访问将于今年秋季开放。",
 };
 
 export const CITIES = [
@@ -21,6 +14,21 @@ export const CITIES = [
   "Hong Kong",
   "Macao",
   "Taipei",
+] as const;
+
+export const MAP_CITIES = [
+  { id: "beijing", lat: 39.9042, lon: 116.4074, name: { en: "Beijing", zh: "北京" }, place: { en: "The Great Wall (Mutianyu)", zh: "慕田峪长城" } },
+  { id: "shanghai", lat: 31.2304, lon: 121.4737, name: { en: "Shanghai", zh: "上海" }, place: { en: "The Bund", zh: "外滩" } },
+  { id: "guangzhou", lat: 23.1291, lon: 113.2644, name: { en: "Guangzhou", zh: "广州" }, place: { en: "Canton Tower", zh: "广州塔" } },
+  { id: "shenzhen", lat: 22.5431, lon: 114.0579, name: { en: "Shenzhen", zh: "深圳" }, place: { en: "Window of the World", zh: "世界之窗" } },
+  { id: "chengdu", lat: 30.5728, lon: 104.0668, name: { en: "Chengdu", zh: "成都" }, place: { en: "Giant Panda Breeding Base", zh: "大熊猫繁育研究基地" } },
+  { id: "chongqing", lat: 29.563, lon: 106.5516, name: { en: "Chongqing", zh: "重庆" }, place: { en: "Hongya Cave", zh: "洪崖洞" } },
+  { id: "kunming", lat: 25.0389, lon: 102.7183, name: { en: "Kunming", zh: "昆明" }, place: { en: "Stone Forest", zh: "石林" } },
+  { id: "zhangjiajie", lat: 29.1274, lon: 110.4791, name: { en: "Zhangjiajie", zh: "张家界" }, place: { en: "Zhangjiajie National Forest Park", zh: "张家界国家森林公园" } },
+  { id: "guilin", lat: 25.2736, lon: 110.29, name: { en: "Guilin", zh: "桂林" }, place: { en: "Li River", zh: "漓江" } },
+  { id: "hong-kong", lat: 22.3193, lon: 114.1694, name: { en: "Hong Kong", zh: "香港" }, place: { en: "Victoria Peak", zh: "太平山顶" } },
+  { id: "macao", lat: 22.1987, lon: 113.5439, name: { en: "Macao", zh: "澳门" }, place: { en: "Ruins of St. Paul's", zh: "大三巴牌坊" } },
+  { id: "taipei", lat: 25.033, lon: 121.5654, name: { en: "Taipei", zh: "台北" }, place: { en: "Taipei 101", zh: "台北 101" } },
 ] as const;
 
 /** Normalised 0-1 coordinates for the city constellation, x right / y down. */
@@ -184,7 +192,7 @@ export const COPY = {
   },
   destinations: {
     eyebrow: { en: "01 · Destination overview", zh: "01 · 目的地总览" },
-    title: { en: "Eight cities. One continuous plan.", zh: "八座城市，一条连贯的行程。" },
+    title: { en: "Twelve cities. One continuous plan.", zh: "十二座城市，一条连贯的行程。" },
     lede: {
       en: "Every leg is checked against real transport, opening hours and pacing before it reaches your itinerary.",
       zh: "每一段行程都会先对照真实的交通、开放时间与节奏做验证，再进入你的行程表。",
@@ -235,5 +243,6 @@ export const COPY = {
   footer: {
     rights: { en: "All rights reserved.", zh: "保留所有权利。" },
     contact: { en: "Contact", zh: "联系我们" },
+    mainSite: { en: "VisePanda", zh: "访问 VisePanda" },
   },
 } as const;
