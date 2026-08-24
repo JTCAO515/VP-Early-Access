@@ -13,7 +13,7 @@ qualifying answers, and state that the iOS and Android apps are in development.
 | Framework | Next.js 16 (App Router), React 19, TypeScript | Same major versions as VP-V4 |
 | Styling | Hand-written CSS in `app/globals.css` | One page, no utility-framework dependency |
 | Fonts | `next/font` (Instrument Serif) | Self-hosted at build time — `fonts.googleapis.com` is unreachable from mainland China |
-| Storage | Pluggable provider (`console` / `jotform` / `webhook`) | Server-side waitlist delivery |
+| Signup | Direct JotForm CTA | JotForm owns the hosted submission form |
 
 No client-side analytics or third-party scripts are loaded.
 
@@ -33,8 +33,6 @@ log, so the page is fully usable before any account exists.
 Set `WAITLIST_PROVIDER` in `.env.local`:
 
 - **`console`** — dev default. Logs to stdout, stores nothing.
-- **`jotform`** — writes one submission per signup to a JotForm form.
-  Setup walkthrough: [`docs/setup-jotform.md`](docs/setup-jotform.md).
 - **`webhook`** — POSTs the JSON payload to `WAITLIST_WEBHOOK_URL`.
 
 The visitor's browser only ever talks to this site's own `/api/waitlist`. The

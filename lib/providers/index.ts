@@ -1,11 +1,10 @@
 import type { WaitlistSubmission } from "../types";
-import { saveToJotForm } from "./jotform";
 
-export type ProviderName = "console" | "jotform" | "webhook";
+export type ProviderName = "console" | "webhook";
 
 function providerName(): ProviderName {
   const raw = process.env.WAITLIST_PROVIDER?.trim().toLowerCase();
-  return raw === "jotform" || raw === "webhook" ? raw : "console";
+  return raw === "webhook" ? raw : "console";
 }
 
 async function saveToWebhook(entry: WaitlistSubmission): Promise<void> {
@@ -24,9 +23,6 @@ async function saveToWebhook(entry: WaitlistSubmission): Promise<void> {
 export async function saveSubmission(entry: WaitlistSubmission): Promise<ProviderName> {
   const name = providerName();
   switch (name) {
-    case "jotform":
-      await saveToJotForm(entry);
-      break;
     case "webhook":
       await saveToWebhook(entry);
       break;

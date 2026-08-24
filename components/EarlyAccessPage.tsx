@@ -6,8 +6,9 @@ import type { CityWeather } from "@/lib/weather";
 import ChinaMap from "./ChinaMap";
 import MobileShowcase from "./MobileShowcase";
 import Simulator from "./Simulator";
-import WaitlistForm from "./WaitlistForm";
 import { ArrowRight } from "./icons";
+
+const JOTFORM_URL = "https://form.jotform.com/cjttttt/visepanda-early-access";
 
 export default function EarlyAccessPage({ weather }: { weather: CityWeather[] }) {
   const [lang, setLang] = useState<Lang>("en");
@@ -35,7 +36,7 @@ export default function EarlyAccessPage({ weather }: { weather: CityWeather[] })
           >
             {t.nav.langToggle[lang]}
           </button>
-          <a href="#join" className="pill-button small nav-cta">
+          <a href={JOTFORM_URL} target="_blank" rel="noreferrer" className="pill-button small nav-cta">
             {t.nav.cta[lang]}
           </a>
         </div>
@@ -49,7 +50,9 @@ export default function EarlyAccessPage({ weather }: { weather: CityWeather[] })
             <span className="dot" />
             {t.hero.note[lang]}
           </p>
-          <WaitlistForm lang={lang} />
+          <a href={JOTFORM_URL} target="_blank" rel="noreferrer" className="pill-button hero-cta">
+            {t.nav.cta[lang]} <ArrowRight />
+          </a>
         </div>
       </header>
 
@@ -73,7 +76,7 @@ export default function EarlyAccessPage({ weather }: { weather: CityWeather[] })
           <div className="closing-card">
             <h2 className="display">{t.closing.title[lang]}</h2>
             <p>{t.closing.lede[lang]}</p>
-            <a href="#join" className="pill-button lilac">
+            <a href={JOTFORM_URL} target="_blank" rel="noreferrer" className="pill-button lilac">
               {t.nav.cta[lang]}
               <ArrowRight />
             </a>

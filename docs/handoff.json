@@ -4,11 +4,11 @@
   "lastUpdated": "2026-08-24T00:00:00Z",
   "currentPhase": "task-3-in-progress",
   "status": "active",
-  "objective": "Deliver the operator-approved Early Access rewrite with a 12-city interactive China map, server-side Open-Meteo weather and JotForm storage.",
+  "objective": "Deliver the operator-approved Early Access rewrite with a 12-city interactive China map, server-side Open-Meteo weather and direct JotForm CTAs.",
   "owner": "JTCAO515",
-  "changedFiles": ["scripts/build-map.mjs", "lib/map-geometry.ts", "lib/weather.ts", "components/ChinaMap.tsx", "app/page.tsx", "lib/providers/jotform.ts", "lib/providers/index.ts", "lib/copy.ts", "app/globals.css", "components/EarlyAccessPage.tsx", ".env.example", "README.md", "docs/setup-jotform.md"],
+  "changedFiles": ["scripts/build-map.mjs", "lib/map-geometry.ts", "lib/weather.ts", "components/ChinaMap.tsx", "app/page.tsx", "lib/providers/index.ts", "lib/copy.ts", "app/globals.css", "components/EarlyAccessPage.tsx", ".env.example", "README.md"],
   "verification": [{"command":"pnpm check","status":"passed","summary":"typecheck and production build passed","artifact":null},{"command":"API regression matrix","status":"passed","summary":"valid 200, invalid email 400, honeypot 200, invalid option 200, sixth request 429 after server restart","artifact":null},{"command":"browser desktop/mobile EN/ZH matrix","status":"not-run","summary":"not run before current handoff","artifact":null},{"command":"JotForm live write","status":"not-run","summary":"awaiting operator environment variables","artifact":null}],
-  "operatorActions": ["Set JOTFORM_API_KEY, JOTFORM_FORM_ID and six JOTFORM_FIELD_* variables only in the hosting environment.", "Bind earlyaccess.go2china.space DNS and Vercel domain.", "Decide confirmation-email behavior."],
+  "operatorActions": ["Bind earlyaccess.go2china.space DNS and Vercel domain.", "Confirm the public JotForm URL remains current."],
   "rollback": "Set WAITLIST_PROVIDER=console and redeploy; revert map/provider commits if needed.",
   "nextAction": {"description":"Run frozen API and browser acceptance, then commit on a feature branch and open a PR.","expectedObservation":"All task-3 map interactions and frozen waitlist API checks pass.","command":"pnpm check"}
 }

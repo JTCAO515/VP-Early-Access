@@ -220,6 +220,7 @@ a { color: inherit; }
   background: var(--lilac);
   box-shadow: 0 0 0 4px rgba(201, 169, 250, 0.28);
 }
+.hero-cta { margin-top: 26px; }
 
 /* --------------------------------------------------------------- form ---- */
 
