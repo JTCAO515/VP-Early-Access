@@ -1,14 +1,63 @@
 {
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
-  "lastUpdated": "2026-08-24T00:00:00Z",
-  "currentPhase": "task-3-in-progress",
-  "status": "active",
-  "objective": "Deliver the operator-approved Early Access rewrite with a 12-city interactive China map, server-side Open-Meteo weather and direct JotForm CTAs.",
+  "lastUpdated": "2026-08-24T14:10:00Z",
+  "currentPhase": "interactive-product-demo-complete",
+  "status": "ready-for-release",
+  "objective": "Present VisePanda's planned product depth through an interactive browser-framed Early Access demo covering Chatbot, Trip Canvas, long-term traveler memory, Explore tools and user profile controls.",
   "owner": "JTCAO515",
-  "changedFiles": ["scripts/build-map.mjs", "lib/map-geometry.ts", "lib/weather.ts", "components/ChinaMap.tsx", "app/page.tsx", "lib/providers/index.ts", "lib/copy.ts", "app/globals.css", "components/EarlyAccessPage.tsx", ".env.example", "README.md"],
-  "verification": [{"command":"pnpm check","status":"passed","summary":"typecheck and production build passed","artifact":null},{"command":"API regression matrix","status":"passed","summary":"valid 200, invalid email 400, honeypot 200, invalid option 200, sixth request 429 after server restart","artifact":null},{"command":"browser desktop/mobile EN/ZH matrix","status":"not-run","summary":"not run before current handoff","artifact":null},{"command":"JotForm live write","status":"not-run","summary":"awaiting operator environment variables","artifact":null}],
-  "operatorActions": ["Bind earlyaccess.go2china.space DNS and Vercel domain.", "Confirm the public JotForm URL remains current."],
-  "rollback": "Set WAITLIST_PROVIDER=console and redeploy; revert map/provider commits if needed.",
-  "nextAction": {"description":"Run frozen API and browser acceptance, then commit on a feature branch and open a PR.","expectedObservation":"All task-3 map interactions and frozen waitlist API checks pass.","command":"pnpm check"}
+  "changedFiles": [
+    "components/ProductDemo.tsx",
+    "components/EarlyAccessPage.tsx",
+    "components/ChinaMap.tsx",
+    "lib/copy.ts",
+    "app/globals.css",
+    "public/assets/demo/michael-turner-avatar.png",
+    "docs/interactive-product-demo-plan.md",
+    "docs/handoff.json",
+    "HANDOFF.md"
+  ],
+  "verification": [
+    {
+      "command": "pnpm check",
+      "status": "passed",
+      "summary": "Strict TypeScript and the Next.js production build passed.",
+      "artifact": null
+    },
+    {
+      "command": "Playwright product-demo interaction matrix",
+      "status": "passed",
+      "summary": "1440x900 and 375x812, English and Chinese: Ask, Canvas, dish drawer, Copilot, Explore, tools and User edit/save passed with no console errors or horizontal overflow.",
+      "artifact": "/tmp/vp-demo-desktop.png"
+    },
+    {
+      "command": "Frozen waitlist API regression matrix",
+      "status": "not-run",
+      "summary": "Not rerun because this slice did not modify the frozen API or provider path; the previous handoff recorded it as passed.",
+      "artifact": null
+    },
+    {
+      "command": "Full China map autoplay and reduced-motion regression",
+      "status": "passed",
+      "summary": "37 markers and four outline paths rendered; five-second autoplay advanced, manual city selection paused playback, and reduced-motion prevented autoplay.",
+      "artifact": null
+    },
+    {
+      "command": "Live JotForm submission",
+      "status": "not-run",
+      "summary": "Not submitted; public CTAs continue to link directly to the operator-provided JotForm URL.",
+      "artifact": null
+    }
+  ],
+  "operatorActions": [
+    "Confirm the public JotForm URL remains current.",
+    "Confirm the Vercel custom-domain binding for go2china.space/earlyaccess.",
+    "Replace CSS POI and dish image placeholders with approved project-local assets in a later image pass."
+  ],
+  "rollback": "Revert the interactive product demo commit to restore the prior Early Access feature sections; the waitlist API and direct JotForm CTA remain isolated.",
+  "nextAction": {
+    "description": "Verify the GitHub-main Vercel deployment and the custom-domain route after release.",
+    "expectedObservation": "The deployed Early Access page shows the interactive VisePanda demo and all JotForm CTAs retain the configured URL.",
+    "command": "vercel inspect"
+  }
 }

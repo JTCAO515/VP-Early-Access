@@ -5,7 +5,7 @@ import { MAP_CITIES, type Lang } from "@/lib/copy";
 import { CHINA_OUTLINE_PATHS, MAP_VIEWBOX } from "@/lib/map-geometry";
 import { type CityWeather, weatherLabel } from "@/lib/weather";
 
-const CYCLE_MS = 4000;
+const CYCLE_MS = 5000;
 
 type Props = { lang: Lang; weather: CityWeather[] };
 

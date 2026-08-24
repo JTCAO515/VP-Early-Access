@@ -1,32 +1,47 @@
-# HANDOFF — VP Early Access
+# HANDOFF — VP Early Access interactive product demo
 
-- Objective: bilingual Early Access page with an interactive 12-city China map and direct JotForm CTAs.
-- Branch: feature branch required before PR; never push this work directly to `main`.
-- Rollback: set `WAITLIST_PROVIDER=console` and redeploy; revert the map commit to restore the former static constellation.
+- Objective: show VisePanda’s planned product depth through a fully clickable, browser-framed Demo on the Early Access page.
+- Scope completed: Ask VisePanda, six preset chats, Trip Canvas timeline/map/bookings, Copilot memory, Explore places/tools, User profile editing and a fictional Michael Turner avatar.
+- Public CTA: every Early Access link still points directly to `https://form.jotform.com/cjttttt/visepanda-early-access`.
+- Truth boundary: all conversations, prices, reviews, account details and external-service handoffs are explicit static Demo fixtures; no live booking, Didi, inventory or real user is represented.
 
-## Frozen contracts
+## Frozen contracts preserved
 
-- `POST /api/waitlist` request/response, honeypot behavior, allowlisted answers, two-step form and server-only secrets remain unchanged.
-- All signup CTA links point directly to the configured public JotForm URL; no API key or provider configuration is needed.
+- No frozen waitlist API, validation, rate-limit, form, simulator, mobile showcase or existing icon file was changed.
+- No secret or provider key was added.
+- Product Demo copy is centralized in `lib/copy.ts` and remains bilingual.
+- Michael Turner and `michael.turner@example.com` are fictional; the avatar is a generated project-local asset.
 
-## Current implementation
+## Delivered interaction states
 
-- `scripts/build-map.mjs` converted Natural Earth 1:50m CHN/TWN/HKG/MAC geometry into committed `lib/map-geometry.ts` paths.
-- `ChinaMap` focuses twelve defined cities, pauses on click, observes reduced motion and fetches weather server-side through cached Open-Meteo data.
-- The legacy local waitlist API remains isolated from the public CTA path.
+- Ask: New Chat, Shanghai three-day trip, Shanghai-to-Beijing transport, Beijing luxury hotel, Shanghai restaurants and imported-guide validation.
+- Trip Canvas: synchronized timeline, map and booking-handoff views; chat switches reset the Canvas to its timeline.
+- Restaurant: dish drawer with taste, ingredients, allergen and group-deal preview.
+- Copilot: long-term traveler profile, budget, pace, walking and allergy adaptation.
+- Explore: Shanghai attractions/restaurants/hotels with POI drawers; Beijing, Guangzhou and Shenzhen show scoped preparation states; translation, ride-hailing, visa/regulations and network/SIM tool previews.
+- User: standard account surface plus editable VisePanda memory judgement and visible save feedback.
 
 ## Verification
 
 - `pnpm check` — passed.
-- API regression — passed: valid 200, invalid email 400, honeypot 200, invalid option 200, sixth request 429 after a fresh server restart.
-- Browser acceptance — not yet run in this round.
-- JotForm submission verification — not run in this repository; the hosted form owns it.
+- `git diff --check` — passed.
+- Product Demo interaction matrix — passed at 1440×900 and 375×812 in English and Chinese.
+- Console errors — none.
+- Horizontal page overflow — none at both viewport sizes.
+- Frozen waitlist API regression — not run in this slice; unchanged and recorded passed in the previous handoff.
+- China-map regression — passed: 37 markers/four outline paths rendered; five-second autoplay advanced, manual selection paused playback, and reduced-motion prevented autoplay.
+- Live JotForm submission — not run; no user email was transmitted during QA.
 
 ## Operator actions
 
-1. Bind `earlyaccess.go2china.space` DNS and Vercel domain.
-3. Decide whether to send a confirmation email; this build only records a signup.
+1. Confirm the JotForm public URL remains current.
+2. Confirm the Vercel custom-domain binding for `go2china.space/earlyaccess`.
+3. Replace the CSS POI/dish image placeholders with approved local assets in a later image pass.
+
+## Rollback
+
+Revert the interactive product Demo commit. The frozen API and direct JotForm CTA are isolated from this UI slice.
 
 ## Next action
 
-Run the frozen API and desktop/mobile browser acceptance matrix, then commit from a feature branch and open a PR.
+Verify the GitHub-main Vercel deployment and custom-domain route after release.
