@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { ACCESS_WINDOW, COPY, type Lang } from "@/lib/copy";
 import type { DemoSurface } from "@/lib/demo/features";
 import type { ChatId } from "@/lib/demo/types";
@@ -52,9 +53,9 @@ export default function EarlyAccessPage({ weather }: { weather: CityWeather[] })
           >
             {t.nav.langToggle[lang]}
           </button>
-          <button type="button" className="pill-button small ghost nav-demo" onClick={() => openDemo({ surface: "ask", chatId: "shanghai" })}>
+          <Link className="pill-button small ghost nav-demo" href="/demo">
             {DEMO_UI.shell.openDemo[lang]}
-          </button>
+          </Link>
           <a href={JOTFORM_URL} target="_blank" rel="noreferrer" className="pill-button small nav-cta">
             {t.nav.cta[lang]}
           </a>
@@ -63,7 +64,7 @@ export default function EarlyAccessPage({ weather }: { weather: CityWeather[] })
 
       <header className="hero">
         <div className="wrap hero-layout">
-          <div className="hero-copy"><h1 className="display">{t.hero.title[lang]}</h1><p className="hero-lede">{t.hero.lede[lang]}</p><p className="hero-note"><span className="dot" />{t.hero.note[lang]}</p><div className="hero-actions"><a href={JOTFORM_URL} target="_blank" rel="noreferrer" className="pill-button hero-cta">{t.nav.cta[lang]} <ArrowRight /></a><button type="button" className="pill-button ghost hero-demo" onClick={() => openDemo({ surface: "ask", chatId: "shanghai" })}>{DEMO_UI.shell.openDemo[lang]} <ArrowRight /></button></div></div>
+          <div className="hero-copy"><h1 className="display">{t.hero.title[lang]}</h1><p className="hero-lede">{t.hero.lede[lang]}</p><p className="hero-note"><span className="dot" />{t.hero.note[lang]}</p><div className="hero-actions"><a href={JOTFORM_URL} target="_blank" rel="noreferrer" className="pill-button hero-cta">{t.nav.cta[lang]} <ArrowRight /></a><Link className="pill-button ghost hero-demo" href="/demo">{DEMO_UI.shell.openDemo[lang]} <ArrowRight /></Link></div></div>
           <ChinaMap lang={lang} weather={weather} />
         </div>
       </header>

@@ -49,6 +49,8 @@ Today · Ask VisePanda · Copilot · Tools · Explore · User
 
 Ask and Trip Canvas share a fixture state. Canvas changes must pass through a visible Diff before they can be applied. Copilot owns long-term memory. Tools is a separate top-level surface. Explore contains Places only.
 
+The same product Demo is available as a shareable immersive page at `/demo`. The standalone route keeps the full product shell, language switch and all interactions, and links back to the Early Access page. It reuses `ProductDemo` and `lib/demo/`; it does not carry a second fixture layer.
+
 ## Map contract
 
 - 50 cities total, including Hong Kong, Macao and Taipei;

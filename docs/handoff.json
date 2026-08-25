@@ -2,9 +2,9 @@
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
   "lastUpdated": "2026-08-25T05:04:43Z",
-  "currentPhase": "humanized-public-copy",
-  "status": "merged-deployed-and-production-smoke-passed",
-  "objective": "Install and configure humanizer plus humanizer-zh, rewrite the bilingual public page and visible Demo dialogue, and publish a code-backed Markdown report of every Demo function and layout for formal product development.",
+  "currentPhase": "shareable-standalone-demo",
+  "status": "implemented; pending-merge-and-production-verification",
+  "objective": "Expose the existing immersive Product Demo as a standalone shareable route at /demo without duplicating components or fixture data.",
   "owner": "JTCAO515",
   "fromAgent": "codex",
   "intendedNextAgent": "operator-review",
@@ -13,6 +13,7 @@
   "changedFiles": [
     "AGENTS.md",
     "app/layout.tsx",
+    "app/demo/page.tsx",
     "README.md",
     "HANDOFF.md",
     "app/globals.css",
@@ -21,6 +22,7 @@
     "components/CompetitiveComparison.tsx",
     "components/EarlyAccessPage.tsx",
     "components/ProductDemo.tsx",
+    "components/StandaloneDemoPage.tsx",
     "components/demo/AskSurface.tsx",
     "components/demo/DishDrawer.tsx",
     "components/demo/ExploreSurface.tsx",
@@ -54,6 +56,7 @@
     "Open-Meteo is fetched server-side; failure omits the weather row.",
     "lib/copy.ts owns landing, comparison and shell copy; lib/demo owns product Demo fixtures and Demo UI copy.",
     "Top-level Demo surfaces are Today, Ask, Copilot, Tools, Explore and User.",
+    "The /demo route reuses ProductDemo and lib/demo; standalone mode must not create a second fixture source.",
     "No Canvas change applies without a visible Diff and confirmation.",
     "Copilot owns long-term memory; Tools is top-level; Explore owns Places only.",
     "No public copy may claim existing OTA, hotel, ticketing or ride-hailing partnerships without evidence.",
@@ -90,6 +93,12 @@
       "status": "passed",
       "summary": "No whitespace errors.",
       "artifact": null
+    },
+    {
+      "command": "Standalone /demo local browser QA",
+      "status": "passed",
+      "summary": "Desktop and 390x844 mobile passed direct navigation, reload, EN/Chinese switching, Explore navigation and return-to-home checks without page overflow or console errors.",
+      "artifact": "/tmp/vp-demo-mobile.png"
     },
     {
       "command": "Map city/glyph invariant",
@@ -141,6 +150,7 @@
     }
   ],
   "operatorActions": [
+    "Share and review https://earlyaccess.go2china.space/demo after deployment.",
     "Use docs/interactive-demo-implementation-report.md to plan the formal product implementation.",
     "Confirm the public JotForm URL remains current."
   ],
@@ -160,8 +170,8 @@
     "docs/codex-kickoff.md"
   ],
   "nextAction": {
-    "description": "Turn docs/interactive-demo-implementation-report.md into scoped implementation issues for the formal VisePanda product.",
-    "expectedObservation": "Each issue names the Demo behaviour to preserve, the production contract to add, its dependencies, checks and rollback.",
-    "command": "sed -n '1,260p' docs/interactive-demo-implementation-report.md"
+    "description": "Merge the standalone Demo route to main and verify /demo on desktop and mobile after Vercel succeeds.",
+    "expectedObservation": "Direct navigation and refresh render the immersive Demo, language switching works, and the back link returns to the Early Access page.",
+    "command": "curl -I https://earlyaccess.go2china.space/demo"
   }
 }

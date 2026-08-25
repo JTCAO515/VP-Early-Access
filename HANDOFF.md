@@ -19,6 +19,16 @@
 - Playwright fallback was used after the in-app browser stalled at a 375px viewport. English/Chinese passed at 1440×900, 375×812 and 430×932 with no page overflow or console errors.
 - Production serves the humanized copy and updated metadata. The previous Hero slogan is absent from rendered HTML.
 
+## Current working slice: shareable `/demo`
+
+- Route: `https://earlyaccess.go2china.space/demo`.
+- Reuses the existing `ProductDemo` and `lib/demo/` fixture layer.
+- Standalone mode stays immersive, offers EN/中文 switching and links back to the Early Access page.
+- Main nav and Hero Demo links now open `/demo`; capability cards keep their existing in-page deep links.
+- Embedded Demo behaviour, JotForm CTA and frozen waitlist API remain unchanged.
+- Local production build passed direct load, reload, EN/中文 switching, Explore navigation and return-to-home checks.
+- Desktop 1280×720 and mobile 390×844 rendered without page overflow or console errors.
+
 - Release commit: `799760b` on GitHub `main`
 - Objective: expand the Hero map to 50 destinations, complete every product-plan item previously marked pending, add an honest competitor-category comparison and reconcile the repository documentation.
 - Status: implemented, merged to `main`, deployed by Vercel and production-smoke accepted.

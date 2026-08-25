@@ -41,6 +41,7 @@ export const DEMO_UI = {
     exitFullscreen: { en: "Exit full screen", zh: "退出全屏" },
     escHint: { en: "Esc to exit", zh: "按 Esc 退出" },
     openDemo: { en: "Open the demo", zh: "打开 Demo" },
+    backToEarlyAccess: { en: "Early Access site", zh: "返回主页" },
     mobileNav: { en: "Demo navigation", zh: "Demo 导航" },
   } satisfies Record<string, Localized>,
 

@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { PRODUCT_DEMO, type Lang } from "@/lib/copy";
+import { COPY, PRODUCT_DEMO, type Lang } from "@/lib/copy";
 import { CANVAS } from "@/lib/demo/canvas";
 import { CHATS, CHAT_CONTEXT } from "@/lib/demo/chats";
 import type { DemoSurface } from "@/lib/demo/features";
@@ -24,9 +25,13 @@ export type DemoIntent = { surface: DemoSurface; chatId?: ChatId; nonce: number 
 type Props = {
   lang: Lang;
   fullscreen: boolean;
-  onFullscreen: (value: boolean) => void;
+  onFullscreen?: (value: boolean) => void;
   intent: DemoIntent | null;
+  standalone?: boolean;
+  onLanguageToggle?: () => void;
 };
+
+const NOOP_FULLSCREEN = () => {};
 
 const TOUR: Array<{ surface: DemoSurface; chat?: ChatId; diff?: boolean }> = [
   { surface: "ask", chat: "shanghai" },
@@ -45,7 +50,7 @@ const NAV: Array<{ id: DemoSurface; glyph: string }> = [
 
 const MOBILE_NAV: Array<{ id: DemoSurface; glyph: string }> = [...NAV, { id: "user", glyph: "○" }];
 
-export default function ProductDemo({ lang, fullscreen, onFullscreen, intent }: Props) {
+export default function ProductDemo({ lang, fullscreen, onFullscreen = NOOP_FULLSCREEN, intent, standalone = false, onLanguageToggle }: Props) {
   const ui = PRODUCT_DEMO.ui;
   const [surface, setSurface] = useState<DemoSurface>("ask");
   const [chatId, setChatId] = useState<ChatId>("shanghai");
@@ -88,15 +93,18 @@ export default function ProductDemo({ lang, fullscreen, onFullscreen, intent }: 
     setTourStep(-1);
   }, [intent]);
 
-  // Full screen locks the page behind it and exits on Escape.
+  const immersive = fullscreen || standalone;
+
+  // Immersive mode locks the page behind it. The shareable page stays immersive.
   useEffect(() => {
-    if (!fullscreen) return;
+    if (!immersive) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    if (standalone) return () => { document.body.style.overflow = previous; };
     const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") onFullscreen(false); };
     window.addEventListener("keydown", onKey);
     return () => { document.body.style.overflow = previous; window.removeEventListener("keydown", onKey); };
-  }, [fullscreen, onFullscreen]);
+  }, [immersive, standalone, onFullscreen]);
 
   const openMemory = (memoryId: string) => {
     setSurface("copilot");
@@ -117,26 +125,33 @@ export default function ProductDemo({ lang, fullscreen, onFullscreen, intent }: 
   };
 
   return (
-    <section className="section product-demo-section" id="product-demo">
-      <div className="wrap">
-        <h2 className="display">{ui.sectionTitle[lang]}</h2>
-        <p className="section-lede">{ui.sectionLede[lang]}</p>
+    <section className={standalone ? "section product-demo-section demo-standalone" : "section product-demo-section"} id="product-demo">
+      <div className={standalone ? "demo-standalone-inner" : "wrap"}>
+        {standalone ? null : <h2 className="display">{ui.sectionTitle[lang]}</h2>}
+        {standalone ? null : <p className="section-lede">{ui.sectionLede[lang]}</p>}
 
-        <div className={fullscreen ? "demo-frame fullscreen" : "demo-frame"}>
+        <div className={immersive ? `demo-frame fullscreen${standalone ? " standalone" : ""}` : "demo-frame"}>
           <div className="demo-browser" aria-label="Interactive VisePanda product demo">
             <header className="demo-browser-bar">
               <span className="demo-browser-dots"><i /><i /><i /></span>
               <span className="demo-address"><ToolGlyph name="lock" />{PRODUCT_DEMO.address}</span>
               <div className="demo-bar-right">
                 <span className="vp-fixture" title={DEMO_UI.fixtureLong[lang]}>{DEMO_UI.fixture[lang]}</span>
-                <button
-                  className="vp-fullscreen"
-                  onClick={() => onFullscreen(!fullscreen)}
-                  aria-label={fullscreen ? DEMO_UI.shell.exitFullscreen[lang] : DEMO_UI.shell.fullscreen[lang]}
-                >
-                  <ToolGlyph name={fullscreen ? "collapse" : "expand"} />
-                  <span>{fullscreen ? DEMO_UI.shell.exitFullscreen[lang] : DEMO_UI.shell.fullscreen[lang]}</span>
-                </button>
+                {standalone ? (
+                  <>
+                    <button className="vp-demo-language" onClick={onLanguageToggle} aria-label={lang === "en" ? "Switch to Chinese" : "切换到英文"}>{COPY.nav.langToggle[lang]}</button>
+                    <Link className="vp-demo-back" href="/">{DEMO_UI.shell.backToEarlyAccess[lang]}</Link>
+                  </>
+                ) : (
+                  <button
+                    className="vp-fullscreen"
+                    onClick={() => onFullscreen(!fullscreen)}
+                    aria-label={fullscreen ? DEMO_UI.shell.exitFullscreen[lang] : DEMO_UI.shell.fullscreen[lang]}
+                  >
+                    <ToolGlyph name={fullscreen ? "collapse" : "expand"} />
+                    <span>{fullscreen ? DEMO_UI.shell.exitFullscreen[lang] : DEMO_UI.shell.fullscreen[lang]}</span>
+                  </button>
+                )}
               </div>
             </header>
 
@@ -228,7 +243,7 @@ export default function ProductDemo({ lang, fullscreen, onFullscreen, intent }: 
               <span className="vp-status-context">
                 <b>{DEMO_UI.status.trip[lang]}</b>{currentDoc.title[lang]}
                 <i>·</i><b>{DEMO_UI.status.context[lang]}</b>{CHAT_CONTEXT[chatId][lang]}
-                <i>·</i>{DEMO_UI.localTime[lang]}{fullscreen ? ` · ${DEMO_UI.shell.escHint[lang]}` : ""}
+                <i>·</i>{DEMO_UI.localTime[lang]}{fullscreen && !standalone ? ` · ${DEMO_UI.shell.escHint[lang]}` : ""}
               </span>
               <div className="vp-state-legend">
                 <small>{DEMO_UI.status.states[lang]}</small>

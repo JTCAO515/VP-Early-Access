@@ -116,6 +116,18 @@ Demo 的核心不是“AI 给出一份行程”，而是下面四件事：
 - Diff、POI 详情和菜品详情改成底部抽屉；
 - 交通、酒店等对比表改成纵向卡片，避免页面横向滚动。
 
+### 4.4 独立分享页 `/demo`
+
+`https://earlyaccess.go2china.space/demo` 是 Demo 的独立沉浸式入口。
+
+- 直接访问或刷新 `/demo` 都会进入完整产品框架；
+- 页面始终保持全屏，不依赖主页的全屏状态；
+- 浏览器栏提供中英文切换；
+- “返回主页”回到 Early Access 页；
+- 主页 nav 和 Hero 的“打开 Demo”都指向这个地址；
+- 六张能力卡继续使用主页内的定向深链；
+- 独立页和主页内嵌 Demo 共用同一个 `ProductDemo` 和同一份 `lib/demo/` fixture。
+
 ## 五、全局状态、来源与置信度
 
 Demo 使用四种统一状态：
@@ -642,7 +654,9 @@ Demo 外有六张能力卡：
 | `components/DemoFeatures.tsx` | 六张能力卡 |
 | `components/CompetitiveComparison.tsx` | 竞品品类对照 |
 | `components/ProductDemo.tsx` | Demo 浏览器壳、导航、状态栏、引导 |
+| `components/StandaloneDemoPage.tsx` | `/demo` 的语言状态和沉浸式页面装配 |
 | `components/ChinaMap.tsx` | 50 城地图与放大镜 |
+| `app/demo/page.tsx` | 可分享 Demo 路由与 metadata |
 
 ### 18.2 Demo 界面
 
