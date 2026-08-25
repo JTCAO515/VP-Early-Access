@@ -32,6 +32,16 @@ function nextStop(turns: { chips?: Localized[] }[], from: number) {
   return turns.length;
 }
 
+/**
+ * Every chat opens on at least two exchanges, so a visitor sees a conversation
+ * rather than a single question. Always end on an assistant turn.
+ */
+function openingShown(turns: Array<{ role: "user" | "assistant"; chips?: Localized[] }>) {
+  let shown = Math.min(turns.length, Math.max(nextStop(turns, 0), 4));
+  if (turns[shown - 1]?.role === "user" && shown < turns.length) shown += 1;
+  return shown;
+}
+
 export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpenDishes, onOpenTool }: Props) {
   const doc = CANVAS[chatId];
   const turns = CONVERSATIONS[chatId];
@@ -41,7 +51,7 @@ export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpen
   const [versionId, setVersionId] = useState(doc.versions.at(-1)?.id ?? "");
   const [diffOpen, setDiffOpen] = useState(false);
   const [decisions, setDecisions] = useState<Record<string, Decision>>({});
-  const [shown, setShown] = useState(() => nextStop(turns, 0));
+  const [shown, setShown] = useState(() => openingShown(turns));
   const [openNode, setOpenNode] = useState<string | null>(null);
 
   useEffect(() => {
@@ -49,7 +59,7 @@ export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpen
     setVersionId(CANVAS[chatId].versions.at(-1)?.id ?? "");
     setDiffOpen(false);
     setDecisions({});
-    setShown(nextStop(CONVERSATIONS[chatId], 0));
+    setShown(openingShown(CONVERSATIONS[chatId]));
     setOpenNode(null);
   }, [chatId]);
 
@@ -99,6 +109,7 @@ export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpen
           <button className={tab === "bookings" ? "active" : ""} onClick={() => setTab("bookings")}>{ui.canvas.bookings[lang]}</button>
         </div>
 
+        <div className="demo-canvas-body">
         {doc.diff && pending > 0 && !diffOpen ? (
           <button className="vp-diff-banner" onClick={() => setDiffOpen(true)}>
             <b>{doc.diff.summary[lang]}</b>
@@ -190,6 +201,7 @@ export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpen
             ))}
           </div>
         ) : null}
+        </div>
       </section>
 
       <section className="demo-chat" aria-label="Chatbot demo">
@@ -273,7 +285,10 @@ function CompareBlock({ lang, doc }: { lang: Lang; doc: (typeof CANVAS)[ChatId] 
       <div className="vp-compare-scroll">
         <table>
           <thead>
-            <tr><th /> {table.options.map((option, index) => <th key={index}>{option[lang]}</th>)}</tr>
+            <tr>
+              <th />
+              {table.options.map((option, index) => <th key={index}>{option[lang]}</th>)}
+            </tr>
           </thead>
           <tbody>
             {table.rows.map((row, index) => (

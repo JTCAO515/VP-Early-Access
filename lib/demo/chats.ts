@@ -198,6 +198,11 @@ export const CONVERSATIONS: Record<ChatId, Turn[]> = {
       role: "assistant",
       text: { en: "The problem is 'Shanghai → Xi'an after dinner'. The last departure leaves before your dinner ends, and hotel check-in would land after midnight. I've explained it before changing anything.", zh: "问题出在「晚餐后上海前往西安」。末班车早于你的晚餐结束时间，酒店入住会落在午夜之后。我先解释，再动行程。" },
       confidence: "high",
+      chips: [
+        { en: "What do you suggest instead?", zh: "那你建议怎么改？" },
+        { en: "Keep it, I'll skip dinner", zh: "保留，我不吃晚餐了" },
+        { en: "Show me the evidence", zh: "给我看依据" },
+      ],
       evidence: [{ kind: "official", label: { en: "Rail official channel", zh: "铁路官方渠道" }, checked: { en: "Demo recheck: 2d ago", zh: "Demo 复核：2 天前" } }],
     },
     { role: "user", text: { en: "What do you suggest instead?", zh: "那你建议怎么改？" } },
@@ -331,6 +336,11 @@ export const CONVERSATIONS: Record<ChatId, Turn[]> = {
     {
       role: "assistant",
       text: { en: "Both are proposals, not edits. Nothing on your Canvas has changed yet.", zh: "两条都是提案，不是修改。你的 Canvas 目前还没有任何变化。" },
+      chips: [
+        { en: "Can I do the museum tomorrow?", zh: "美术馆能改到明天吗？" },
+        { en: "Accept both", zh: "两条都接受" },
+        { en: "Is there compensation?", zh: "晚点有补偿吗？" },
+      ],
     },
     { role: "user", text: { en: "Can I still make the museum tomorrow instead?", zh: "美术馆能改到明天吗？" } },
     {

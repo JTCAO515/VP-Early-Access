@@ -31,7 +31,15 @@ export const DEMO_UI = {
     ask: { en: "Ask the vague thing clearly, then turn it into a plan.", zh: "把模糊的想法问清楚，再落成行程。" },
     copilot: { en: "Remember your pace, budget and allergies — and do the errands.", zh: "记住你的节奏、预算和忌口，也顺手把杂事办了。" },
     explore: { en: "See the place clearly before you commit to it.", zh: "先看清楚一个地方，再决定要不要去。" },
+    tools: { en: "The errands a trip needs, without leaving the trip.", zh: "行程里要办的杂事，不用离开行程去办。" },
     today: { en: "What to do right now, and what to do if it breaks.", zh: "此刻该做什么，出问题时又该做什么。" },
+  } satisfies Record<string, Localized>,
+
+  shell: {
+    fullscreen: { en: "Full screen", zh: "全屏" },
+    exitFullscreen: { en: "Exit full screen", zh: "退出全屏" },
+    escHint: { en: "Esc to exit", zh: "按 Esc 退出" },
+    openDemo: { en: "Open the demo", zh: "打开 Demo" },
   } satisfies Record<string, Localized>,
 
   tour: {
