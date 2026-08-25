@@ -1,10 +1,10 @@
 {
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
-  "lastUpdated": "2026-08-25T00:00:00Z",
-  "currentPhase": "hero-map-detail-and-demo-plan-expansion",
-  "status": "map-shipped-to-production; demo-plan-expansion-awaiting-implementation",
-  "objective": "Make the Early Access hero map read as a real reference map (province borders, cursor magnifier, per-city landmark art) and expand the interactive product demo plan with the field-level detail needed to build and accept the next demo slices.",
+  "lastUpdated": "2026-08-25T02:00:00Z",
+  "currentPhase": "product-demo-rebuild",
+  "status": "map-and-demo-shipped; S7/S13 partial, 430x932 unverified",
+  "objective": "Make the Early Access hero map read as a real reference map, and rebuild the interactive product demo on a shared fixture layer so every claim carries a state, a source and a recheck time.",
   "owner": "JTCAO515",
   "fromAgent": "claude-code",
   "intendedNextAgent": "codex",
@@ -13,6 +13,23 @@
     "lib/map-geometry.ts",
     "lib/landmarks.ts",
     "components/ChinaMap.tsx",
+    "lib/demo/types.ts",
+    "lib/demo/canvas.ts",
+    "lib/demo/chats.ts",
+    "lib/demo/tools.ts",
+    "lib/demo/memory.ts",
+    "lib/demo/explore.ts",
+    "lib/demo/today.ts",
+    "lib/demo/ui.ts",
+    "components/demo/parts.tsx",
+    "components/demo/art.tsx",
+    "components/demo/AskSurface.tsx",
+    "components/demo/CopilotSurface.tsx",
+    "components/demo/ExploreSurface.tsx",
+    "components/demo/TodaySurface.tsx",
+    "components/demo/UserSurface.tsx",
+    "components/ProductDemo.tsx",
+    "lib/copy.ts",
     "app/globals.css",
     "docs/interactive-product-demo-plan.md",
     "docs/handoff.json",
@@ -25,18 +42,27 @@
     "Landmark glyphs are authored on a 32x32 grid, stroke-only, coloured through currentColor; stroke width is set per usage, not in the symbol.",
     "The hero map plate never pans, rolls or zooms on its own; only the pointer-driven lens transforms, and only for fine pointers.",
     "Product Demo copy stays centralized and bilingual in lib/copy.ts.",
-    "The frozen waitlist API, validation, rate limit and the direct JotForm CTA were not touched."
+    "The frozen waitlist API, validation, rate limit and the direct JotForm CTA were not touched.",
+    "lib/demo is the single source of truth for the product demo. Superseded fixtures were removed from lib/copy.ts; do not reintroduce demo content there.",
+    "Every demo claim renders through StateBadge / ConfidenceTag / EvidenceChip. A number without a source and a recheck time is a bug.",
+    "No Canvas change may apply without passing through the diff. There is no silent-update path.",
+    "Hard constraints (peanut allergy, step-free access) are never overridden automatically anywhere in the demo.",
+    "Each Copilot tool renders its own boundary line. Ride hailing must keep stating that it claims no partnership and requests no car.",
+    "Demo art is stroke-only SVG in components/demo/art.tsx on a 32x32 (glyph) or 64x32 (scene) grid. No bitmaps, no third-party imagery."
   ],
   "assumptions": [
     "Operator approved hand-drawn SVG landmark line art over sourced photography, so no third-party image licence is involved.",
     "Operator approved direct implementation of the map slice by Claude rather than dispatching it to Codex.",
-    "Operator approved pushing this slice straight to main, which triggers a Vercel production deploy."
+    "Operator approved pushing this slice straight to main, which triggers a Vercel production deploy.",
+    "Operator asked for the execution tools inside Copilot, so Explore now carries Places only. Explore's Tools mode was removed rather than duplicated.",
+    "Operator asked for the expanded plan to be implemented by Claude rather than dispatched to Codex.",
+    "Operator asked for POI and dish imagery to follow the same hand-drawn SVG route as the hero landmarks."
   ],
   "verification": [
     {
       "command": "pnpm typecheck",
       "status": "passed",
-      "summary": "Strict TypeScript passed after the ChinaMap rewrite and the landmark wiring.",
+      "summary": "Strict TypeScript passed across the new lib/demo and components/demo modules.",
       "artifact": null
     },
     {
@@ -46,70 +72,83 @@
       "artifact": null
     },
     {
-      "command": "Desktop hero map interaction, 1440x900, English and Chinese",
+      "command": "Hero map, desktop and mobile, both languages",
       "status": "passed",
-      "summary": "31 province paths, 4 country outlines and 37 markers rendered; the lens magnified the region under the pointer 2.6x with province, city and landmark labels; the callout tracked the lens and showed the correct landmark glyph; the base plate dimmed while lensing and the hint pill hid.",
+      "summary": "31 province paths, 4 outlines, 37 markers, lens magnification with province/city/landmark labels; lens correctly suppressed on a coarse pointer.",
       "artifact": null
     },
     {
       "command": "Landmark contact sheet review of all 37 glyphs",
       "status": "passed",
-      "summary": "Rendered every glyph at 96px against the city and place names; Hohhot, Shanghai, Hangzhou, Zhengzhou and Shenzhen were redrawn after the first pass and re-reviewed.",
+      "summary": "Reviewed at 96px; five glyphs redrawn after the first pass and re-reviewed.",
       "artifact": null
     },
     {
-      "command": "Mobile hero map, 375x812",
+      "command": "Demo interaction pass at 1440x900, English and Chinese",
       "status": "passed",
-      "summary": "Coarse pointer disabled the lens and the cursor hint; the static plate, province borders, rotating highlight and the landmark callout all rendered without horizontal overflow.",
+      "summary": "11 chats render; diff opens with 3 entries and per-entry accept/reject; Copilot Tools shows 5 tools with 7 and 8 screens verified; Explore POI drawer renders 4 matrices; Today shows 4 recovery paths and 9 simulator checks with a 2/4/3 summary; User shows 5 tabs including Privacy & Data.",
       "artifact": null
     },
     {
-      "command": "Browser console errors",
+      "command": "Demo at 375x812",
       "status": "passed",
-      "summary": "No console errors on a fresh load or after lens interaction. One dependency-array warning appeared only across a Fast Refresh boundary and did not reproduce after a full reload.",
+      "summary": "No horizontal overflow (scrollWidth 375 = innerWidth 375); sidebar, canvas, diff, tools, recovery and matrices all reflow to single column.",
       "artifact": null
     },
     {
-      "command": "Production smoke test after deploy",
+      "command": "Browser console on a fresh load and after interaction",
       "status": "passed",
-      "summary": "earlyaccess.go2china.space returned 200 with 31 province paths and the lm-* landmark symbols in the HTML, and the deployed stylesheet contains the new province, lens and callout rules.",
+      "summary": "No console errors in a clean tab. Earlier dependency-array warnings were Fast Refresh artifacts and did not reproduce.",
+      "artifact": null
+    },
+    {
+      "command": "Production smoke test of the hero map slice",
+      "status": "passed",
+      "summary": "earlyaccess.go2china.space returned 200 with 31 province paths and the lm-* symbols; the deployed stylesheet carries the new rules.",
       "artifact": "https://earlyaccess.go2china.space/"
     },
     {
-      "command": "prefers-reduced-motion regression on the rewritten map",
+      "command": "Production smoke test of the demo rebuild",
       "status": "not-run",
-      "summary": "The reduced-motion guard was rewritten (autoplay suppressed, marker pulse and callout transition disabled) but not executed under an emulated reduced-motion setting; the browser pane offers no such emulation here.",
+      "summary": "Not yet pushed at the time of writing; run after the deploy completes.",
       "artifact": null
     },
     {
-      "command": "Frozen waitlist API regression matrix",
+      "command": "prefers-reduced-motion regression",
       "status": "not-run",
-      "summary": "Not rerun; this slice did not touch the API, validation, rate limit or provider path.",
-      "artifact": null
-    },
-    {
-      "command": "Live JotForm submission",
-      "status": "not-run",
-      "summary": "Not submitted; public CTAs continue to link directly to the operator-provided JotForm URL.",
+      "summary": "Guards were rewritten for the map and the demo skeleton shimmer but not executed under an emulated reduced-motion setting.",
       "artifact": null
     },
     {
       "command": "430x932 mobile viewport",
       "status": "not-run",
-      "summary": "Only 375x812 was checked this round; the expanded plan lists 430x932 as a standing requirement.",
+      "summary": "Only 375x812 was checked; the plan lists 430x932 as a standing requirement.",
+      "artifact": null
+    },
+    {
+      "command": "Frozen waitlist API regression matrix",
+      "status": "not-run",
+      "summary": "Not rerun; neither slice touched the API, validation, rate limit or provider path.",
+      "artifact": null
+    },
+    {
+      "command": "Live JotForm submission",
+      "status": "not-run",
+      "summary": "Not submitted; public CTAs still link directly to the operator-provided JotForm URL.",
       "artifact": null
     }
   ],
   "blockers": [],
   "risks": [
-    "lib/map-geometry.ts grew from about 13 KB to about 43 KB gzipped because it now carries 31 simplified province outlines. Raise EPSILON in scripts/build-map.mjs if the hero payload becomes a problem.",
-    "Province borders come from Natural Earth 1:50m admin-1 and are drawn per province, so shared borders are stroked twice; this is only visible as a slightly denser dashed line.",
-    "The landmark glyphs are stylised interpretations, not surveyed drawings; they must never be presented as photographs of the real places."
+    "lib/map-geometry.ts is about 43 KB gzipped because it carries 31 simplified province outlines. Raise EPSILON in scripts/build-map.mjs if the hero payload becomes a problem.",
+    "The demo fixture layer is now large. Adding a chat means adding a CanvasDoc and a conversation together, or the Canvas falls back to an empty document.",
+    "Landmark and POI glyphs are stylised interpretations, not surveyed drawings or photographs, and must never be presented as either.",
+    "Moving the execution tools into Copilot removed Explore's Tools mode. If the operator wants both, the tool list needs a second entry point rather than a copy."
   ],
   "operatorActions": [
     "Confirm the public JotForm URL remains current.",
-    "Decide whether the expanded demo plan (docs/interactive-product-demo-plan.md sections 10 to 17) should be split into GitHub issues for Codex, and in which order.",
-    "Replace the CSS POI and dish image placeholders inside the Product Demo with approved project-local assets in a later image pass; the hero map no longer needs an image pass."
+    "Confirm that execution tools belong in Copilot only, or say whether Explore should also link to them.",
+    "Decide whether S7 (per-item editing of parsed import results) and S13 (partial-failure and offline degradation states) are worth another slice."
   ],
   "mandatoryReadingOrder": [
     "docs/interactive-product-demo-plan.md",
@@ -119,10 +158,10 @@
     "lib/landmarks.ts",
     "scripts/build-map.mjs"
   ],
-  "rollback": "Revert f82abc9 to drop the landmark glyphs and 19dd221 to restore the previous rolling map; both commits are isolated from the waitlist API, the JotForm CTA and the Product Demo.",
+  "rollback": "Revert 593d76b for the demo rebuild, f82abc9 for the landmark glyphs and 19dd221 for the map. All three are isolated from the waitlist API and the JotForm CTA.",
   "nextAction": {
-    "description": "Implement slice S1 of the expanded demo plan: the shared status badges from section 2.2 and the evidence/source constructs from section 10, since every later slice depends on them.",
-    "expectedObservation": "Confirmed, Proposed, Inferred and Recheck badges render from one shared component in Canvas, Copilot, POI and User surfaces, and every numeric claim in the demo can be traced to a source with a recheck time.",
-    "command": "pnpm check"
+    "description": "Verify the demo rebuild on production after the deploy, then close out S7 and S13 if the operator wants them.",
+    "expectedObservation": "earlyaccess.go2china.space returns 200 and renders 11 chats, the diff banner and the Copilot Tools list.",
+    "command": "curl -s https://earlyaccess.go2china.space/ | grep -c vp-tool-list"
   }
 }
