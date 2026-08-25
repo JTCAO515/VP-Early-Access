@@ -1,85 +1,96 @@
-# VP - Early Access
+# VP Early Access
 
-Early access (waitlist) landing page for **VisePanda** — the companion page to
-[JTCAO515/VP-V4](https://github.com/JTCAO515/VP-V4).
+Bilingual Early Access landing page and interactive, fixture-backed VisePanda product demo.
 
-One page, three jobs: explain what VisePanda does, collect an email plus three
-qualifying answers, and state that the iOS and Android apps are in development.
+## Current product surface
+
+The page has four jobs:
+
+1. explain VisePanda’s China-trip execution model;
+2. show a 50-city interactive China destination map;
+3. let visitors operate a prepared VisePanda workspace in normal or full-screen mode;
+4. send the single public Early Access CTA to the operator-owned JotForm form.
+
+The Demo is intentionally static. Conversations, prices, reviews, user data, tool results and channel handoffs are fixed fixtures. It does not create real bookings, request a car, upload a file or contact a person.
 
 ## Stack
 
-| Layer | Choice | Why |
-| --- | --- | --- |
-| Framework | Next.js 16 (App Router), React 19, TypeScript | Same major versions as VP-V4 |
-| Styling | Hand-written CSS in `app/globals.css` | One page, no utility-framework dependency |
-| Fonts | `next/font` (Instrument Serif) | Self-hosted at build time — `fonts.googleapis.com` is unreachable from mainland China |
-| Signup | Direct JotForm CTA | JotForm owns the hosted submission form |
+| Layer | Choice |
+| --- | --- |
+| Framework | Next.js 16 App Router, React 19, strict TypeScript |
+| Styling | Hand-written CSS in `app/globals.css` |
+| Fonts | Self-hosted through `next/font` |
+| Public intake | Direct JotForm link |
+| Map | Generated local SVG paths from Natural Earth 1:50m |
+| Weather | Open-Meteo, fetched server-side with revalidation |
 
-No client-side analytics or third-party scripts are loaded.
+No client-side analytics, map tiles, external fonts or third-party scripts are loaded.
 
-## Quick start
+## Architecture
+
+- `lib/copy.ts` — landing-page, navigation, map and comparison copy.
+- `lib/demo/` — single source of truth for Demo conversations, Canvas documents, memory, tools, Explore, Today, status and UI copy.
+- `components/demo/` — typed interactive surfaces that render the fixture layer.
+- `components/ProductDemo.tsx` — browser shell, navigation, tour, full-screen state and deep-link routing.
+- `components/ChinaMap.tsx` — 50 destination markers, static province plate, pointer lens, autoplay and reduced-motion behaviour.
+- `lib/landmarks.ts` — exactly one 32×32 stroke-only landmark glyph per `MAP_CITIES` entry.
+- `lib/map-geometry.ts` — generated file; never edit it by hand.
+- `scripts/build-map.mjs` — the only supported way to regenerate country and province geometry.
+
+The legacy `POST /api/waitlist` contract remains in the repository for compatibility but is not called by the public page. Do not change its request/response, honeypot, allowlist or rate-limit behaviour without an explicit contract decision.
+
+## Demo navigation
+
+The current top-level surfaces are:
+
+```text
+Today · Ask VisePanda · Copilot · Tools · Explore · User
+```
+
+Ask and Trip Canvas share a fixture state. Canvas changes must pass through a visible Diff before they can be applied. Copilot owns long-term memory. Tools is a separate top-level surface. Explore contains Places only.
+
+## Map contract
+
+- 50 cities total, including Hong Kong, Macao and Taipei;
+- 50 matching landmark glyphs, with no missing or extra keys;
+- 31 mainland province shapes plus CHN/TWN/HKG/MAC outlines;
+- the base plate never pans or zooms automatically;
+- a fine pointer can open a lens; touch keeps the static plate;
+- autoplay changes only the active city and stops while pinned or under reduced motion.
+
+## Public CTA
+
+All Early Access buttons point to:
+
+```text
+https://form.jotform.com/cjttttt/visepanda-early-access
+```
+
+The form link is public configuration, not a secret. API keys, private form configuration and user submissions must never enter the repository, documentation or chat.
+
+## Local development
 
 ```bash
 pnpm install
-cp .env.example .env.local
 pnpm dev
 ```
 
-With no configuration the `console` provider prints each signup to the server
-log, so the page is fully usable before any account exists.
-
-## Waitlist storage
-
-Set `WAITLIST_PROVIDER` in `.env.local`:
-
-- **`console`** — dev default. Logs to stdout, stores nothing.
-- **`webhook`** — POSTs the JSON payload to `WAITLIST_WEBHOOK_URL`.
-
-The visitor's browser only ever talks to this site's own `/api/waitlist`. The
-call to the storage provider happens server-side, so overseas visitors are never
-slowed down by a China-hosted service, and mainland visitors are never blocked by
-an overseas one.
-
-To add a provider, implement it in `lib/providers/` and register it in
-`lib/providers/index.ts`.
-
-## What the form collects
-
-Step 1 is email only. Step 2 asks three optional single-select questions
-(travel timing, referral source, most wanted feature) and can be skipped.
-Both the questions and their options live in `QUESTIONS` in `lib/copy.ts`.
-
-Protections on `POST /api/waitlist`: hidden honeypot field, in-memory rate limit
-of 5 requests per IP per minute, email format check, and an allowlist that drops
-any answer value not defined in `QUESTIONS`.
-
-> The rate limiter is per server instance and resets on deploy. Move it to
-> Upstash Redis or an equivalent before running paid traffic at this page.
-
-## Editing content
-
-**All copy lives in `lib/copy.ts`.** Every string is `{ en, zh }`, and the page
-has an EN/中文 toggle in the nav. Nothing else needs to be touched to change
-wording, questions, cities, or the itinerary shown in the mockups.
-
-`ACCESS_WINDOW` is the line under the closing call to action.
-
-## Deployment
-
-The app is a standard Next.js build with one dynamic route handler, so it runs on
-Vercel, Cloudflare Pages, Netlify, or any Node host. Set the environment
-variables from `.env.example` in the host's dashboard — no secret belongs in this
-repository.
-
-## Notes on the map
-
-The destination map is generated offline from Natural Earth 1:50m public-domain
-country geometry. Runtime uses the committed SVG paths only.
-
-## Checks
+## Verification
 
 ```bash
 pnpm check
 ```
 
-Runs `tsc --noEmit` and a production build.
+This runs strict TypeScript and the production build. Frontend changes additionally require browser checks at 1440×900, 375×812 and 430×932, both languages, reduced motion, console errors, page overflow and the main interaction paths.
+
+## Current documentation authority
+
+Read in this order:
+
+1. `README.md`
+2. `docs/interactive-product-demo-plan.md`
+3. `HANDOFF.md`
+4. `docs/handoff.json`
+5. the owning implementation files named by the handoff
+
+`docs/codex-kickoff.md` now records the current execution contract and supersedes its former 12-city/server-side-JotForm brief. Repository and deployed evidence outrank historical chat or commit notes.

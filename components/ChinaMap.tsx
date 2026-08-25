@@ -160,8 +160,8 @@ export default function ChinaMap({ lang, weather }: Props) {
           onPointerLeave={() => { setLens(null); setPinned(false); }}
           role="img"
           aria-label={lang === "zh"
-            ? "中国省级界线点状地图，含香港、澳门、台湾与 37 个目的地点位"
-            : "Dotted China map with province borders, Hong Kong, Macao, Taiwan and 37 destination markers"}
+            ? `中国省级界线点状地图，含香港、澳门、台湾与 ${MAP_CITIES.length} 个目的地点位`
+            : `Dotted China map with province borders, Hong Kong, Macao, Taiwan and ${MAP_CITIES.length} destination markers`}
         >
           <defs>
             <pattern id="map-dots" width="12" height="12" patternUnits="userSpaceOnUse">
@@ -203,7 +203,6 @@ export default function ChinaMap({ lang, weather }: Props) {
                 cx={CITY_POINTS[index].x}
                 cy={CITY_POINTS[index].y}
                 r="5"
-                onClick={() => focus(index)}
               />
             ))}
           </g>
@@ -249,7 +248,7 @@ export default function ChinaMap({ lang, weather }: Props) {
                           height={g(20)}
                           strokeWidth={2.6}
                         />
-                        <circle cx={marker.x} cy={marker.y} r={g(6)} onClick={() => focus(index)} />
+                        <circle cx={marker.x} cy={marker.y} r={g(6)} />
                         <text x={marker.x + g(9)} y={marker.y + g(4)} fontSize={g(12)}>
                           {item.name[lang]}
                         </text>
@@ -263,6 +262,30 @@ export default function ChinaMap({ lang, weather }: Props) {
               <circle className="lens-ring inner" cx={lens.x} cy={lens.y} r={LENS_RADIUS - 5} />
             </g>
           ) : null}
+
+          <g className="map-controls">
+            {MAP_CITIES.map((item, index) => {
+              const marker = CITY_POINTS[index];
+              return (
+                <g
+                  key={item.id}
+                  className="map-city-control"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${item.name[lang]} · ${item.place[lang]}`}
+                  aria-pressed={pinned && index === active}
+                  onClick={(event) => { event.stopPropagation(); focus(index); }}
+                  onKeyDown={(event) => {
+                    if (event.key !== "Enter" && event.key !== " ") return;
+                    event.preventDefault();
+                    focus(index);
+                  }}
+                >
+                  <circle cx={marker.x} cy={marker.y} r="11" />
+                </g>
+              );
+            })}
+          </g>
         </svg>
 
         {callout ? (

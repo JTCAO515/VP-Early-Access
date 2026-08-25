@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { PRODUCT_DEMO, type Lang } from "@/lib/copy";
-import { CHATS } from "@/lib/demo/chats";
+import { CANVAS } from "@/lib/demo/canvas";
+import { CHATS, CHAT_CONTEXT } from "@/lib/demo/chats";
 import type { DemoSurface } from "@/lib/demo/features";
 import type { ToolId } from "@/lib/demo/tools";
 import type { ChatId } from "@/lib/demo/types";
@@ -16,6 +17,7 @@ import ExploreSurface from "./demo/ExploreSurface";
 import TodaySurface from "./demo/TodaySurface";
 import ToolsSurface from "./demo/ToolsSurface";
 import UserSurface from "./demo/UserSurface";
+import { StateBadge } from "./demo/parts";
 
 export type DemoIntent = { surface: DemoSurface; chatId?: ChatId; nonce: number };
 
@@ -26,9 +28,9 @@ type Props = {
   intent: DemoIntent | null;
 };
 
-const TOUR: Array<{ surface: DemoSurface; chat?: ChatId }> = [
+const TOUR: Array<{ surface: DemoSurface; chat?: ChatId; diff?: boolean }> = [
   { surface: "ask", chat: "shanghai" },
-  { surface: "ask", chat: "shanghai" },
+  { surface: "ask", chat: "shanghai", diff: true },
   { surface: "copilot" },
   { surface: "ask", chat: "import" },
 ];
@@ -41,6 +43,8 @@ const NAV: Array<{ id: DemoSurface; glyph: string }> = [
   { id: "explore", glyph: "◇" },
 ];
 
+const MOBILE_NAV: Array<{ id: DemoSurface; glyph: string }> = [...NAV, { id: "user", glyph: "○" }];
+
 export default function ProductDemo({ lang, fullscreen, onFullscreen, intent }: Props) {
   const ui = PRODUCT_DEMO.ui;
   const [surface, setSurface] = useState<DemoSurface>("ask");
@@ -50,6 +54,7 @@ export default function ProductDemo({ lang, fullscreen, onFullscreen, intent }: 
   const [dishOpen, setDishOpen] = useState(false);
   const [toast, setToast] = useState("");
   const [tourStep, setTourStep] = useState(-1);
+  const currentDoc = CANVAS[chatId];
 
   const navLabel: Record<DemoSurface, string> = {
     today: DEMO_UI.today.title[lang],
@@ -71,6 +76,7 @@ export default function ProductDemo({ lang, fullscreen, onFullscreen, intent }: 
     setChatId(id);
     setDishOpen(false);
     setToast("");
+    setTourStep(-1);
   }, []);
 
   // External deep links from the page's capability cards and the hero button.
@@ -79,6 +85,7 @@ export default function ProductDemo({ lang, fullscreen, onFullscreen, intent }: 
     setSurface(intent.surface);
     if (intent.chatId) setChatId(intent.chatId);
     setDishOpen(false);
+    setTourStep(-1);
   }, [intent]);
 
   // Full screen locks the page behind it and exits on Escape.
@@ -119,7 +126,7 @@ export default function ProductDemo({ lang, fullscreen, onFullscreen, intent }: 
           <div className="demo-browser" aria-label="Interactive VisePanda product demo">
             <header className="demo-browser-bar">
               <span className="demo-browser-dots"><i /><i /><i /></span>
-              <span className="demo-address">⌁ {PRODUCT_DEMO.address}</span>
+              <span className="demo-address"><ToolGlyph name="lock" />{PRODUCT_DEMO.address}</span>
               <div className="demo-bar-right">
                 <span className="vp-fixture" title={DEMO_UI.fixtureLong[lang]}>{DEMO_UI.fixture[lang]}</span>
                 <button
@@ -181,6 +188,7 @@ export default function ProductDemo({ lang, fullscreen, onFullscreen, intent }: 
                     onOpenMemory={openMemory}
                     onOpenDishes={() => setDishOpen(true)}
                     onOpenTool={openTool}
+                    forceDiff={tourStep === 1 && chatId === "shanghai"}
                   />
                 ) : null}
 
@@ -206,14 +214,30 @@ export default function ProductDemo({ lang, fullscreen, onFullscreen, intent }: 
 
                 {toast ? <div className="demo-toast">{toast}</div> : null}
               </main>
+
+              <nav className="demo-mobile-nav" aria-label={DEMO_UI.shell.mobileNav[lang]}>
+                {MOBILE_NAV.map((item) => (
+                  <button key={item.id} className={surface === item.id ? "active" : ""} onClick={() => setSurface(item.id)}>
+                    <span>{item.glyph}</span><small>{navLabel[item.id]}</small>
+                  </button>
+                ))}
+              </nav>
             </div>
 
             <footer className="demo-status-bar">
-              <span>{DEMO_UI.localTime[lang]}{fullscreen ? ` · ${DEMO_UI.shell.escHint[lang]}` : ""}</span>
+              <span className="vp-status-context">
+                <b>{DEMO_UI.status.trip[lang]}</b>{currentDoc.title[lang]}
+                <i>·</i><b>{DEMO_UI.status.context[lang]}</b>{CHAT_CONTEXT[chatId][lang]}
+                <i>·</i>{DEMO_UI.localTime[lang]}{fullscreen ? ` · ${DEMO_UI.shell.escHint[lang]}` : ""}
+              </span>
+              <div className="vp-state-legend">
+                <small>{DEMO_UI.status.states[lang]}</small>
+                {(["confirmed", "proposed", "inferred", "recheck"] as const).map((state) => <StateBadge key={state} state={state} lang={lang} />)}
+              </div>
               <div className="vp-tour">
                 <small>{DEMO_UI.tour.title[lang]}</small>
                 {DEMO_UI.tour.steps.map((step, index) => (
-                  <button key={index} className={tourStep === index ? "active" : ""} onClick={() => runTour(index)}>
+                  <button key={index} className={tourStep === index ? "active" : ""} aria-current={tourStep === index ? "step" : undefined} onClick={() => runTour(index)}>
                     {index + 1}. {step[lang]}
                   </button>
                 ))}

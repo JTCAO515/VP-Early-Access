@@ -7,6 +7,7 @@ import type { ChatId } from "@/lib/demo/types";
 import { DEMO_UI } from "@/lib/demo/ui";
 import type { CityWeather } from "@/lib/weather";
 import ChinaMap from "./ChinaMap";
+import CompetitiveComparison from "./CompetitiveComparison";
 import DemoFeatures from "./DemoFeatures";
 import MobileShowcase from "./MobileShowcase";
 import ProductDemo, { type DemoIntent } from "./ProductDemo";
@@ -68,6 +69,7 @@ export default function EarlyAccessPage({ weather }: { weather: CityWeather[] })
       </header>
 
       <DemoFeatures lang={lang} onOpen={(intent) => openDemo(intent)} />
+      <CompetitiveComparison lang={lang} />
 
       <ProductDemo
         lang={lang}

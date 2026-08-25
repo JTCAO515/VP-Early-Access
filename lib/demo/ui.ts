@@ -29,7 +29,8 @@ export const DEMO_UI = {
 
   ability: {
     ask: { en: "Ask the vague thing clearly, then turn it into a plan.", zh: "把模糊的想法问清楚，再落成行程。" },
-    copilot: { en: "Remember your pace, budget and allergies — and do the errands.", zh: "记住你的节奏、预算和忌口，也顺手把杂事办了。" },
+    canvas: { en: "Every change is explained first, then waits for your confirmation.", zh: "行程的每一次变化都先解释，再由你确认。" },
+    copilot: { en: "Remember your pace, budget and allergies, so you do not repeat yourself.", zh: "记住你的节奏、预算和忌口，下一次不用重讲。" },
     explore: { en: "See the place clearly before you commit to it.", zh: "先看清楚一个地方，再决定要不要去。" },
     tools: { en: "The errands a trip needs, without leaving the trip.", zh: "行程里要办的杂事，不用离开行程去办。" },
     today: { en: "What to do right now, and what to do if it breaks.", zh: "此刻该做什么，出问题时又该做什么。" },
@@ -40,6 +41,13 @@ export const DEMO_UI = {
     exitFullscreen: { en: "Exit full screen", zh: "退出全屏" },
     escHint: { en: "Esc to exit", zh: "按 Esc 退出" },
     openDemo: { en: "Open the demo", zh: "打开 Demo" },
+    mobileNav: { en: "Demo navigation", zh: "Demo 导航" },
+  } satisfies Record<string, Localized>,
+
+  status: {
+    trip: { en: "Trip", zh: "行程" },
+    context: { en: "Context", zh: "当前" },
+    states: { en: "States", zh: "状态" },
   } satisfies Record<string, Localized>,
 
   tour: {
@@ -47,7 +55,7 @@ export const DEMO_UI = {
     steps: [
       { en: "Ask · build a Canvas", zh: "Ask · 生成 Canvas" },
       { en: "Canvas · confirm a diff", zh: "Canvas · 确认改动" },
-      { en: "Copilot · memory and tools", zh: "Copilot · 记忆与工具" },
+      { en: "Copilot · long-term memory", zh: "Copilot · 长期记忆" },
       { en: "Ask · check an imported guide", zh: "Ask · 检查导入的攻略" },
     ],
   },
@@ -132,6 +140,8 @@ export const DEMO_UI = {
     anyPrice: { en: "Any price", zh: "不限价位" },
     intlCard: { en: "Takes international cards", zh: "接受境外卡" },
     englishService: { en: "English service", zh: "英文服务" },
+    area: { en: "Area", zh: "区域" },
+    anyArea: { en: "Any area", zh: "不限区域" },
     reset: { en: "Reset", zh: "重置" },
     results: { en: "results", zh: "个结果" },
     noResults: { en: "No place matches all of these filters", zh: "没有同时满足这些筛选的地点" },
@@ -146,6 +156,8 @@ export const DEMO_UI = {
     citySoonTitle: { en: "This city is being prepared", zh: "这个城市正在整理" },
     citySoonBody: { en: "Shanghai has the complete category, filter and POI flow today.", zh: "目前上海已开放完整的分类、筛选和 POI 详情。" },
     poiCount: { en: "places", zh: "个地点" },
+    ready: { en: "Ready", zh: "已开放" },
+    preparing: { en: "In preparation", zh: "整理中" },
   } satisfies Record<string, Localized>,
 
   today: {
@@ -202,5 +214,10 @@ export const DEMO_UI = {
     partial: { en: "Partly parsed", zh: "部分解析成功" },
     retry: { en: "Fill it in by hand", zh: "手工补充" },
     offline: { en: "Offline · showing what works without a connection", zh: "离线 · 只展示无需联网的部分" },
+    normal: { en: "Connected", zh: "已联网" },
+    simulateOffline: { en: "Preview offline", zh: "预览离线状态" },
+    simulatePartial: { en: "Preview partial failure", zh: "预览部分失败" },
+    offlineBody: { en: "Saved cards and bilingual addresses remain available. Live rechecks, provider handoffs and new lookups wait for a connection.", zh: "已保存的卡片和双语地址仍可使用；实时复核、渠道跳转和新查询需等待网络恢复。" },
+    partialBody: { en: "Four results are ready. One provider did not answer, so its field stays marked for recheck instead of being guessed.", zh: "4 条结果可用；1 个渠道没有响应，该字段保持需复核，不会被猜测填充。" },
   } satisfies Record<string, Localized>,
 };

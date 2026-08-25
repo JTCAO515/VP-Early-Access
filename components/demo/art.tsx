@@ -45,6 +45,7 @@ const GLYPHS: Record<string, string[]> = {
   ],
   expand: ["M5 12 V5 H12 M20 5 H27 V12 M27 20 V27 H20 M12 27 H5 V20", "M12 12 H20 V20 H12 Z"],
   collapse: ["M12 5 V12 H5 M27 12 H20 V5 M20 27 V20 H27 M5 20 H12 V27"],
+  lock: ["M9 14 V10 a7 7 0 0 1 14 0 V14", "M7 14 H25 V28 H7 Z", "M16 19 V23"],
   alert: ["M16 4 L29 27 H3 Z", "M16 12 V19 M16 22.5 V23.5"],
 };
 

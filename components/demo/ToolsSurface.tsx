@@ -12,6 +12,7 @@ export default function ToolsSurface({ lang, focusTool, onToast }: Props) {
   const ui = DEMO_UI.copilot;
   const [toolId, setToolId] = useState<ToolId>(focusTool ?? "translate");
   const [screenId, setScreenId] = useState<string>(TOOLS[0].screens[0].id);
+  const [degraded, setDegraded] = useState<"normal" | "partial" | "offline">("normal");
 
   useEffect(() => {
     if (!focusTool) return;
@@ -22,6 +23,7 @@ export default function ToolsSurface({ lang, focusTool, onToast }: Props) {
 
   const tool = TOOLS.find((item) => item.id === toolId) ?? TOOLS[0];
   const screen = tool.screens.find((item) => item.id === screenId) ?? tool.screens[0];
+  const offlineAvailable = tool.id === "translate" && (screen.id === "direction" || screen.id === "address");
 
   return (
     <div className="demo-tools-page">
@@ -29,6 +31,19 @@ export default function ToolsSurface({ lang, focusTool, onToast }: Props) {
         <div><small>Tools</small><h3>{ui.toolsTitle[lang]}</h3></div>
         <span className="vp-ability">{DEMO_UI.ability.tools[lang]}</span>
       </header>
+
+      <div className="vp-degrade-controls" aria-label={DEMO_UI.empty.loading[lang]}>
+        <button className={degraded === "normal" ? "active" : ""} onClick={() => setDegraded("normal")}>{DEMO_UI.empty.normal[lang]}</button>
+        <button className={degraded === "partial" ? "active" : ""} onClick={() => setDegraded("partial")}>{DEMO_UI.empty.simulatePartial[lang]}</button>
+        <button className={degraded === "offline" ? "active" : ""} onClick={() => setDegraded("offline")}>{DEMO_UI.empty.simulateOffline[lang]}</button>
+      </div>
+
+      {degraded !== "normal" ? (
+        <p className={`vp-degrade-banner ${degraded}`}>
+          <b>{degraded === "partial" ? DEMO_UI.empty.partial[lang] : DEMO_UI.empty.offline[lang]}</b>
+          {degraded === "partial" ? DEMO_UI.empty.partialBody[lang] : DEMO_UI.empty.offlineBody[lang]}
+        </p>
+      ) : null}
 
       <div className="vp-tools">
         <nav className="vp-tool-list">
@@ -73,7 +88,7 @@ export default function ToolsSurface({ lang, focusTool, onToast }: Props) {
               </dl>
             ) : null}
             {screen.note ? <p className="vp-tool-note">{screen.note[lang]}</p> : null}
-            <button onClick={() => onToast(`${tool.title[lang]} · ${screen.label[lang]}`)}>
+            <button disabled={degraded === "offline" && !offlineAvailable} onClick={() => onToast(`${tool.title[lang]} · ${screen.label[lang]}`)}>
               {lang === "zh" ? "在 Demo 中执行" : "Run in the demo"}
             </button>
           </article>

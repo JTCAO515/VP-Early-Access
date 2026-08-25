@@ -1,93 +1,86 @@
-# HANDOFF — VP Early Access hero map, product demo rebuild and demo shell
+# HANDOFF — 50-city map, completed Demo states and category comparison
 
-- Objective: make the hero map read as a real reference map, and rebuild the interactive product Demo on a shared fixture layer so every claim carries a state, a source and a recheck time.
-- Public CTA: unchanged — every Early Access link still points directly to `https://form.jotform.com/cjttttt/visepanda-early-access`.
-- Truth boundary: unchanged and now enforced in the UI. Every conversation, price, review and account is a fixed sample; every tool states what it does not claim; no Canvas change applies without confirmation.
-
-## Frozen contracts preserved
-
-- No change to the waitlist API, validation, rate limit, form, simulator section, mobile showcase or the JotForm CTA.
-- No secret or provider key was added.
-- `lib/map-geometry.ts` stays generated-only from `scripts/build-map.mjs`.
-- City markers project against the admin-0 bounds, so the 37 hero points did not move.
-
-## Latest slice (`5200b0c`)
-
-- Execution tools left Copilot and became a top-level **Tools** tab. Copilot holds long-term memory only.
-- The demo has a **full-screen mode**: the browser chrome goes fixed, the page behind it locks, and Escape or the header button returns. The frame keeps its footprint so the page does not jump.
-- **Open the demo** sits beside Join early access in the nav and the hero, and opens the demo full screen.
-- A **capability section** (`#capabilities`) puts six of the demo's claims on the page; each card deep-links into the demo surface where that claim actually lives.
-- Type scale moved up one step throughout the demo; the 7–9px tier was unreadable in the frame.
-- Scrolling fixed: the shell clamps its grid row, the sidebar pins the User row and scrolls only the chat list, and everything under the Canvas tab bar scrolls as one region.
-- Every chat opens on at least two exchanges.
-
-## New contracts
-
-- `lib/demo/` is the single source of truth for the Demo. Superseded fixtures were deleted from `lib/copy.ts`; do not put Demo content back there.
-- Every Demo claim renders through `StateBadge` / `ConfidenceTag` / `EvidenceChip`. A number without a source and a recheck time is a bug.
-- No Canvas change may apply without passing the diff. There is no silent-update path.
-- Hard constraints (peanut allergy, step-free access) are never overridden automatically.
-- Each Copilot tool renders its own boundary line. Ride hailing must keep stating that it claims no partnership and requests no car.
-- Demo art is stroke-only SVG in `components/demo/art.tsx`, 32x32 for glyphs and 64x32 for scenes. No bitmaps, no third-party imagery.
-- The demo shell clamps its grid row; every surface scrolls internally. Do not put a `min-height` back on `.demo-app-shell`.
-- Full-screen state lives in `EarlyAccessPage`, not in `ProductDemo`, because the nav, the hero and the capability cards all open it.
+- Branch: `codex/ea-50-cities-spec-completion`
+- Objective: expand the Hero map to 50 destinations, complete every product-plan item previously marked pending, add an honest competitor-category comparison and reconcile the repository documentation.
+- Status: implemented and locally accepted; not merged or deployed.
+- Frozen boundaries preserved: public JotForm CTA, legacy waitlist API contract, no secrets, no real transaction/provider action, VP-V4 read-only.
 
 ## Delivered
 
-**Hero map (`19dd221`, `f82abc9`)**
+### Hero map
 
-- 31 admin-1 province shapes with dotted fill and dashed borders, four national outlines on top, a graticule clipped to the silhouette.
-- The plate is static; a lens follows a fine pointer, magnifies 2.6x and reveals province, city and landmark labels. Touch devices keep the static plate.
-- 37 hand-drawn landmark glyphs in `lib/landmarks.ts`, used by both the lens and the callout.
+- `MAP_CITIES` now contains exactly 50 destinations.
+- Added Datong, Suzhou, Huangshan, Xiamen, Jingdezhen, Qingdao, Luoyang, Jiuzhaigou, Dali, Lijiang, Sanya, Dunhuang and Kashgar.
+- `LANDMARK_ART` contains exactly 50 matching keys; each new destination has a 32×32 stroke-only SVG glyph.
+- Added a top SVG control layer with 50 keyboard-accessible city buttons. This prevents the pointer lens or overlapping Hero copy from swallowing marker clicks.
+- Mouse activation, keyboard activation, `aria-pressed`, autoplay pinning and weather callouts share the same city state.
+- Fixed the server parser for Open-Meteo multi-coordinate responses. A live 50-coordinate request returned HTTP 200 and 50 result objects.
+- Corrected WMO weather-code ordering so fog and snow no longer fall through to drizzle/rain.
 
-**Product demo (`593d76b`)**
+### Completed Demo specification
 
-- Eleven chats, four to eight turns each, with clarifying chips, evidence chips, confidence levels, memory recall that links into Copilot, and a three-part fallback when an answer cannot be confirmed. New chats: Xi'an timed entry, travelling with parents, first day on the ground, delay recovery, tighter budget.
-- Trip Canvas with the full node schema, read identically by the timeline, the schematic map and the bookings list.
-- Diff and confirm, with the trigger named on every change; Canvas versions with per-version difference summaries.
-- Copilot split into Memory and Tools. Memory carries source, state, confidence, last update and the suggestions each item already rewrote, plus forget, pause, export and a before/after preview. **Tools moved into Copilot at the operator's request** — translation, ride hailing, visa, network and human handoff, 36 screens, each with its own boundary statement. Explore no longer has a Tools mode.
-- Explore with price, international-card and English-service filters, self-drawn covers, and payment, language and entry broken out field by field.
-- Today with the next step, current conditions, four recovery paths and the nine simulator checks with alternatives for every failure.
-- User gains Travel Profile, Preferences and Privacy & Data.
+- Tour step 2 opens the Shanghai Canvas Diff instead of returning to an unchanged Ask state.
+- Added the missing Canvas ability statement, browser lock glyph, current Trip/context/time and a four-state legend.
+- Added editable four-stage import inspection: received, parsing, extracted and checked. Five extracted fields can be edited; a failed rail field can be repaired manually.
+- Added reachable partial-failure and offline degradation states in Tools. Offline disables network-dependent execution while keeping saved bilingual cards conceptually available.
+- Explore city cards now show readiness, POI count, coverage categories and update time. Added an area selector alongside price, international-card and English-service filters.
+- Mobile Demo now uses a six-item bottom navigation and an Ask/Trip Canvas segmented switch. Comparison tables become vertical cards inside the Demo.
+- 375×812 and 430×932 both keep page-level horizontal overflow at zero.
 
-## Verification
+### Competitor-category comparison
 
-- `pnpm typecheck` — passed.
-- `pnpm build` — passed.
-- Hero map, desktop and mobile, both languages — passed.
-- All 37 landmark glyphs reviewed on a rendered contact sheet — passed; five redrawn and re-reviewed.
-- Demo interaction pass at 1440×900 in English and Chinese — passed: 11 chats, diff with three entries and per-entry accept/reject, Copilot Tools with five tools (translation 7 screens, ride hailing 8 screens verified), Explore POI drawer with four matrices, Today with four recovery paths and nine checks summarised 2/4/3, User with five tabs.
-- Demo at 375×812 — passed, no horizontal overflow.
-- Browser console on a fresh load and after interaction — no errors.
-- Hero map on production — passed (`earlyaccess.go2china.space` returns 200 with 31 province paths and the `lm-*` symbols).
-- Demo rebuild on production — **not run** at the time of writing; verify after the deploy.
-- `prefers-reduced-motion` regression — **not run**.
-- 430×932 viewport — **not run**.
-- Frozen waitlist API regression — **not run**; untouched by both slices.
-- Live JotForm submission — **not run**.
+- Added a section between capability cards and the interactive Demo.
+- Compares traditional OTAs, general AI, travel AI and VisePanda across seven capability dimensions.
+- Explicitly states that OTA hotel/ticket inventory, live prices and instant transactions remain stronger.
+- VisePanda claims only official-channel handoffs and future channel-integration/partnership capability; it does not claim an existing OTA, hotel, ticketing or ride-hailing partnership.
+- The table is labelled as category-level positioning, not a named-provider ranking.
 
-## Known gaps
+### Documentation
 
-- S7: the import pipeline shows all four stages in conversation, but you cannot yet edit an individual extracted item.
-- S13: empty, loading, filter-no-result and cannot-confirm states are done; partial-failure and offline degradation are not.
+- Replaced the obsolete 12-city/server-side-JotForm kickoff with the current execution contract.
+- README now reflects the direct JotForm CTA, 50-city map, fixture architecture and current navigation.
+- `docs/interactive-product-demo-plan.md` no longer marks implemented work as pending and records S1–S15, the 50-city extension and competitor comparison.
+- `lib/copy.ts` owns landing/comparison copy; `lib/demo/` owns Demo fixture and UI copy.
 
-## Risks
+## Verification evidence
 
-- `lib/map-geometry.ts` is about 43 KB gzipped. Raise `EPSILON` in `scripts/build-map.mjs` if the hero payload becomes a problem.
-- Adding a chat means adding a `CanvasDoc` and a conversation together, or the Canvas falls back to an empty document.
-- Landmark and POI glyphs are stylised interpretations, never photographs.
-- Moving tools into Copilot removed Explore's Tools mode. If both are wanted, add a second entry point rather than a copy.
+- `pnpm check` — passed after implementation.
+- `git diff --check` — passed.
+- Map invariant script — 50 cities, 50 glyphs, empty missing/extra sets.
+- Rendered contact sheet — all 50 glyphs reviewed at `/tmp/vp-landmarks-50.png`; new glyphs are distinct and follow the existing stroke system.
+- Open-Meteo live shape check — HTTP 200, response array length 50.
+- In-app Browser — passed desktop visual review, competitor section, full screen, tour Diff, import repair, partial/offline state, Explore area filter and 375px mobile navigation.
+- Playwright fallback — used because the in-app browser stalled while changing to 430×932. Passed 1440×900, 375×812 and 430×932 in English and Chinese, with no page overflow or console errors.
+- Map browser checks — 50 markers, 50 accessible controls, 50 SVG symbols, 31 province paths and four national outlines; Kashgar mouse activation and Suzhou keyboard activation showed the correct glyph/place/weather callout.
+- Autoplay advanced; emulated reduced motion kept the active city fixed.
+- Full-screen enter/Escape exit restored body scrolling.
+- Production deployment — not run; this branch has not been merged.
+- Frozen waitlist API regression — not run; untouched.
+- Live JotForm submission — not run; no email was transmitted.
 
-## Operator actions
+## Visual fidelity ledger
 
-1. Confirm the JotForm public URL remains current.
-2. Confirm that execution tools belong in Copilot only, or say whether Explore should link to them too.
-3. Decide whether S7 and S13 are worth another slice.
+| Point | Accepted evidence | Local evidence | Result |
+| --- | --- | --- | --- |
+| Hero composition | Production 1440×900 | `/tmp/vp-ea-local-desktop.png` | Copy/layout preserved; only marker count, click layer and live weather changed |
+| Map art | Existing purple stroke landmarks | `/tmp/vp-landmarks-50.png` | 13 new glyphs match grid, stroke, caps and colour |
+| Competitor section | Existing white/purple landing system | `/tmp/vp-ea-comparison.png` | Same typography, border, radius and VisePanda accent column |
+| Demo chrome | Existing browser shell | `/tmp/vp-ea-demo.png` | Lock, context, state legend and tour fit without changing the shell family |
+| Mobile product frame | Existing responsive Demo | `/tmp/vp-ea-mobile-430.png` | Bottom nav and segmented Ask/Canvas state are readable with no page overflow |
+
+Above-the-fold copy and CTA order are unchanged. No material visual mismatch remains in the checked views.
+
+## Residual risks
+
+- Dense eastern-city clusters rely on the lens; all markers are clickable but not all labels can be visible simultaneously.
+- Open-Meteo is an external dependency. Failure still omits the weather row rather than inventing a value.
+- The competitor section is positioning copy, not a sourced market study; keep it category-level unless a research task adds citations.
+- Public production behaviour is unverified until the branch is merged and Vercel completes.
 
 ## Rollback
 
-Revert `593d76b` for the demo rebuild, `f82abc9` for the landmark glyphs and `19dd221` for the map. All three are isolated from the waitlist API and the JotForm CTA.
+Revert the single implementation commit from this branch. The generated map geometry, waitlist API and public JotForm destination are not changed by the rollback.
 
 ## Next action
 
-Verify the demo rebuild on production once the deploy completes, then close out S7 and S13 if the operator wants them.
+Operator reviews the branch and authorizes merge to `main`; after Vercel succeeds, run the same production smoke and interaction matrix against `https://earlyaccess.go2china.space/`.

@@ -25,6 +25,7 @@ export default function ExploreSurface({ lang, onToast, onAsk }: Props) {
   const [cityId, setCityId] = useState("shanghai");
   const [category, setCategory] = useState<PoiCategory>("attractions");
   const [maxTier, setMaxTier] = useState(4);
+  const [areaId, setAreaId] = useState("all");
   const [intlOnly, setIntlOnly] = useState(false);
   const [englishOnly, setEnglishOnly] = useState(false);
   const [poiId, setPoiId] = useState<string | null>(null);
@@ -33,9 +34,15 @@ export default function ExploreSurface({ lang, onToast, onAsk }: Props) {
     () => POIS.filter((poi) =>
       poi.category === category &&
       poi.tier <= maxTier &&
+      (areaId === "all" || poi.area.en === areaId) &&
       (!intlOnly || poi.intlCard) &&
       (!englishOnly || poi.english)),
-    [category, maxTier, intlOnly, englishOnly],
+    [areaId, category, maxTier, intlOnly, englishOnly],
+  );
+
+  const areas = useMemo(
+    () => Array.from(new Map(POIS.filter((item) => item.category === category).map((item) => [item.area.en, item.area])).values()),
+    [category],
   );
 
   const poi = POIS.find((item) => item.id === poiId) ?? null;
@@ -51,7 +58,9 @@ export default function ExploreSurface({ lang, onToast, onAsk }: Props) {
         {EXPLORE_CITY_CARDS.map((city) => (
           <button key={city.id} className={cityId === city.id ? "active" : ""} onClick={() => { setCityId(city.id); setPoiId(null); }}>
             <b>{city.name[lang]}</b>
-            <span>{city.ready ? `${city.count} ${ui.poiCount[lang]}` : city.updated[lang]}</span>
+            <em className={city.ready ? "ready" : "preparing"}>{city.ready ? ui.ready[lang] : ui.preparing[lang]}</em>
+            <span>{city.count} {ui.poiCount[lang]} · {city.categories[lang]}</span>
+            <small>{city.updated[lang]}</small>
           </button>
         ))}
       </div>
@@ -60,7 +69,7 @@ export default function ExploreSurface({ lang, onToast, onAsk }: Props) {
         <>
           <div className="poi-category-tabs">
             {CATEGORIES.map((item) => (
-              <button key={item} className={category === item ? "active" : ""} onClick={() => { setCategory(item); setPoiId(null); }}>
+              <button key={item} className={category === item ? "active" : ""} onClick={() => { setCategory(item); setAreaId("all"); setPoiId(null); }}>
                 {CATEGORY_LABEL[item][lang]}
               </button>
             ))}
@@ -72,9 +81,16 @@ export default function ExploreSurface({ lang, onToast, onAsk }: Props) {
               <span>{maxTier === 4 ? ui.anyPrice[lang] : "¥".repeat(maxTier)}</span>
               <input type="range" min={1} max={4} value={maxTier} onChange={(event) => setMaxTier(Number(event.target.value))} />
             </label>
+            <label className="vp-area-filter">
+              <span>{ui.area[lang]}</span>
+              <select value={areaId} onChange={(event) => setAreaId(event.target.value)}>
+                <option value="all">{ui.anyArea[lang]}</option>
+                {areas.map((area) => <option key={area.en} value={area.en}>{area[lang]}</option>)}
+              </select>
+            </label>
             <button className={intlOnly ? "active" : ""} onClick={() => setIntlOnly((value) => !value)}>{ui.intlCard[lang]}</button>
             <button className={englishOnly ? "active" : ""} onClick={() => setEnglishOnly((value) => !value)}>{ui.englishService[lang]}</button>
-            <button onClick={() => { setMaxTier(4); setIntlOnly(false); setEnglishOnly(false); }}>{ui.reset[lang]}</button>
+            <button onClick={() => { setMaxTier(4); setAreaId("all"); setIntlOnly(false); setEnglishOnly(false); }}>{ui.reset[lang]}</button>
             <em>{visible.length} {ui.results[lang]}</em>
           </div>
 
@@ -82,7 +98,7 @@ export default function ExploreSurface({ lang, onToast, onAsk }: Props) {
             <div className="vp-empty">
               <h4>{ui.noResults[lang]}</h4>
               <p>{ui.noResultsBody[lang]}</p>
-              <div><button onClick={() => { setMaxTier(4); setIntlOnly(false); setEnglishOnly(false); }}>{ui.reset[lang]}</button></div>
+              <div><button onClick={() => { setMaxTier(4); setAreaId("all"); setIntlOnly(false); setEnglishOnly(false); }}>{ui.reset[lang]}</button></div>
             </div>
           ) : (
             <div className="poi-card-grid">

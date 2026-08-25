@@ -22,6 +22,20 @@ export const CHATS: ChatMeta[] = [
   { id: "budget", title: { en: "Tighter daily budget", zh: "预算下调" }, subtitle: { en: "Rebalanced · same days", zh: "已重排 · 天数不变" }, when: { en: "1h ago", zh: "1 小时前" } },
 ];
 
+export const CHAT_CONTEXT: Record<ChatId, Localized> = {
+  new: { en: "China", zh: "中国" },
+  shanghai: { en: "Shanghai", zh: "上海" },
+  transport: { en: "Shanghai → Beijing", zh: "上海 → 北京" },
+  hotel: { en: "Beijing", zh: "北京" },
+  restaurant: { en: "Shanghai", zh: "上海" },
+  import: { en: "Shanghai → Xi'an", zh: "上海 → 西安" },
+  xian: { en: "Xi'an", zh: "西安" },
+  family: { en: "Shanghai", zh: "上海" },
+  arrival: { en: "Shanghai", zh: "上海" },
+  rescue: { en: "Nanjing → Shanghai", zh: "南京 → 上海" },
+  budget: { en: "Shanghai", zh: "上海" },
+};
+
 const RECHECK_NOTE: Localized = { en: "Rules change often; treat this as a starting point, not a ruling.", zh: "规则变动频繁，这里只是起点，不是裁定。" };
 
 export const CONVERSATIONS: Record<ChatId, Turn[]> = {

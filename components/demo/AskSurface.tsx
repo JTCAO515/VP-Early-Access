@@ -6,6 +6,7 @@ import { CANVAS } from "@/lib/demo/canvas";
 import { CONVERSATIONS } from "@/lib/demo/chats";
 import { DEMO_UI } from "@/lib/demo/ui";
 import type { CanvasDay, CanvasNode, ChatId, Localized } from "@/lib/demo/types";
+import ImportInspector from "./ImportInspector";
 import { ConfidenceTag, EvidenceRow, StateBadge } from "./parts";
 
 type Decision = "accepted" | "rejected";
@@ -18,6 +19,7 @@ type Props = {
   onOpenMemory: (memoryId: string) => void;
   onOpenDishes: () => void;
   onOpenTool: (toolId: string) => void;
+  forceDiff?: boolean;
 };
 
 const KIND_GLYPH: Record<CanvasNode["kind"], string> = {
@@ -42,7 +44,7 @@ function openingShown(turns: Array<{ role: "user" | "assistant"; chips?: Localiz
   return shown;
 }
 
-export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpenDishes, onOpenTool }: Props) {
+export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpenDishes, onOpenTool, forceDiff = false }: Props) {
   const doc = CANVAS[chatId];
   const turns = CONVERSATIONS[chatId];
   const ui = DEMO_UI;
@@ -53,6 +55,7 @@ export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpen
   const [decisions, setDecisions] = useState<Record<string, Decision>>({});
   const [shown, setShown] = useState(() => openingShown(turns));
   const [openNode, setOpenNode] = useState<string | null>(null);
+  const [mobilePane, setMobilePane] = useState<"canvas" | "chat">("chat");
 
   useEffect(() => {
     setTab("timeline");
@@ -61,7 +64,14 @@ export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpen
     setDecisions({});
     setShown(openingShown(CONVERSATIONS[chatId]));
     setOpenNode(null);
+    setMobilePane("chat");
   }, [chatId]);
+
+  useEffect(() => {
+    if (!forceDiff || !doc.diff) return;
+    setDiffOpen(true);
+    setMobilePane("canvas");
+  }, [doc.diff, forceDiff]);
 
   const pending = useMemo(
     () => (doc.diff?.entries ?? []).filter((entry) => !decisions[entry.id]).length,
@@ -85,10 +95,15 @@ export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpen
 
   return (
     <div className="demo-ask-layout">
-      <section className="demo-canvas" aria-label="Trip Canvas demo">
+      <nav className="vp-mobile-pane-switch" aria-label={ui.ability.ask[lang]}>
+        <button className={mobilePane === "chat" ? "active" : ""} onClick={() => setMobilePane("chat")}>Ask</button>
+        <button className={mobilePane === "canvas" ? "active" : ""} onClick={() => setMobilePane("canvas")}>Trip Canvas</button>
+      </nav>
+
+      <section className={`demo-canvas pane-${mobilePane}`} aria-label="Trip Canvas demo">
         <header>
-          <span>{doc.title[lang]}</span>
-          <small>{doc.subtitle[lang]}</small>
+          <div><span>{doc.title[lang]}</span><small>{doc.subtitle[lang]}</small></div>
+          <p className="vp-ability canvas-answer">{ui.ability.canvas[lang]}</p>
           {doc.versions.length > 1 ? (
             <label className="vp-version">
               <span>{ui.canvas.version[lang]}</span>
@@ -153,6 +168,8 @@ export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpen
           </section>
         ) : null}
 
+        {chatId === "import" ? <ImportInspector lang={lang} onReviewDiff={() => setDiffOpen(true)} /> : null}
+
         {tab === "timeline" ? (
           <div className="demo-canvas-rows">
             {doc.empty ? (
@@ -204,7 +221,7 @@ export default function AskSurface({ lang, chatId, onToast, onOpenMemory, onOpen
         </div>
       </section>
 
-      <section className="demo-chat" aria-label="Chatbot demo">
+      <section className={`demo-chat pane-${mobilePane}`} aria-label="Chatbot demo">
         <header>
           <span>Ask VisePanda</span>
           <small>{ui.ability.ask[lang]}</small>
@@ -301,6 +318,20 @@ function CompareBlock({ lang, doc }: { lang: Lang; doc: (typeof CANVAS)[ChatId] 
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="vp-compare-mobile">
+        {table.options.map((option, optionIndex) => (
+          <article key={option.en}>
+            <h4>{option[lang]}</h4>
+            <dl>
+              {table.rows.map((row) => (
+                <div key={row.field.en} className={row.match === optionIndex ? "match" : ""}>
+                  <dt>{row.field[lang]}</dt><dd>{row.values[optionIndex][lang]}</dd>
+                </div>
+              ))}
+            </dl>
+          </article>
+        ))}
       </div>
       <small>{table.footnote[lang]}</small>
     </section>

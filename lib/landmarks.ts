@@ -344,4 +344,110 @@ export const LANDMARK_ART: Record<string, string[]> = {
     "M15 12 H23 M16 20 H22 M7 22 H11",
     "M17 29 V24 H21 V29",
   ],
+  // Datong — Yungang Grottoes: three cave arches cut into the cliff, with the central Buddha.
+  datong: [
+    "M2 29 H30",
+    "M4 29 V8 H28 V29",
+    "M7 29 V18 A4 4 0 0 1 15 18 V29",
+    "M17 29 V18 A4 4 0 0 1 25 18 V29",
+    "M12 16 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0",
+    "M11 25 Q14 19 17 25 M21 22 a1.5 1.5 0 1 0 3 0",
+  ],
+  // Suzhou — Humble Administrator's Garden: moon gate, waterside pavilion and garden rock.
+  suzhou: [
+    "M2 29 H30",
+    "M4 29 V11 H17 V29",
+    "M7 29 V21 A3.5 3.5 0 0 1 14 21 V29",
+    "M18 29 V20 H29 V29 M17 20 Q23.5 14 30 20",
+    "M21 29 V23 M27 29 V23",
+    "M2 27 q4 -1.5 8 0 t8 0",
+  ],
+  // Huangshan — Yellow Mountain: granite peaks with the crooked welcoming pine.
+  huangshan: [
+    "M1 29 H31",
+    "M1 29 L8 15 L13 23 L20 7 L30 29",
+    "M22 29 V15 Q24 11 27 13 M23 18 Q19 15 16 17",
+    "M26 13 L29 10 M24 12 L23 8",
+  ],
+  // Xiamen — Gulangyu: Sunlight Rock above the island and its piano-shaped cultural mark.
+  xiamen: [
+    "M2 27 q4 -1.5 8 0 t8 0 t8 0",
+    "M3 24 Q8 14 14 24 Q20 10 28 24",
+    "M18 19 V11 H25 V19 M17 11 Q21.5 7 26 11",
+    "M7 24 V20 H12 V24 M9.5 20 V17",
+    "M2 30 q4 -1.5 8 0 t8 0 t8 0",
+  ],
+  // Jingdezhen — Ancient Kiln: a porcelain vase beside the arched kiln flame.
+  jingdezhen: [
+    "M2 29 H30",
+    "M5 29 V19 Q5 12 11 9 Q17 12 17 19 V29",
+    "M8 29 V23 A3 3 0 0 1 14 23 V29",
+    "M20 7 H27 M21 7 Q21 12 19 16 Q18 23 23.5 27 Q29 23 28 16 Q26 12 26 7",
+    "M22 4 H26 V7 M20 18 H28",
+  ],
+  // Qingdao — Zhanqiao Pier: the long pier reaching its octagonal pavilion over the sea.
+  qingdao: [
+    "M2 29 q4 -1.5 8 0 t8 0 t8 0",
+    "M3 24 H22 M7 24 V29 M18 24 V29",
+    "M20 24 V16 H30 V24",
+    "M18 16 Q25 10 32 16",
+    "M23 16 V12 M27 16 V12 M21 12 Q25 8 29 12",
+  ],
+  // Luoyang — Longmen Grottoes: river cliff caves framing the central Vairocana figure.
+  luoyang: [
+    "M2 29 H30",
+    "M3 29 V7 H29 V29",
+    "M6 29 V20 A3 3 0 0 1 12 20 V29 M20 29 V20 A3 3 0 0 1 26 20 V29",
+    "M13 29 V17 A3 3 0 0 1 19 17 V29",
+    "M14 16 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0",
+    "M14 25 Q16 20 18 25",
+  ],
+  // Jiuzhaigou — Five Flower Lake: layered peaks reflected in clear stepped water.
+  jiuzhaigou: [
+    "M1 21 L8 10 L14 19 L20 7 L31 21",
+    "M3 24 Q9 21 15 24 T27 24",
+    "M2 27 Q8 24 14 27 T26 27",
+    "M4 30 Q10 27 16 30 T28 30",
+    "M22 14 L24 18 L27 14",
+  ],
+  // Dali — the Three Pagodas, with the taller Qianxun Pagoda at centre.
+  dali: [
+    "M2 29 H30",
+    "M13 29 V8 H19 V29 M12 12 H20 M12 17 H20 M12 22 H20 M16 8 V4",
+    "M5 29 V16 H10 V29 M4 20 H11 M7.5 16 V12",
+    "M22 29 V16 H27 V29 M21 20 H28 M24.5 16 V12",
+  ],
+  // Lijiang — old-town tiled roofs and the waterwheel beside the canal.
+  lijiang: [
+    "M2 29 H30",
+    "M3 29 V20 H16 V29 M1 20 Q9.5 13 18 20",
+    "M7 29 V24 H12 V29",
+    "M21 21 a6 6 0 1 0 12 0 a6 6 0 1 0 -12 0",
+    "M27 15 V27 M21 21 H33 M23 17 L31 25 M31 17 L23 25",
+  ],
+  // Sanya — Tianya Haijiao: two coastal rocks, a leaning palm and the South China Sea.
+  sanya: [
+    "M2 27 q4 -1.5 8 0 t8 0 t8 0",
+    "M5 26 L8 17 L12 26 M14 26 L18 14 L23 26",
+    "M27 26 Q26 16 29 8",
+    "M29 8 Q24 6 22 10 M29 8 Q31 4 34 6 M29 8 Q27 3 28 1",
+    "M2 30 q4 -1.5 8 0 t8 0 t8 0",
+  ],
+  // Dunhuang — Mogao Caves: cliff niches and the nine-storey facade silhouette.
+  dunhuang: [
+    "M2 29 H30",
+    "M3 29 V9 H15 V29 M5 15 H13 M5 21 H13",
+    "M18 29 V8 H27 V29 M17 12 H28 M17 17 H28 M17 22 H28",
+    "M20 29 V25 A2.5 2.5 0 0 1 25 25 V29",
+    "M19 8 Q22.5 4 26 8 M22.5 4 V2",
+  ],
+  // Kashgar — Id Kah Mosque: central prayer hall between two slender minarets.
+  kashgar: [
+    "M2 29 H30",
+    "M7 29 V12 H25 V29",
+    "M10 12 Q16 5 22 12",
+    "M13 29 V22 A3 3 0 0 1 19 22 V29",
+    "M4 29 V9 H7 V29 M25 29 V9 H28 V29",
+    "M4 9 Q5.5 5 7 9 M25 9 Q26.5 5 28 9 M5.5 5 V2 M26.5 5 V2",
+  ],
 };
