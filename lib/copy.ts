@@ -157,14 +157,14 @@ export const COPY = {
     langToggle: { en: "中文", zh: "EN" },
   },
   hero: {
-    title: { en: "China, perfectly connected.", zh: "让中国旅行，一路走得通。" },
+    title: { en: "Plan China without the loose ends.", zh: "中国旅行，别卡在衔接上。" },
     lede: {
-      en: "VisePanda maps the journeys that matter — so your trip flows effortlessly from city to city.",
-      zh: "VisePanda 只规划真正重要的连接——让行程在城市之间自然流动。",
+      en: "VisePanda keeps your route, daily plan and practical details together, so you know what comes next in every city.",
+      zh: "VisePanda 把路线、每天的安排和沿途要处理的事放在一起。到了下一座城市，你仍然知道接下来该做什么。",
     },
     note: {
-      en: "iOS and Android apps are in development. Early access members get the first invites.",
-      zh: "iOS 与 Android 应用正在开发中，早期访问成员优先收到邀请。",
+      en: "We're building VisePanda for iOS and Android. Early Access members will be invited first.",
+      zh: "VisePanda 的 iOS 与 Android 版本正在开发，早期访问用户会优先收到邀请。",
     },
   },
   form: {
@@ -174,21 +174,21 @@ export const COPY = {
     continue: { en: "Request access", zh: "申请访问" },
     questionsHeading: { en: "Three quick questions", zh: "三个小问题" },
     questionsLede: {
-      en: "Optional, but it decides what we build first and when you get invited.",
-      zh: "可跳过。它决定我们先做什么，以及你什么时候拿到邀请。",
+      en: "You can skip these. Your answers help us decide what to work on first and who to invite.",
+      zh: "可以跳过。你的回答会帮助我们决定先完善哪些功能，以及邀请哪些用户。",
     },
     submit: { en: "Join the waitlist", zh: "加入等待名单" },
     skip: { en: "Skip and join", zh: "跳过并加入" },
     back: { en: "Back", zh: "返回" },
     sending: { en: "Sending…", zh: "提交中…" },
     privacy: {
-      en: "No spam. One email when your access opens — nothing else.",
-      zh: "不发垃圾邮件。仅在开放访问时发一封通知邮件。",
+      en: "No spam. We'll send one email when your access is ready.",
+      zh: "不发垃圾邮件。开放访问时，我们只发一封通知邮件。",
     },
     successTitle: { en: "You're on the list.", zh: "已加入名单。" },
     successBody: {
-      en: "We'll email you the moment your access opens. iOS and Android builds are in development, and early access members are invited first.",
-      zh: "开放访问时我们会第一时间邮件通知你。iOS 与 Android 版本正在开发中，早期访问成员优先受邀。",
+      en: "We'll email you when your access is ready. The iOS and Android apps are still in development, and Early Access members will be invited first.",
+      zh: "开放访问时，我们会发邮件通知你。iOS 与 Android 版本仍在开发，早期访问用户会优先收到邀请。",
     },
     errors: {
       email: { en: "Enter a valid email address.", zh: "请输入有效的邮箱地址。" },
@@ -197,19 +197,19 @@ export const COPY = {
     },
   },
   destinations: {
-    eyebrow: { en: "Destination overview", zh: "目的地总览" },
-    title: { en: "Twelve cities. One continuous plan.", zh: "十二座城市，一条连贯的行程。" },
+    eyebrow: { en: "Across China", zh: "目的地" },
+    title: { en: "Keep 50 cities in one plan.", zh: "50 座城市，放进同一份行程。" },
     lede: {
-      en: "Every leg is checked against real transport, opening hours and pacing before it reaches your itinerary.",
-      zh: "每一段行程都会先对照真实的交通、开放时间与节奏做验证，再进入你的行程表。",
+      en: "Each stop is checked for transport, opening hours and a workable pace before it reaches your itinerary.",
+      zh: "地点加进行程前，会先检查交通、开放时间和当天的节奏是否合适。",
     },
   },
   simulator: {
-    eyebrow: { en: "Execution-logic simulator", zh: "执行逻辑模拟器" },
-    title: { en: "Make the plan work before you leave.", zh: "让行程在出发前走通。" },
+    eyebrow: { en: "Check the plan", zh: "行程检查" },
+    title: { en: "Check the plan before you leave.", zh: "出发前，先把行程查一遍。" },
     lede: {
-      en: "Start from the plan you already have. VisePanda validates it, fixes what breaks, and turns it into something you can execute.",
-      zh: "从你的想法出发，VisePanda 帮你验证、优化并生成可执行的旅行计划。",
+      en: "Bring the plan you already have. VisePanda points out conflicts and shows the proposed changes in Trip Canvas for you to review.",
+      zh: "把现有行程交给 VisePanda。它会找出冲突，再把修改建议放进 Trip Canvas，由你确认。",
     },
     panelPlan: { en: "Your Existing Plan", zh: "你现有的计划" },
     panelChecks: { en: "Preparation Checks", zh: "出行前检查" },
@@ -221,11 +221,11 @@ export const COPY = {
     footer: { en: "All checks complete. Your trip is ready to go.", zh: "检查已全部完成，行程可以出发。" },
   },
   mobile: {
-    eyebrow: { en: "Mobile app availability", zh: "移动端进度" },
-    title: { en: "Your trip, in your pocket.", zh: "把行程装进口袋。" },
+    eyebrow: { en: "VisePanda on mobile", zh: "移动端" },
+    title: { en: "Your day plan, on your phone.", zh: "每天的行程，手机上随时看。" },
     lede: {
-      en: "The VisePanda app brings your Trip Canvas to life — day plans, real-time updates, and the next best step, wherever you are.",
-      zh: "VisePanda App 让行程画布真正跑起来——每日计划、实时更新，以及此刻该做的下一步。",
+      en: "While you travel, the app keeps today's plan, updates as they happen and the next step close at hand.",
+      zh: "旅行途中，今天怎么走、行程有什么新变化、下一步做什么，都能在手机上及时看到。",
     },
     ios: { en: "iOS App", zh: "iOS 应用" },
     android: { en: "Android App", zh: "Android 应用" },
@@ -240,10 +240,10 @@ export const COPY = {
     whatsAhead: { en: "What's Ahead", zh: "接下来" },
   },
   closing: {
-    title: { en: "Be there for the first invites.", zh: "成为第一批拿到邀请的人。" },
+    title: { en: "Get the first Early Access invite.", zh: "第一批邀请开放时，我们会通知你。" },
     lede: {
-      en: "Early access members shape what ships first — and get in before anyone else.",
-      zh: "早期访问成员决定我们先做什么，也最早拿到使用权限。",
+      en: "Join the list and we'll email you when invitations open. Your answers also help us decide what to work on first.",
+      zh: "留下邮箱。邀请开放时我们会通知你，你填写的需求也会影响我们先完善哪些功能。",
     },
   },
   footer: {
@@ -262,8 +262,8 @@ export const PRODUCT_DEMO = {
     user: { en: "User", zh: "用户" },
   } satisfies Record<string, Localized>,
   ui: {
-    sectionTitle: { en: "Try a VisePanda workspace that actually responds.", zh: "打开一个真正能操作的 VisePanda。" },
-    sectionLede: { en: "Switch conversations, Canvas, Copilot and Explore to see how different travel jobs are handled.", zh: "切换聊天、Canvas、Copilot 与 Explore，查看不同旅行任务如何被理解和执行。" },
+    sectionTitle: { en: "Open the demo and click around.", zh: "打开 Demo，自己点一点。" },
+    sectionLede: { en: "Try a chat, review a Canvas change, look up a place or open a tool. Every screen is a prepared demo state.", zh: "换一段对话、确认一次 Canvas 改动、查一个地点，或者打开工具。里面都是准备好的演示状态。" },
     chats: { en: "Chats", zh: "对话" },
   } satisfies Record<string, Localized>,
   userProfile: {
@@ -278,27 +278,27 @@ export const PRODUCT_DEMO = {
 } as const;
 
 export const COMPARISON_COPY = {
-  eyebrow: { en: "Where VisePanda fits", zh: "VisePanda 的位置" },
-  title: { en: "Planning is not the same as making a trip work.", zh: "能规划，不等于能把旅程走通。" },
+  eyebrow: { en: "How the categories differ", zh: "四类产品怎么分工" },
+  title: { en: "Each travel product is good at a different part of the trip.", zh: "四类旅行产品，各有长处。" },
   lede: {
-    en: "OTAs, general AI and travel AI each solve part of the journey. VisePanda is built around the execution gaps international travellers meet inside China.",
-    zh: "传统 OTA、通用 AI 与旅游 AI 各自解决旅程的一部分。VisePanda 专注国际旅行者在中国真正遇到的执行断点。",
+    en: "OTAs are strong at bookings. General AI handles open questions. Travel AI is built for itinerary planning. VisePanda focuses on the practical gaps international travellers run into inside China.",
+    zh: "传统 OTA 擅长预订，通用 AI 擅长开放问答，旅游 AI 更专注行程规划。VisePanda 处理的是国际旅行者到了中国以后，经常卡住的那些具体问题。",
   },
   dimension: { en: "Capability", zh: "能力" },
-  scopeNote: { en: "Category-level positioning, not a ranking of named providers.", zh: "这是品类层面的定位对照，不是对具体品牌的排名。" },
-  limitationTitle: { en: "Where VisePanda is not yet the strongest", zh: "VisePanda 目前并非最强的地方" },
+  scopeNote: { en: "This compares product categories, not specific brands.", zh: "这里只比较产品类型，不评价具体品牌。" },
+  limitationTitle: { en: "Where OTAs are still stronger", zh: "OTA 仍然更强的地方" },
   limitationBody: {
-    en: "OTAs still lead in hotel and ticket inventory, live prices and instant transactions. VisePanda does not imitate that inventory: it prepares official-channel handoffs today and keeps a clear path for future channel integrations and partnerships.",
-    zh: "传统 OTA 在酒店与票务库存、实时价格和即时交易上仍然更强。VisePanda 不伪造库存：当前先把官方渠道跳转做清楚，并保留后续渠道接入与合作扩展能力。",
+    en: "OTAs still have far more hotel and ticket inventory, live prices and instant checkout. VisePanda does not try to copy that supply. Today it sends travellers to official channels. The product is also designed to support future channel integrations and partnerships.",
+    zh: "传统 OTA 的酒店和票务库存更多，也能提供实时价格和即时交易。VisePanda 目前不做这类库存，而是把官方渠道入口整理清楚。产品也为后续渠道接入和合作留好了接口。",
   },
 } as const;
 
 export const COMPETITOR_COMPARISON = {
   columns: [
     { id: "ota", title: { en: "Traditional OTA", zh: "传统 OTA" }, note: { en: "Inventory and transactions", zh: "库存与交易" } },
-    { id: "general", title: { en: "General AI", zh: "通用 AI" }, note: { en: "Flexible conversation", zh: "灵活对话" } },
-    { id: "travel", title: { en: "Travel AI", zh: "旅游 AI" }, note: { en: "Inspiration and itineraries", zh: "灵感与行程" } },
-    { id: "visepanda", title: { en: "VisePanda", zh: "VisePanda" }, note: { en: "China trip execution", zh: "中国旅行执行" } },
+    { id: "general", title: { en: "General AI", zh: "通用 AI" }, note: { en: "Open questions", zh: "开放问答" } },
+    { id: "travel", title: { en: "Travel AI", zh: "旅游 AI" }, note: { en: "Discovery and planning", zh: "发现与规划" } },
+    { id: "visepanda", title: { en: "VisePanda", zh: "VisePanda" }, note: { en: "Travel inside China", zh: "中国境内旅行" } },
   ],
   rows: [
     {
@@ -307,61 +307,61 @@ export const COMPETITOR_COMPARISON = {
         { en: "Bookable supply and price comparison", zh: "可预订库存与价格比较" },
         { en: "Broad knowledge and open-ended answers", zh: "广泛知识与开放问答" },
         { en: "Destination discovery and itinerary creation", zh: "目的地发现与行程生成" },
-        { en: "From conversation to an executable China trip", zh: "从对话到可执行的中国行程" },
+        { en: "Turns a conversation into a trip you can follow", zh: "把对话变成一份能照着走的行程" },
       ],
     },
     {
       label: { en: "Trip structure", zh: "行程结构" },
       values: [
-        { en: "Bookings live in separate order flows", zh: "订单分散在不同预订流程" },
-        { en: "Usually delivered as text", zh: "通常以文本回答交付" },
-        { en: "Visual itinerary builder", zh: "可视化行程生成" },
+        { en: "Bookings sit in separate order flows", zh: "不同预订各走一套订单流程" },
+        { en: "Usually gives a text answer", zh: "通常给出一段文本回答" },
+        { en: "Builds a visual itinerary", zh: "生成可视化行程" },
         { en: "Chatbot and Trip Canvas share one confirmed state", zh: "Chatbot 与 Trip Canvas 共用一份已确认状态" },
       ],
     },
     {
       label: { en: "China-local execution", zh: "中国本地执行" },
       values: [
-        { en: "Strong for listed hotels, tickets and transport", zh: "已上架酒店、票务和交通较强" },
-        { en: "Generic guidance; execution varies", zh: "提供通用建议，执行深度不稳定" },
-        { en: "Planning depth varies by destination", zh: "不同目的地的执行深度不一" },
-        { en: "Language, payment, transport, rules and recovery in one flow", zh: "语言、支付、交通、规则与恢复路径在同一流程" },
+        { en: "Strong for hotels, tickets and transport in its inventory", zh: "擅长处理库存内的酒店、票务和交通" },
+        { en: "Gives general advice, but execution varies", zh: "能给通用建议，具体执行能力不稳定" },
+        { en: "Depth depends on the destination", zh: "不同目的地的支持深度不同" },
+        { en: "Keeps language, payment, transport, rules and recovery in one trip", zh: "把语言、支付、交通、规则和应变都放在同一份行程里" },
       ],
     },
     {
       label: { en: "Long-term traveller memory", zh: "长期旅行者画像" },
       values: [
-        { en: "Account history and saved preferences", zh: "账户历史与已保存偏好" },
+        { en: "Travel history and saved preferences", zh: "旅行历史和已保存偏好" },
         { en: "Conversation memory can be inconsistent", zh: "对话记忆可能不稳定" },
-        { en: "Trip-level preference filters", zh: "单次行程偏好筛选" },
-        { en: "Source-visible memory the traveller can confirm, edit or forget", zh: "可查看来源、可确认、修改或忘记的长期画像" },
+        { en: "Preference filters for the current trip", zh: "围绕当前行程筛选偏好" },
+        { en: "Shows where each memory came from, then lets you confirm, edit or forget it", zh: "每条记忆都能查看来源，也能确认、修改或忘记" },
       ],
     },
     {
       label: { en: "Sources and rechecks", zh: "来源与复核" },
       values: [
-        { en: "Strongest inside owned inventory", zh: "自有库存范围内最强" },
-        { en: "Sources are not consistently exposed", zh: "来源并非始终可见" },
-        { en: "Depends on the provider and destination", zh: "取决于产品和目的地" },
-        { en: "Operational claims carry a source, confidence and recheck time", zh: "执行结论带来源、置信度与复核时间" },
+        { en: "Strong inside its own inventory", zh: "自有库存内的信息最完整" },
+        { en: "Does not always show its sources", zh: "不一定展示信息来源" },
+        { en: "Depends on the product and destination", zh: "取决于具体产品和目的地" },
+        { en: "Shows a source, confidence and recheck time for practical claims", zh: "涉及实际执行的信息，会标出来源、置信度和复核时间" },
       ],
     },
     {
       label: { en: "Inventory and transactions", zh: "库存与交易" },
       values: [
-        { en: "Strongest — live supply and checkout", zh: "最强——实时库存与交易闭环" },
+        { en: "The strongest option for live inventory and checkout", zh: "实时库存和交易能力最强" },
         { en: "No owned travel inventory", zh: "没有自有旅行库存" },
-        { en: "Varies with booking partners", zh: "取决于预订合作渠道" },
-        { en: "Currently lighter than OTAs; official handoffs and integration-ready channels", zh: "目前弱于 OTA；提供官方跳转并支持后续渠道接入" },
+        { en: "Depends on its booking partners", zh: "取决于接入的预订渠道" },
+        { en: "Has less inventory than an OTA. Sends users to official channels and can add channel integrations later", zh: "库存少于 OTA。目前提供官方渠道入口，也支持后续接入更多渠道" },
       ],
     },
     {
       label: { en: "When the plan breaks", zh: "计划出问题时" },
       values: [
-        { en: "Customer service focuses on the booking", zh: "客服主要处理订单问题" },
-        { en: "Can suggest options without changing a trip state", zh: "可以给建议，但不一定改写行程状态" },
-        { en: "May regenerate the itinerary", zh: "可能重新生成行程" },
-        { en: "Today recovery paths propose a Canvas diff before anything changes", zh: "Today 恢复路径先生成 Canvas Diff，再由用户确认" },
+        { en: "Customer service usually focuses on the booking", zh: "客服通常围绕订单处理问题" },
+        { en: "Can suggest options, but may not update the trip itself", zh: "可以给建议，但不一定会更新行程" },
+        { en: "May rebuild the itinerary", zh: "可能重新生成整份行程" },
+        { en: "Today suggests a recovery plan, then shows a Canvas diff for approval", zh: "Today 先给出应变方案，再把 Canvas 改动交给用户确认" },
       ],
     },
   ],

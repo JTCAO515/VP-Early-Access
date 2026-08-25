@@ -27,13 +27,13 @@ export const IMPORT_ITEMS: Array<{
 ];
 
 export const IMPORT_UI = {
-  title: P("Imported guide pipeline", "攻略导入流水线"),
-  lede: P("Every extracted item can be corrected before the checks reach your Canvas.", "每条抽取结果都能先修正，再进入 Canvas 检查。"),
+  title: P("Review an imported guide", "检查导入的攻略"),
+  lede: P("Check or correct each item before it reaches your Canvas.", "抽取结果可以逐条检查和修改，确认后再进入 Canvas。"),
   edit: P("Edit", "修改"),
   undo: P("Undo", "撤销"),
   repair: P("Fill by hand", "手工补充"),
   partial: P("Partly parsed", "部分解析成功"),
   partialBody: P("Four fields were extracted. The train reference could not be read and stays out of the Canvas until you repair it.", "4 个字段已抽取；高铁字段无法辨认，在手工修正前不会进入 Canvas。"),
   review: P("Review the proposed Canvas changes", "查看 Canvas 改动提案"),
-  privacy: P("Static fixture: no real file is uploaded, stored or recognised.", "静态示例：不会上传、存储或识别真实文件。"),
+  privacy: P("This is a static example. No real file is uploaded, stored or recognised.", "这里只展示静态示例，不会上传、存储或识别真实文件。"),
 };

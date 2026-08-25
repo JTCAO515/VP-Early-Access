@@ -20,7 +20,7 @@ export type Tool = {
   screens: ToolScreen[];
 };
 
-/** Execution tools, shown inside Copilot. Every screen is a static demo state. */
+/** Execution tools shown in the top-level Tools surface. Every screen is a static demo state. */
 export const TOOLS: Tool[] = [
   {
     id: "translate",
@@ -112,7 +112,7 @@ export const TOOLS: Tool[] = [
       {
         id: "locate",
         label: { en: "Current location", zh: "当前定位" },
-        body: { en: "Where the app thinks you are, with the accuracy it actually has.", zh: "应用判断你所在的位置，并如实给出精度。" },
+        body: { en: "Shows the app's estimated location and its current accuracy.", zh: "显示应用估算的位置和当前定位精度。" },
         fields: [
           { k: { en: "Area", zh: "区域" }, v: { en: "Huangpu · near the riverfront", zh: "黄浦 · 滨江附近" } },
           { k: { en: "Accuracy", zh: "定位精度" }, v: { en: "≈ 30 m · confirm the pickup below", zh: "约 30 米 · 请在下方确认上车点" } },
@@ -121,7 +121,7 @@ export const TOOLS: Tool[] = [
       {
         id: "pickup",
         label: { en: "Pickup point", zh: "上车点" },
-        body: { en: "Named pickup points rather than a dropped pin, so the driver finds you.", zh: "使用有名字的上车点而不是随手落的图钉，司机更容易找到你。" },
+        body: { en: "Uses a named pickup point that is easier for the driver to find.", zh: "使用有名称的上车点，司机更容易找到。" },
         fields: [
           { k: { en: "Selected", zh: "已选" }, v: { en: "Riverfront gate 2", zh: "滨江 2 号门" } },
           { k: { en: "Walk there", zh: "步行前往" }, v: { en: "3 min", zh: "3 分钟" } },
@@ -146,7 +146,7 @@ export const TOOLS: Tool[] = [
       {
         id: "class",
         label: { en: "Vehicle class", zh: "车型" },
-        body: { en: "Three classes with what actually differs between them.", zh: "三种车型，写清彼此真正的差别。" },
+        body: { en: "Compares the practical differences between three car classes.", zh: "对比三种车型在价格、空间和服务上的差别。" },
         fields: [
           { k: { en: "Standard", zh: "标准" }, v: { en: "4 seats · shortest wait", zh: "4 座 · 等待最短" } },
           { k: { en: "Comfort", zh: "舒适" }, v: { en: "4 seats · more legroom", zh: "4 座 · 空间更大" } },
@@ -165,7 +165,7 @@ export const TOOLS: Tool[] = [
       {
         id: "confirm",
         label: { en: "Trip confirmation", zh: "行程确认" },
-        body: { en: "The summary you would confirm — in the demo the button only changes this screen.", zh: "你将要确认的行程摘要——在 Demo 里这个按钮只会切换本屏状态。" },
+        body: { en: "Shows the trip summary you would confirm. In this demo, the button only changes the screen.", zh: "这里显示待确认的行程摘要。在 Demo 中，按钮只会切换界面状态。" },
         fields: [
           { k: { en: "Pickup", zh: "上车点" }, v: { en: "Riverfront gate 2", zh: "滨江 2 号门" } },
           { k: { en: "Destination", zh: "目的地" }, v: { en: "Concession lanes café", zh: "衡复风貌区咖啡馆" } },
@@ -206,7 +206,7 @@ export const TOOLS: Tool[] = [
       {
         id: "stay",
         label: { en: "Choose length of stay", zh: "选择停留时间" },
-        body: { en: "Thresholds matter more than the exact number of days.", zh: "关键是门槛，而不是具体天数。" },
+        body: { en: "Shows which stay-length threshold applies to the rule.", zh: "显示这条规则对应的停留时长门槛。" },
         fields: [
           { k: { en: "Planned", zh: "计划停留" }, v: { en: "11 days", zh: "11 天" } },
           { k: { en: "Nearest threshold", zh: "最近的门槛" }, v: { en: "Different rules apply above and below it", zh: "跨过门槛前后规则不同" } },
@@ -215,7 +215,7 @@ export const TOOLS: Tool[] = [
       {
         id: "source",
         label: { en: "Rule source", zh: "规则来源" },
-        body: { en: "Every statement carries the source it came from — official, platform, or your own upload.", zh: "每条结论都标明来源——官方、公开平台，或你自己上传的材料。" },
+        body: { en: "Shows whether each statement came from an official source, a public platform or your upload.", zh: "每条结论都会注明来源，包括官方信息、公开平台或你上传的材料。" },
         fields: [
           { k: { en: "Primary", zh: "主要来源" }, v: { en: "Official channel", zh: "官方渠道" } },
           { k: { en: "Secondary", zh: "次要来源" }, v: { en: "Public platform summary", zh: "公开平台整理" } },
@@ -233,7 +233,7 @@ export const TOOLS: Tool[] = [
       {
         id: "official",
         label: { en: "Official channel", zh: "官方渠道跳转" },
-        body: { en: "One tap to the channel that actually decides, rather than a summary that doesn't.", zh: "一步跳到真正能裁定的渠道，而不是停留在二手摘要。" },
+        body: { en: "Opens the official channel responsible for the final decision.", zh: "直接打开负责最终裁定的官方渠道。" },
         fields: [
           { k: { en: "Action", zh: "操作" }, v: { en: "Open official channel", zh: "打开官方渠道" } },
           { k: { en: "Status", zh: "状态" }, v: { en: "Handoff preview only", zh: "仅展示跳转" } },
@@ -242,13 +242,13 @@ export const TOOLS: Tool[] = [
       {
         id: "unknown",
         label: { en: "When it isn't settled", zh: "未确定时" },
-        body: { en: "If the answer can't be confirmed, you get the gap named, the channel, and a next step — never a guess.", zh: "无法确认时，会明确说出缺口、给出渠道和下一步——不会猜。" },
+        body: { en: "If the answer cannot be confirmed, the screen shows what is missing, the official channel and the next step.", zh: "如果无法确认，界面会说明缺少什么、该查看哪个官方渠道，以及下一步怎么做。" },
         fields: [
           { k: { en: "Cannot confirm", zh: "无法确认" }, v: { en: "Whether your transit airport changes the rule", zh: "中转机场是否改变规则" } },
           { k: { en: "Official channel", zh: "官方渠道" }, v: { en: "Consular channel for your passport", zh: "对应护照的领事渠道" } },
           { k: { en: "Next step", zh: "下一步" }, v: { en: "Confirm before you book the connecting leg", zh: "在订联程票之前先确认" } },
         ],
-        note: { en: "Marked Recheck across the whole demo, not just here.", zh: "整个 Demo 都会标为「需复核」，不只是这一屏。" },
+        note: { en: "The same item is marked Recheck everywhere in the demo.", zh: "这条信息在整个 Demo 中都会标记为「需复核」。" },
       },
     ],
   },
@@ -290,7 +290,7 @@ export const TOOLS: Tool[] = [
       {
         id: "wifi",
         label: { en: "Wi-Fi", zh: "Wi-Fi" },
-        body: { en: "Widely available, but many networks verify by SMS — which needs a working number.", zh: "覆盖广，但很多网络需要短信验证——前提是你有能收短信的号码。" },
+        body: { en: "Widely available, but many networks verify by SMS and require a working phone number.", zh: "覆盖范围较广，但很多网络需要短信验证，因此要先有一个能收短信的号码。" },
         fields: [
           { k: { en: "Best for", zh: "适合" }, v: { en: "Hotels and cafés", zh: "酒店与咖啡馆" } },
           { k: { en: "Watch out", zh: "注意" }, v: { en: "SMS verification blocks you without a number", zh: "没有号码会卡在短信验证" } },
@@ -299,7 +299,7 @@ export const TOOLS: Tool[] = [
       {
         id: "number",
         label: { en: "Do you need a number?", zh: "手机号需求" },
-        body: { en: "The question that decides everything above.", zh: "这个问题决定上面所有选择。" },
+        body: { en: "Whether you need a local number determines which option fits.", zh: "是否需要本地号码，会直接影响你该选哪种方案。" },
         fields: [
           { k: { en: "Data only", zh: "只要流量" }, v: { en: "eSIM is enough", zh: "eSIM 就够" } },
           { k: { en: "Need SMS", zh: "需要收短信" }, v: { en: "Roaming or a local SIM", zh: "漫游或本地 SIM" } },
@@ -309,7 +309,7 @@ export const TOOLS: Tool[] = [
       {
         id: "checklist",
         label: { en: "Preparation checklist", zh: "网络准备清单" },
-        body: { en: "What to finish before you fly, so a failure costs nothing.", zh: "出发前要完成的事，这样失败也不影响行程。" },
+        body: { en: "A checklist to finish before departure, while there is still time to fix a problem.", zh: "出发前按清单准备，遇到问题还有时间处理。" },
         fields: [
           { k: { en: "Before departure", zh: "出发前" }, v: { en: "Buy the eSIM, test the QR, note the support channel", zh: "购买 eSIM、测试二维码、记下客服渠道" } },
           { k: { en: "On landing", zh: "落地后" }, v: { en: "Activate, then confirm data before leaving the terminal", zh: "开通，并在离开航站楼前确认能上网" } },
@@ -318,7 +318,7 @@ export const TOOLS: Tool[] = [
       {
         id: "binding",
         label: { en: "Payment & binding", zh: "支付与绑定提醒" },
-        body: { en: "Connectivity and payment fail together, so they're prepared together.", zh: "网络和支付常常一起出问题，所以放在一起准备。" },
+        body: { en: "Prepares connectivity and payment together because one often depends on the other.", zh: "网络和支付往往互相影响，所以放在一起准备。" },
         fields: [
           { k: { en: "Card binding", zh: "绑卡" }, v: { en: "Rules change often · marked Recheck", zh: "规则变动频繁 · 标为需复核" } },
           { k: { en: "Fallback", zh: "兜底" }, v: { en: "Keep a small cash reserve", zh: "准备少量现金" } },
@@ -332,7 +332,7 @@ export const TOOLS: Tool[] = [
     id: "human",
     glyph: "human",
     title: { en: "Human handoff", zh: "人工介入" },
-    lede: { en: "When the app can't settle it, hand over a complete packet.", zh: "应用解决不了时，交出一份完整的求助包。" },
+    lede: { en: "When the app cannot resolve a problem, prepare a clear handoff for a person.", zh: "应用解决不了的问题，可以整理成一份清楚的材料交给人工处理。" },
     boundary: {
       en: "The demo does not contact anyone. It assembles the packet you would send.",
       zh: "Demo 不会联系任何人，只是把你要发出去的求助包整理好。",
@@ -377,7 +377,7 @@ export const TOOLS: Tool[] = [
       {
         id: "emergency",
         label: { en: "Official emergency channels", zh: "官方紧急渠道" },
-        body: { en: "Listed plainly, above the app's own help, because they matter more.", zh: "直接列出，且排在应用自身帮助之上，因为它们更重要。" },
+        body: { en: "Lists official emergency channels before the app's own support options.", zh: "官方紧急渠道会排在应用自身的帮助入口之前。" },
         fields: [
           { k: { en: "Medical", zh: "医疗" }, v: { en: "Local emergency number", zh: "当地急救电话" } },
           { k: { en: "Consular", zh: "领事" }, v: { en: "Consular channel for your passport", zh: "对应护照的领事渠道" } },

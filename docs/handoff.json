@@ -1,16 +1,17 @@
 {
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
-  "lastUpdated": "2026-08-25T03:46:37Z",
-  "currentPhase": "50-city-and-spec-completion",
-  "status": "merged-deployed-and-production-smoke-passed",
-  "objective": "Expand the Hero map to 50 destinations with matching landmark glyphs, complete all formerly pending Demo states, add an honest competitor-category comparison and reconcile the repository documentation.",
+  "lastUpdated": "2026-08-25T04:46:26Z",
+  "currentPhase": "humanized-public-copy",
+  "status": "implemented-and-locally-accepted; not-merged-or-deployed",
+  "objective": "Install and configure humanizer plus humanizer-zh, then rewrite the bilingual public page and visible Demo dialogue so it sounds natural without changing facts, boundaries or CTA behaviour.",
   "owner": "JTCAO515",
   "fromAgent": "codex",
   "intendedNextAgent": "operator-review",
-  "branch": "main",
-  "releaseCommit": "799760b6632e9ff25fc683a52dd3fd2ec82270f5",
+  "branch": "codex/humanize-homepage-copy",
+  "productionBaselineCommit": "bac38b1",
   "changedFiles": [
+    "AGENTS.md",
     "README.md",
     "HANDOFF.md",
     "app/globals.css",
@@ -20,21 +21,30 @@
     "components/EarlyAccessPage.tsx",
     "components/ProductDemo.tsx",
     "components/demo/AskSurface.tsx",
+    "components/demo/DishDrawer.tsx",
     "components/demo/ExploreSurface.tsx",
     "components/demo/ImportInspector.tsx",
     "components/demo/ToolsSurface.tsx",
+    "components/demo/UserSurface.tsx",
     "components/demo/art.tsx",
     "docs/codex-kickoff.md",
     "docs/handoff.json",
     "docs/interactive-product-demo-plan.md",
     "lib/copy.ts",
     "lib/demo/chats.ts",
+    "lib/demo/canvas.ts",
+    "lib/demo/explore.ts",
+    "lib/demo/features.ts",
     "lib/demo/import.ts",
+    "lib/demo/today.ts",
+    "lib/demo/tools.ts",
     "lib/demo/ui.ts",
     "lib/landmarks.ts",
     "lib/weather.ts"
   ],
   "architectureContracts": [
+    "Public English prose is revised with humanizer and public Chinese prose with neutral humanizer-zh; named-author imitation requires an explicit operator request.",
+    "Bilingual pairs change together while facts, numbers, CTA destinations, route arrows, state labels and fixture boundaries stay unchanged.",
     "MAP_CITIES and LANDMARK_ART must contain exactly the same 50 destination ids.",
     "Landmark glyphs are stroke-only paths on a 32x32 grid and render through currentColor.",
     "The map base is static; autoplay changes the active marker only; the pointer lens is fine-pointer-only.",
@@ -48,6 +58,24 @@
     "The public JotForm CTA and frozen waitlist API contract remain unchanged."
   ],
   "verification": [
+    {
+      "command": "Humanizer pattern scan",
+      "status": "passed",
+      "summary": "No narrative em dash, inflated marketing keyword cluster, formulaic Chinese contrast or stale headline remained in the edited public-copy files.",
+      "artifact": null
+    },
+    {
+      "command": "In-app Browser copy QA",
+      "status": "passed",
+      "summary": "Desktop English and Chinese Hero, capability, competitor and Demo copy rendered without framework or console errors; full-screen Demo interaction remained functional.",
+      "artifact": "/tmp/vp-human-demo-en.png"
+    },
+    {
+      "command": "Playwright bilingual responsive copy matrix",
+      "status": "passed",
+      "summary": "1440x900, 375x812 and 430x932 passed in English and Chinese without page overflow or console errors. Headings and body copy remained visible.",
+      "artifact": "/tmp/vp-human-zh-375.png"
+    },
     {
       "command": "pnpm check",
       "status": "passed",
@@ -104,16 +132,17 @@
     }
   ],
   "operatorActions": [
-    "Review the production competitor positioning and the explicit OTA inventory limitation.",
+    "Review and approve the humanized bilingual copy for merge to main.",
     "Confirm the public JotForm URL remains current."
   ],
   "risks": [
+    "The copy pass is locally verified but not yet visible in production.",
     "Dense eastern-city clusters depend on the pointer lens for labels.",
     "Open-Meteo remains an external dependency; failure omits weather.",
     "The competitor table is category-level positioning, not a sourced named-provider market study.",
     "Production smoke passed, but long-term product outcome and external-service availability are not measured."
   ],
-  "rollback": "Revert 799760b. Waitlist API, JotForm destination and generated map geometry are unchanged.",
+  "rollback": "Revert the humanized-copy commit to return to production baseline bac38b1. Waitlist API, JotForm destination and product behaviour are unchanged.",
   "mandatoryReadingOrder": [
     "README.md",
     "docs/interactive-product-demo-plan.md",
@@ -122,8 +151,8 @@
     "docs/codex-kickoff.md"
   ],
   "nextAction": {
-    "description": "Operator reviews the production experience and confirms that the public JotForm URL remains current.",
-    "expectedObservation": "The page positioning is accepted and each Early Access CTA opens the intended public form.",
-    "command": "curl -I https://form.jotform.com/cjttttt/visepanda-early-access"
+    "description": "Operator reviews the rewritten copy and authorizes merge to main; the next agent then runs a production bilingual smoke check after Vercel succeeds.",
+    "expectedObservation": "The English and Chinese production page shows the approved natural-language copy without layout regressions.",
+    "command": "git diff main...codex/humanize-homepage-copy"
   }
 }

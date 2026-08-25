@@ -140,7 +140,7 @@ export default function UserSurface({ lang, onToast }: { lang: Lang; onToast: (m
             <small>{ui.deleteData[lang]}</small>
             <p>{ui.deleteWarn[lang]}</p>
             <button onClick={() => setConfirmDelete((value) => !value)}>{ui.deleteData[lang]}</button>
-            {confirmDelete ? <p className="vp-banner">{lang === "zh" ? "静态确认态：Demo 不会真的删除任何东西。" : "Static confirmation state: the demo deletes nothing."}</p> : null}
+            {confirmDelete ? <p className="vp-banner">{lang === "zh" ? "这里只切换演示状态，不会真的删除数据。" : "This only changes the demo state. No data is deleted."}</p> : null}
           </section>
           <p className="vp-note">{ui.noCollection[lang]}</p>
         </div>

@@ -111,7 +111,7 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
             map: { x: .68, y: .46 },
             evidence: [OFFICIAL({ en: "Ticketing page", zh: "票务页面" }, 9)],
             risks: [{ en: "Reservation window may be required", zh: "可能需要预约时段" }],
-            next: { label: { en: "Ticket channel", zh: "门票渠道" }, feedback: { en: "Ticket handoff previewed — nothing was booked", zh: "已展示门票跳转，未产生任何预订" } },
+            next: { label: { en: "Ticket channel", zh: "门票渠道" }, feedback: { en: "Ticket handoff previewed. Nothing was booked", zh: "已展示门票跳转，未产生任何预订" } },
           },
           {
             id: "s1-lunch", time: "13:00", kind: "food", state: "confirmed", confidence: "medium",
@@ -161,7 +161,7 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
             cost: { en: "≈ ¥24", zh: "约 ¥24" },
             map: { x: .38, y: .55 },
             evidence: [PLATFORM({ en: "Typical fare range", zh: "常见价格区间" }, 5)],
-            next: { label: { en: "Open ride tool", zh: "打开叫车工具" }, feedback: { en: "Ride demo opened — no car was requested", zh: "已打开叫车演示，未发起真实叫车" } },
+            next: { label: { en: "Open ride tool", zh: "打开叫车工具" }, feedback: { en: "Ride demo opened. No car was requested", zh: "已打开叫车演示，未发起真实叫车" } },
           },
           {
             id: "s2-cafe", time: "11:30", kind: "food", state: "confirmed", confidence: "medium",
@@ -203,7 +203,7 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
             map: { x: .34, y: .74 },
             evidence: [OFFICIAL({ en: "Exhibition page", zh: "展览页面" }, 21)],
             risks: [{ en: "Exhibition rotation may change opening hours", zh: "换展期间开放时间可能变化" }],
-            next: { label: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed — nothing was booked", zh: "已展示官方渠道，未产生任何预订" } },
+            next: { label: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed. Nothing was booked", zh: "已展示官方渠道，未产生任何预订" } },
           },
           {
             id: "s3-xintiandi", time: "14:30", kind: "sight", state: "confirmed", confidence: "high",
@@ -225,9 +225,9 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
       },
     ],
     bookings: [
-      { id: "b-yu", label: { en: "Ticket", zh: "门票" }, title: { en: "Yu Garden entry", zh: "豫园预约" }, state: "proposed", action: { en: "Ticket channel", zh: "门票渠道" }, feedback: { en: "Ticket handoff previewed — nothing was booked", zh: "已展示门票跳转，未产生任何预订" } },
-      { id: "b-museum", label: { en: "Ticket", zh: "门票" }, title: { en: "West Bund museum", zh: "西岸美术馆" }, state: "recheck", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed — nothing was booked", zh: "已展示官方渠道，未产生任何预订" } },
-      { id: "b-dinner", label: { en: "Table", zh: "餐位" }, title: { en: "Day 2 peanut-free dinner", zh: "Day 2 无花生晚餐" }, state: "proposed", action: { en: "Reservation channel", zh: "预订渠道" }, feedback: { en: "Reservation handoff previewed — nothing was booked", zh: "已展示预订跳转，未产生任何预订" } },
+      { id: "b-yu", label: { en: "Ticket", zh: "门票" }, title: { en: "Yu Garden entry", zh: "豫园预约" }, state: "proposed", action: { en: "Ticket channel", zh: "门票渠道" }, feedback: { en: "Ticket handoff previewed. Nothing was booked", zh: "已展示门票跳转，未产生任何预订" } },
+      { id: "b-museum", label: { en: "Ticket", zh: "门票" }, title: { en: "West Bund museum", zh: "西岸美术馆" }, state: "recheck", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed. Nothing was booked", zh: "已展示官方渠道，未产生任何预订" } },
+      { id: "b-dinner", label: { en: "Table", zh: "餐位" }, title: { en: "Day 2 peanut-free dinner", zh: "Day 2 无花生晚餐" }, state: "proposed", action: { en: "Reservation channel", zh: "预订渠道" }, feedback: { en: "Reservation handoff previewed. Nothing was booked", zh: "已展示预订跳转，未产生任何预订" } },
     ],
   },
 
@@ -261,15 +261,15 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
         },
         nodes: [
           { id: "t-out", time: "08:10", kind: "transit", state: "confirmed", confidence: "high", title: { en: "Hotel → Hongqiao area", zh: "酒店 → 虹桥片区" }, duration: { en: "35 min", zh: "35 分钟" }, cost: { en: "≈ ¥8", zh: "约 ¥8" }, map: { x: .2, y: .4 }, evidence: [OFFICIAL({ en: "Metro operator", zh: "轨交运营方" }, 4, SEASON)] },
-          { id: "t-rail", time: "09:30", kind: "transit", state: "proposed", confidence: "medium", title: { en: "Shanghai → Beijing by rail", zh: "上海 → 北京 高铁" }, duration: { en: "≈ 4 h 30 m", zh: "约 4 小时 30 分" }, cost: { en: "Mid band · demo fixture", zh: "中档区间 · Demo fixture" }, map: { x: .5, y: .3 }, evidence: [OFFICIAL({ en: "Rail official channel", zh: "铁路官方渠道" }, 2)], risks: [{ en: "Book before the seat class you want sells out", zh: "座位等级可能提前售完" }], next: { label: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Rail handoff previewed — nothing was booked", zh: "已展示铁路官方跳转，未产生任何预订" } } },
+          { id: "t-rail", time: "09:30", kind: "transit", state: "proposed", confidence: "medium", title: { en: "Shanghai → Beijing by rail", zh: "上海 → 北京 高铁" }, duration: { en: "≈ 4 h 30 m", zh: "约 4 小时 30 分" }, cost: { en: "Mid band · demo fixture", zh: "中档区间 · Demo fixture" }, map: { x: .5, y: .3 }, evidence: [OFFICIAL({ en: "Rail official channel", zh: "铁路官方渠道" }, 2)], risks: [{ en: "Book before the seat class you want sells out", zh: "座位等级可能提前售完" }], next: { label: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Rail handoff previewed. Nothing was booked", zh: "已展示铁路官方跳转，未产生任何预订" } } },
           { id: "t-in", time: "14:20", kind: "transit", state: "confirmed", confidence: "high", title: { en: "Beijing South → Wangfujing", zh: "北京南 → 王府井" }, duration: { en: "32 min", zh: "32 分钟" }, cost: { en: "≈ ¥7", zh: "约 ¥7" }, map: { x: .74, y: .34 } },
-          { id: "t-hotel", time: "15:10", kind: "stay", state: "proposed", confidence: "medium", title: { en: "Check in · Wangfujing", zh: "入住 · 王府井" }, duration: { en: "30 min", zh: "30 分钟" }, map: { x: .8, y: .42 }, next: { label: { en: "View hotel", zh: "查看酒店" }, feedback: { en: "Hotel handoff previewed — nothing was booked", zh: "已展示酒店跳转，未产生任何预订" } } },
+          { id: "t-hotel", time: "15:10", kind: "stay", state: "proposed", confidence: "medium", title: { en: "Check in · Wangfujing", zh: "入住 · 王府井" }, duration: { en: "30 min", zh: "30 分钟" }, map: { x: .8, y: .42 }, next: { label: { en: "View hotel", zh: "查看酒店" }, feedback: { en: "Hotel handoff previewed. Nothing was booked", zh: "已展示酒店跳转，未产生任何预订" } } },
         ],
       },
     ],
     bookings: [
-      { id: "b-rail", label: { en: "Rail", zh: "高铁" }, title: { en: "Shanghai → Beijing", zh: "上海 → 北京" }, state: "proposed", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Rail handoff previewed — nothing was booked", zh: "已展示铁路官方跳转，未产生任何预订" } },
-      { id: "b-hotel", label: { en: "Hotel", zh: "酒店" }, title: { en: "Wangfujing · Beijing", zh: "北京 · 王府井" }, state: "proposed", action: { en: "View hotel", zh: "查看酒店" }, feedback: { en: "Hotel handoff previewed — nothing was booked", zh: "已展示酒店跳转，未产生任何预订" } },
+      { id: "b-rail", label: { en: "Rail", zh: "高铁" }, title: { en: "Shanghai → Beijing", zh: "上海 → 北京" }, state: "proposed", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Rail handoff previewed. Nothing was booked", zh: "已展示铁路官方跳转，未产生任何预订" } },
+      { id: "b-hotel", label: { en: "Hotel", zh: "酒店" }, title: { en: "Wangfujing · Beijing", zh: "北京 · 王府井" }, state: "proposed", action: { en: "View hotel", zh: "查看酒店" }, feedback: { en: "Hotel handoff previewed. Nothing was booked", zh: "已展示酒店跳转，未产生任何预订" } },
     ],
   },
 
@@ -302,13 +302,13 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
           indoor: { en: "Indoor 90%", zh: "室内 90%" },
         },
         nodes: [
-          { id: "h-in", time: "15:00", kind: "stay", state: "proposed", confidence: "medium", title: { en: "Wangfujing · courtyard view", zh: "王府井 · 庭院景观" }, duration: { en: "3 nights", zh: "3 晚" }, cost: { en: "Above your usual band", zh: "高于你的常规区间" }, map: { x: .5, y: .4 }, evidence: [PLATFORM({ en: "Property listing", zh: "酒店信息页" }, 6)], risks: [{ en: "Above your daily budget band", zh: "超出你的每日预算区间" }], next: { label: { en: "View hotel", zh: "查看酒店" }, feedback: { en: "Hotel handoff previewed — nothing was booked", zh: "已展示酒店跳转，未产生任何预订" } } },
+          { id: "h-in", time: "15:00", kind: "stay", state: "proposed", confidence: "medium", title: { en: "Wangfujing · courtyard view", zh: "王府井 · 庭院景观" }, duration: { en: "3 nights", zh: "3 晚" }, cost: { en: "Above your usual band", zh: "高于你的常规区间" }, map: { x: .5, y: .4 }, evidence: [PLATFORM({ en: "Property listing", zh: "酒店信息页" }, 6)], risks: [{ en: "Above your daily budget band", zh: "超出你的每日预算区间" }], next: { label: { en: "View hotel", zh: "查看酒店" }, feedback: { en: "Hotel handoff previewed. Nothing was booked", zh: "已展示酒店跳转，未产生任何预订" } } },
           { id: "h-alt", time: "—", kind: "task", state: "inferred", confidence: "medium", title: { en: "Not satisfied? Load another three", zh: "都不满意？换一批" }, map: { x: .6, y: .55 }, next: { label: { en: "Show another set", zh: "换一批" }, feedback: { en: "Second preset comparison loaded", zh: "已切换到第二组预置对比" } } },
         ],
       },
     ],
     bookings: [
-      { id: "b-stay", label: { en: "Hotel", zh: "酒店" }, title: { en: "Wangfujing · 3 nights", zh: "王府井 · 3 晚" }, state: "proposed", action: { en: "View hotel", zh: "查看酒店" }, feedback: { en: "Hotel handoff previewed — nothing was booked", zh: "已展示酒店跳转，未产生任何预订" } },
+      { id: "b-stay", label: { en: "Hotel", zh: "酒店" }, title: { en: "Wangfujing · 3 nights", zh: "王府井 · 3 晚" }, state: "proposed", action: { en: "View hotel", zh: "查看酒店" }, feedback: { en: "Hotel handoff previewed. Nothing was booked", zh: "已展示酒店跳转，未产生任何预订" } },
     ],
   },
 
@@ -327,13 +327,13 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
           indoor: { en: "Indoor 100%", zh: "室内 100%" },
         },
         nodes: [
-          { id: "r-place", time: "19:00", kind: "food", state: "proposed", confidence: "medium", title: { en: "Local Shanghai cuisine", zh: "上海本帮菜" }, duration: { en: "1 h 30 m", zh: "1 小时 30 分" }, transfer: { en: "Walk · 15 min", zh: "步行 · 15 分钟" }, cost: { en: "≈ ¥168 set menu", zh: "团购套餐约 ¥168" }, map: { x: .45, y: .5 }, evidence: [PLATFORM({ en: "Menu listing", zh: "菜单信息" }, 4)], risks: [{ en: "Queue can run 30–45 min at peak", zh: "高峰排队 30–45 分钟" }], next: { label: { en: "Group deal channel", zh: "团购渠道" }, feedback: { en: "Group deal handoff previewed — nothing was purchased", zh: "已展示团购跳转，未产生任何购买" } } },
+          { id: "r-place", time: "19:00", kind: "food", state: "proposed", confidence: "medium", title: { en: "Local Shanghai cuisine", zh: "上海本帮菜" }, duration: { en: "1 h 30 m", zh: "1 小时 30 分" }, transfer: { en: "Walk · 15 min", zh: "步行 · 15 分钟" }, cost: { en: "≈ ¥168 set menu", zh: "团购套餐约 ¥168" }, map: { x: .45, y: .5 }, evidence: [PLATFORM({ en: "Menu listing", zh: "菜单信息" }, 4)], risks: [{ en: "Queue can run 30–45 min at peak", zh: "高峰排队 30–45 分钟" }], next: { label: { en: "Group deal channel", zh: "团购渠道" }, feedback: { en: "Group deal handoff previewed. Nothing was purchased", zh: "已展示团购跳转，未产生任何购买" } } },
           { id: "r-dish", time: "Dish", kind: "food", state: "confirmed", confidence: "high", title: { en: "Braised pork · Scallion noodles", zh: "红烧肉 · 葱油拌面" }, cost: { en: "Included in the set", zh: "含在套餐内" }, map: { x: .5, y: .6 }, evidence: [PLATFORM({ en: "Dish listing", zh: "菜品信息" }, 4)], risks: [{ en: "Contains pork, soy and wheat · no peanut", zh: "含猪肉、酱油、小麦 · 不含花生" }], next: { label: { en: "View dishes", zh: "查看菜品" }, feedback: { en: "Dish drawer opened", zh: "已打开菜品抽屉" } } },
         ],
       },
     ],
     bookings: [
-      { id: "b-table", label: { en: "Table", zh: "餐位" }, title: { en: "Tonight · 19:00", zh: "今晚 · 19:00" }, state: "proposed", action: { en: "Group deal channel", zh: "团购渠道" }, feedback: { en: "Group deal handoff previewed — nothing was purchased", zh: "已展示团购跳转，未产生任何购买" } },
+      { id: "b-table", label: { en: "Table", zh: "餐位" }, title: { en: "Tonight · 19:00", zh: "今晚 · 19:00" }, state: "proposed", action: { en: "Group deal channel", zh: "团购渠道" }, feedback: { en: "Group deal handoff previewed. Nothing was purchased", zh: "已展示团购跳转，未产生任何购买" } },
     ],
   },
 
@@ -375,7 +375,7 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
       },
     ],
     bookings: [
-      { id: "b-recheck", label: { en: "Recheck", zh: "复核" }, title: { en: "Rail departure window", zh: "高铁出发时段" }, state: "recheck", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed — nothing was booked", zh: "已展示官方渠道，未产生任何预订" } },
+      { id: "b-recheck", label: { en: "Recheck", zh: "复核" }, title: { en: "Rail departure window", zh: "高铁出发时段" }, state: "recheck", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed. Nothing was booked", zh: "已展示官方渠道，未产生任何预订" } },
     ],
   },
 
@@ -414,13 +414,13 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
         summary: { walk: { en: "Walking 5.1 km", zh: "步行 5.1 km" }, nodes: { en: "2 main stops", zh: "主要节点 2 个" }, budget: { en: "≈ ¥680", zh: "约 ¥680" }, indoor: { en: "Indoor 70%", zh: "室内 70%" } },
         nodes: [
           { id: "x-out", time: "11:20", kind: "transit", state: "confirmed", confidence: "high", title: { en: "City → museum area", zh: "市区 → 博物馆片区" }, duration: { en: "1 h 10 m", zh: "1 小时 10 分" }, cost: { en: "≈ ¥120 round trip", zh: "往返约 ¥120" }, map: { x: .3, y: .6 } },
-          { id: "x-warriors", time: "13:00", kind: "sight", state: "proposed", confidence: "recheck", title: { en: "Terracotta Warriors · timed slot", zh: "兵马俑 · 分时段" }, duration: { en: "2 h 30 m", zh: "2 小时 30 分" }, cost: { en: "Ticketed · slot required", zh: "需购票 · 需选时段" }, map: { x: .72, y: .55 }, evidence: [OFFICIAL({ en: "Reservation page", zh: "预约页面" }, 2)], risks: [{ en: "Passport is required at entry", zh: "入场需要护照" }, { en: "Afternoon slots sell out first", zh: "下午时段更早售罄" }], next: { label: { en: "Reservation channel", zh: "预约渠道" }, feedback: { en: "Reservation handoff previewed — nothing was booked", zh: "已展示预约跳转，未产生任何预订" } } },
+          { id: "x-warriors", time: "13:00", kind: "sight", state: "proposed", confidence: "recheck", title: { en: "Terracotta Warriors · timed slot", zh: "兵马俑 · 分时段" }, duration: { en: "2 h 30 m", zh: "2 小时 30 分" }, cost: { en: "Ticketed · slot required", zh: "需购票 · 需选时段" }, map: { x: .72, y: .55 }, evidence: [OFFICIAL({ en: "Reservation page", zh: "预约页面" }, 2)], risks: [{ en: "Passport is required at entry", zh: "入场需要护照" }, { en: "Afternoon slots sell out first", zh: "下午时段更早售罄" }], next: { label: { en: "Reservation channel", zh: "预约渠道" }, feedback: { en: "Reservation handoff previewed. Nothing was booked", zh: "已展示预约跳转，未产生任何预订" } } },
         ],
       },
     ],
     bookings: [
-      { id: "b-warriors", label: { en: "Reservation", zh: "预约" }, title: { en: "Warriors · afternoon slot", zh: "兵马俑 · 下午时段" }, state: "proposed", action: { en: "Reservation channel", zh: "预约渠道" }, feedback: { en: "Reservation handoff previewed — nothing was booked", zh: "已展示预约跳转，未产生任何预订" } },
-      { id: "b-wall", label: { en: "Ticket", zh: "门票" }, title: { en: "City Wall south gate", zh: "城墙南门" }, state: "confirmed", action: { en: "Ticket channel", zh: "门票渠道" }, feedback: { en: "Ticket handoff previewed — nothing was booked", zh: "已展示门票跳转，未产生任何预订" } },
+      { id: "b-warriors", label: { en: "Reservation", zh: "预约" }, title: { en: "Warriors · afternoon slot", zh: "兵马俑 · 下午时段" }, state: "proposed", action: { en: "Reservation channel", zh: "预约渠道" }, feedback: { en: "Reservation handoff previewed. Nothing was booked", zh: "已展示预约跳转，未产生任何预订" } },
+      { id: "b-wall", label: { en: "Ticket", zh: "门票" }, title: { en: "City Wall south gate", zh: "城墙南门" }, state: "confirmed", action: { en: "Ticket channel", zh: "门票渠道" }, feedback: { en: "Ticket handoff previewed. Nothing was booked", zh: "已展示门票跳转，未产生任何预订" } },
     ],
   },
 
@@ -452,7 +452,7 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
       },
     ],
     bookings: [
-      { id: "b-access", label: { en: "Recheck", zh: "复核" }, title: { en: "Step-free access at each stop", zh: "各节点无障碍通行" }, state: "recheck", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed — nothing was booked", zh: "已展示官方渠道，未产生任何预订" } },
+      { id: "b-access", label: { en: "Recheck", zh: "复核" }, title: { en: "Step-free access at each stop", zh: "各节点无障碍通行" }, state: "recheck", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed. Nothing was booked", zh: "已展示官方渠道，未产生任何预订" } },
     ],
   },
 
@@ -469,19 +469,19 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
           { id: "a-sim", time: "On landing", kind: "task", state: "confirmed", confidence: "high", title: { en: "Activate the eSIM you prepared", zh: "启用出发前准备的 eSIM" }, duration: { en: "10 min", zh: "10 分钟" }, map: { x: .2, y: .3 }, evidence: [OFFICIAL({ en: "Carrier activation page", zh: "运营商开通页" }, 5)], risks: [{ en: "Activation may need Wi-Fi on arrival", zh: "开通可能需要落地 Wi-Fi" }], next: { label: { en: "Open network tool", zh: "打开网络工具" }, feedback: { en: "Network tool demo opened", zh: "已打开网络工具演示" } } },
           { id: "a-pay", time: "+15 min", kind: "task", state: "recheck", confidence: "recheck", title: { en: "Link a card to mobile payment", zh: "把银行卡绑定到移动支付" }, duration: { en: "15 min", zh: "15 分钟" }, map: { x: .34, y: .38 }, evidence: [OFFICIAL({ en: "Payment provider help page", zh: "支付方帮助页" }, 14)], risks: [{ en: "Binding rules change often · recheck before you rely on it", zh: "绑定规则变动频繁 · 依赖前需复核" }] },
           { id: "a-cash", time: "+30 min", kind: "task", state: "inferred", confidence: "medium", title: { en: "Keep a small cash reserve", zh: "准备少量现金备用" }, map: { x: .46, y: .46 }, risks: [{ en: "Some small vendors are cash-only", zh: "部分小商户仅收现金" }] },
-          { id: "a-ride", time: "+45 min", kind: "transit", state: "proposed", confidence: "medium", title: { en: "Airport → hotel", zh: "机场 → 酒店" }, duration: { en: "55 min", zh: "55 分钟" }, cost: { en: "≈ ¥180", zh: "约 ¥180" }, map: { x: .68, y: .56 }, next: { label: { en: "Open ride tool", zh: "打开叫车工具" }, feedback: { en: "Ride demo opened — no car was requested", zh: "已打开叫车演示，未发起真实叫车" } } },
+          { id: "a-ride", time: "+45 min", kind: "transit", state: "proposed", confidence: "medium", title: { en: "Airport → hotel", zh: "机场 → 酒店" }, duration: { en: "55 min", zh: "55 分钟" }, cost: { en: "≈ ¥180", zh: "约 ¥180" }, map: { x: .68, y: .56 }, next: { label: { en: "Open ride tool", zh: "打开叫车工具" }, feedback: { en: "Ride demo opened. No car was requested", zh: "已打开叫车演示，未发起真实叫车" } } },
         ],
       },
     ],
     bookings: [
-      { id: "b-esim", label: { en: "Prepare", zh: "准备" }, title: { en: "eSIM activation", zh: "eSIM 开通" }, state: "confirmed", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed — nothing was purchased", zh: "已展示官方渠道，未产生任何购买" } },
+      { id: "b-esim", label: { en: "Prepare", zh: "准备" }, title: { en: "eSIM activation", zh: "eSIM 开通" }, state: "confirmed", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed. Nothing was purchased", zh: "已展示官方渠道，未产生任何购买" } },
       { id: "b-pay", label: { en: "Recheck", zh: "复核" }, title: { en: "Card binding rules", zh: "银行卡绑定规则" }, state: "recheck", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed", zh: "已展示官方渠道" } },
     ],
   },
 
   rescue: {
     title: { en: "Delay recovery", zh: "延误恢复" },
-    subtitle: { en: "Your train is late — here is what still works", zh: "高铁晚点——这些安排仍然成立" },
+    subtitle: { en: "Your train is late. These parts still work", zh: "高铁晚点了，下面这些安排仍然可行" },
     versions: [
       { id: "v1", label: { en: "v1 · Before the delay", zh: "v1 · 延误前" }, note: { en: "Museum at 14:00, dinner at 18:30", zh: "14:00 美术馆，18:30 晚餐" } },
       { id: "v2", label: { en: "v2 · Current", zh: "v2 · 当前" }, note: { en: "Museum dropped, dinner moved later", zh: "取消美术馆，晚餐后移" } },
@@ -501,12 +501,12 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
         nodes: [
           { id: "rs-delay", time: "!", kind: "transit", state: "recheck", confidence: "recheck", title: { en: "Train delayed ≈ 95 min", zh: "列车晚点约 95 分钟" }, map: { x: .3, y: .3 }, evidence: [OFFICIAL({ en: "Rail official channel", zh: "铁路官方渠道" }, 0)], risks: [{ en: "Delay may still grow · recheck before acting", zh: "延误可能继续扩大 · 行动前复核" }] },
           { id: "rs-arrive", time: "16:15", kind: "transit", state: "proposed", confidence: "medium", title: { en: "Arrive and drop bags", zh: "抵达并放行李" }, duration: { en: "40 min", zh: "40 分钟" }, map: { x: .5, y: .42 } },
-          { id: "rs-dinner", time: "20:00", kind: "food", state: "proposed", confidence: "medium", title: { en: "Dinner, moved later", zh: "晚餐，时间后移" }, duration: { en: "1 h 30 m", zh: "1 小时 30 分" }, cost: { en: "≈ ¥210 pp", zh: "人均约 ¥210" }, map: { x: .66, y: .58 }, next: { label: { en: "Reservation channel", zh: "预订渠道" }, feedback: { en: "Reservation handoff previewed — nothing was changed", zh: "已展示预订跳转，未修改任何预订" } } },
+          { id: "rs-dinner", time: "20:00", kind: "food", state: "proposed", confidence: "medium", title: { en: "Dinner, moved later", zh: "晚餐，时间后移" }, duration: { en: "1 h 30 m", zh: "1 小时 30 分" }, cost: { en: "≈ ¥210 pp", zh: "人均约 ¥210" }, map: { x: .66, y: .58 }, next: { label: { en: "Reservation channel", zh: "预订渠道" }, feedback: { en: "Reservation handoff previewed. Nothing was changed", zh: "已展示预订跳转，未修改任何预订" } } },
         ],
       },
     ],
     bookings: [
-      { id: "b-move", label: { en: "Table", zh: "餐位" }, title: { en: "Move dinner to 20:00", zh: "晚餐改到 20:00" }, state: "proposed", action: { en: "Reservation channel", zh: "预订渠道" }, feedback: { en: "Reservation handoff previewed — nothing was changed", zh: "已展示预订跳转，未修改任何预订" } },
+      { id: "b-move", label: { en: "Table", zh: "餐位" }, title: { en: "Move dinner to 20:00", zh: "晚餐改到 20:00" }, state: "proposed", action: { en: "Reservation channel", zh: "预订渠道" }, feedback: { en: "Reservation handoff previewed. Nothing was changed", zh: "已展示预订跳转，未修改任何预订" } },
       { id: "b-refund", label: { en: "Recheck", zh: "复核" }, title: { en: "Delay compensation rules", zh: "延误补偿规则" }, state: "recheck", action: { en: "Official channel", zh: "官方渠道" }, feedback: { en: "Official channel previewed", zh: "已展示官方渠道" } },
     ],
   },
@@ -540,7 +540,7 @@ export const CANVAS: Record<ChatId, CanvasDoc> = {
       },
     ],
     bookings: [
-      { id: "b-swap", label: { en: "Table", zh: "餐位" }, title: { en: "Swap Day 2 dinner", zh: "更换 Day 2 晚餐" }, state: "proposed", action: { en: "Reservation channel", zh: "预订渠道" }, feedback: { en: "Reservation handoff previewed — nothing was booked", zh: "已展示预订跳转，未产生任何预订" } },
+      { id: "b-swap", label: { en: "Table", zh: "餐位" }, title: { en: "Swap Day 2 dinner", zh: "更换 Day 2 晚餐" }, state: "proposed", action: { en: "Reservation channel", zh: "预订渠道" }, feedback: { en: "Reservation handoff previewed. Nothing was booked", zh: "已展示预订跳转，未产生任何预订" } },
     ],
   },
 };

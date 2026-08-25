@@ -103,7 +103,7 @@ export const POIS: Poi[] = [
     area: P("Yu Garden area", "豫园区域"),
     address: P("Yuyuan Old Street, Huangpu, Shanghai", "上海市黄浦区豫园老街"),
     price: P("¥¥ · about ¥90 per person", "¥¥ · 人均约 ¥90"),
-    review: P("Known for xiaolongbao. The queue is the real cost — it can reshape the rest of your afternoon.", "以小笼包闻名。真正的代价是排队，可能改变整个下午的安排。"),
+    review: P("Known for xiaolongbao. Peak queues can take enough time to affect the rest of the afternoon.", "这里以小笼包闻名。高峰期排队时间较长，可能影响下午的其他安排。"),
     payment: PAY_ROWS("onsite", "yes", "no", "yes", "yes"),
     language: LANG_ROWS(P("Picture menu", "图片菜单"), P("Limited", "有限"), P("None", "无"), P("Not provided", "不提供")),
     entry: [
@@ -119,7 +119,7 @@ export const POIS: Poi[] = [
     area: P("Huangpu", "黄浦区"),
     address: P("Fuzhou Road, Huangpu, Shanghai", "上海市黄浦区福州路"),
     price: P("¥¥¥ · about ¥180 per person", "¥¥¥ · 人均约 ¥180"),
-    review: P("Classic Shanghai flavours, sweet-savoury. Ask about allergens before ordering rather than after.", "本帮口味，偏咸甜。点餐前而不是点完之后再确认过敏原。"),
+    review: P("Classic sweet-savoury Shanghai flavours. Ask about allergens before ordering.", "典型本帮菜口味，偏咸甜。点餐前先确认过敏原。"),
     payment: PAY_ROWS("onsite", "yes", "no", "yes", "yes"),
     language: LANG_ROWS(P("Partial English menu", "部分英文菜单"), P("Limited", "有限"), P("None", "无"), P("Not provided", "不提供")),
     entry: [
@@ -167,7 +167,7 @@ export const POIS: Poi[] = [
     area: P("Nanjing East Road", "南京东路"),
     address: P("Nanjing East Road, Huangpu, Shanghai", "上海市黄浦区南京东路"),
     price: P("Luxury · above your usual band", "豪华 · 高于你的常规区间"),
-    review: P("Central and lively. That cuts both ways — weigh the nightlife against your quiet preference.", "位置中心、氛围热闹。这是双刃剑——夜生活和你的安静偏好要权衡。"),
+    review: P("Central and lively, but the nightlife may not suit a traveller looking for a quiet room.", "位置中心，周边也很热闹。如果你更在意安静，订房前要留意房间位置。"),
     payment: PAY_ROWS("yes", "yes", "yes", "yes", "yes"),
     language: LANG_ROWS(P("Full English", "全英文"), P("Available", "可沟通"), P("Not applicable", "不适用"), P("Not applicable", "不适用")),
     entry: [
@@ -183,7 +183,7 @@ export const POIS: Poi[] = [
     area: P("Former French Concession", "衡复风貌区"),
     address: P("Jianguo West Road, Xuhui, Shanghai", "上海市徐汇区建国西路"),
     price: P("Luxury · above your usual band", "豪华 · 高于你的常规区间"),
-    review: P("Lane-house atmosphere and genuinely quiet. Add transfer time at peak hours — it is not on a metro doorstep.", "石库门氛围，确实安静。高峰时段要多留交通时间，门口没有地铁。"),
+    review: P("Quiet lane-house setting. It is not next to a metro station, so allow more transfer time during peak hours.", "石库门街区比较安静，但酒店不在地铁口，高峰时段要多留一些交通时间。"),
     payment: PAY_ROWS("yes", "yes", "yes", "yes", "yes"),
     language: LANG_ROWS(P("Full English", "全英文"), P("Available", "可沟通"), P("Not applicable", "不适用"), P("Not applicable", "不适用")),
     entry: [

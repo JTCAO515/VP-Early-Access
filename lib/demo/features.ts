@@ -17,10 +17,10 @@ export const FEATURES: Feature[] = [
   {
     id: "diff",
     glyph: "diff",
-    title: { en: "Nothing changes until you say so", zh: "你不点头，行程就不会变" },
+    title: { en: "Changes wait for your approval", zh: "改行程前，先问你" },
     body: {
-      en: "Every edit arrives as a proposal that names what triggered it — your message, your profile, a check, or a condition outside the app. You accept or reject each one.",
-      zh: "每一处修改都以提案出现，并写明触发来源——你的消息、你的画像、一次检查，还是应用之外的条件。你逐条接受或拒绝。",
+      en: "A message, profile setting or trip check may suggest a change. VisePanda shows the reason first, then lets you accept or reject it.",
+      zh: "一段对话、画像设置或行程检查，都可能带来修改建议。VisePanda 会先说明原因，再让你决定接受还是拒绝。",
     },
     proof: { en: "Shanghai · 3 changes waiting", zh: "上海 · 3 处改动待确认" },
     surface: "ask", chatId: "shanghai",
@@ -28,10 +28,10 @@ export const FEATURES: Feature[] = [
   {
     id: "evidence",
     glyph: "visa",
-    title: { en: "Every number carries its source", zh: "每个数字都带着来源" },
+    title: { en: "See where each fact came from", zh: "信息从哪来，一眼能看到" },
     body: {
-      en: "Prices, opening hours, payment rules and visa answers all show where they came from and when they were last rechecked. Stale facts are marked, not quietly reused.",
-      zh: "价格、开放时间、支付规则和签证结论都标明出处与上次复核时间。过期的信息会被标出来，而不是被悄悄继续使用。",
+      en: "Prices, opening hours, payment rules and visa answers show their source and last recheck. Old information is marked for another check.",
+      zh: "价格、开放时间、支付规则和签证信息都会标出来源与复核时间。信息过期了，就会提示重新确认。",
     },
     proof: { en: "Official · Platform · Your upload", zh: "官方 · 平台 · 你上传" },
     surface: "explore",
@@ -39,10 +39,10 @@ export const FEATURES: Feature[] = [
   {
     id: "unknown",
     glyph: "alert",
-    title: { en: "It says when it doesn't know", zh: "不知道的时候会直说" },
+    title: { en: "When it isn't sure, it tells you", zh: "不确定，就明确说" },
     body: {
-      en: "When an answer can't be confirmed, you get the gap named, the official channel that decides it, and a next step you can actually take — instead of a confident guess.",
-      zh: "无法确认时，会明确说出缺口、给出真正能裁定的官方渠道，以及你可以执行的下一步——而不是给一个听起来很确定的猜测。",
+      en: "If an answer cannot be confirmed, VisePanda says what is missing, points to the official channel and gives you a practical next step.",
+      zh: "遇到无法确认的信息，VisePanda 会说清楚缺什么、该去哪个官方渠道，以及你现在能做什么。",
     },
     proof: { en: "Delay compensation · cannot confirm", zh: "晚点补偿 · 无法确认" },
     surface: "ask", chatId: "rescue",
@@ -50,10 +50,10 @@ export const FEATURES: Feature[] = [
   {
     id: "memory",
     glyph: "human",
-    title: { en: "Your pace, remembered", zh: "你的节奏，它记得" },
+    title: { en: "It remembers how you travel", zh: "它会记住你的旅行习惯" },
     body: {
-      en: "Budget, walking range, start time, hotel style, allergies. Each memory shows its source, its confidence, and the suggestions it has already rewritten — and you can forget any of it.",
-      zh: "预算、步行范围、出发时间、酒店偏好、过敏。每条记忆都显示来源、置信度，以及它已经改写过哪些建议——任何一条你都可以让它忘记。",
+      en: "VisePanda can remember your budget, walking range, start time, hotel style and allergies. You can see where each memory came from, change it or delete it.",
+      zh: "预算、步行范围、出发时间、酒店偏好和过敏信息都可以记住。每条记忆都能查看来源，也能修改或删除。",
     },
     proof: { en: "12 memory items · peanut is a hard constraint", zh: "12 条记忆 · 花生是硬约束" },
     surface: "copilot",
@@ -61,10 +61,10 @@ export const FEATURES: Feature[] = [
   {
     id: "tools",
     glyph: "translate",
-    title: { en: "The errands, handled in place", zh: "杂事在行程里就办了" },
+    title: { en: "Useful travel tools in one place", zh: "常用工具，不用到处找" },
     body: {
-      en: "Menu reading, a Chinese ordering card, a pickup point, visa rules, an eSIM, and a support packet you can hand to a human. Each one states plainly what it does not claim.",
-      zh: "读菜单、生成中文点菜卡、确认上车点、查签证规则、办 eSIM，以及一份能直接交给人工的求助包。每个工具都写明自己不声明什么。",
+      en: "Read a menu, show a Chinese ordering card, confirm a pickup point, check visa rules or prepare an eSIM. Each tool also says where its responsibility ends.",
+      zh: "读菜单、出示中文点菜卡、确认上车点、查签证规则或准备 eSIM，都可以在这里完成。每个工具也会说明自己的能力边界。",
     },
     proof: { en: "5 tools · 36 screens", zh: "5 个工具 · 36 个子屏" },
     surface: "tools",
@@ -72,10 +72,10 @@ export const FEATURES: Feature[] = [
   {
     id: "recovery",
     glyph: "clock",
-    title: { en: "A plan for when it breaks", zh: "出问题时也有安排" },
+    title: { en: "When plans change, you still have a next step", zh: "计划有变，也知道下一步" },
     body: {
-      en: "Delays, closures, queues, someone feeling unwell. Today shows the next step now, and a recovery path for each of those — each one still going through the same confirmation.",
-      zh: "延误、闭馆、排队过长、身体不适。Today 给出此刻的下一步，以及这四种情况各自的恢复路径——而且同样要经过确认才生效。",
+      en: "A delay, closure, long queue or sick travel companion can change the day. Today suggests what to do next, but still asks before changing the Canvas.",
+      zh: "晚点、闭馆、排队过长，或者同行人身体不舒服，都会打乱当天安排。Today 会给出下一步，但修改 Canvas 前仍然要问你。",
     },
     proof: { en: "9 checks · 2 not workable", zh: "9 项检查 · 2 项不可行" },
     surface: "today",
@@ -83,11 +83,11 @@ export const FEATURES: Feature[] = [
 ];
 
 export const FEATURES_COPY = {
-  eyebrow: { en: "What the demo shows", zh: "Demo 展示了什么" },
-  title: { en: "Six things a trip planner has to get right.", zh: "旅行规划必须做对的六件事。" },
+  eyebrow: { en: "Try the working parts", zh: "这些功能可以直接点" },
+  title: { en: "A useful trip plan has to survive the trip.", zh: "行程好不好用，出发后才知道。" },
   lede: {
-    en: "Each one is a working state in the demo, not a promise. Open the card to land where it lives.",
-    zh: "每一条在 Demo 里都是可操作的真实状态，不是承诺。点开卡片直接落到它所在的位置。",
+    en: "Open a card to see the feature in the demo. These are prepared states, not live services.",
+    zh: "点开卡片，就能直接看到对应功能。这里展示的是预设状态，不是实时服务。",
   },
   open: { en: "Open in the demo", zh: "在 Demo 中打开" },
 };

@@ -89,7 +89,7 @@ export default function ToolsSurface({ lang, focusTool, onToast }: Props) {
             ) : null}
             {screen.note ? <p className="vp-tool-note">{screen.note[lang]}</p> : null}
             <button disabled={degraded === "offline" && !offlineAvailable} onClick={() => onToast(`${tool.title[lang]} · ${screen.label[lang]}`)}>
-              {lang === "zh" ? "在 Demo 中执行" : "Run in the demo"}
+              {lang === "zh" ? "查看演示状态" : "Show this demo state"}
             </button>
           </article>
 

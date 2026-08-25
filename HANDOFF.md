@@ -1,5 +1,21 @@
 # HANDOFF — 50-city map, completed Demo states and category comparison
 
+## Current working slice: humanized public copy
+
+- Branch: `codex/humanize-homepage-copy`
+- Status: implemented and locally accepted; not merged or deployed.
+- Installed global skills:
+  - `humanizer` from `blader/humanizer` at `e2e92e7b4b8229253ed5c8e81dc65463fdeddda5`;
+  - `humanizer-zh` from `ai-zixun/humanizer-zh` at `f75f1ac9735c4f10da1bba0148e0ea7228c5c3b3`.
+- Added repository copy rules in `AGENTS.md`: English uses `humanizer`; Chinese uses neutral `humanizer-zh`; bilingual pairs move together; facts, numbers, CTA targets and Demo boundaries stay unchanged.
+- Rewrote Hero, capability cards, competitor comparison, simulator, mobile section, closing CTA, Demo ability statements and the visible turns in all eleven chats.
+- Removed narrative em dashes, inflated claims, formulaic contrast, report language and repeated three-part explanations. Standard UI labels and fixture data were kept stable.
+- Fact audit: no product number, price, date, route, hard constraint, source/recheck state, inventory limitation or partnership boundary was added or removed.
+- `pnpm check` and `git diff --check` passed.
+- In-app Browser passed desktop English/Chinese identity, layout, console and interaction checks.
+- Playwright fallback was used after the in-app browser stalled at a 375px viewport. English/Chinese passed at 1440×900, 375×812 and 430×932 with no page overflow or console errors.
+- Production still serves `bac38b1`; the copy branch has not been released.
+
 - Release commit: `799760b` on GitHub `main`
 - Objective: expand the Hero map to 50 destinations, complete every product-plan item previously marked pending, add an honest competitor-category comparison and reconcile the repository documentation.
 - Status: implemented, merged to `main`, deployed by Vercel and production-smoke accepted.
@@ -83,4 +99,4 @@ Revert `799760b`. The generated map geometry, waitlist API and public JotForm de
 
 ## Next action
 
-Operator reviews the production experience and confirms that the public JotForm URL remains current.
+Operator reviews the rewritten copy and authorizes merge to `main`; after Vercel succeeds, run a production bilingual smoke check.

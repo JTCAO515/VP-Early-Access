@@ -20,20 +20,20 @@ export const SOURCE_LABEL: Record<SourceKind, Localized> = {
 };
 
 export const DEMO_UI = {
-  fixture: { en: "Demo fixture · not live data", zh: "Demo fixture · 非实时数据" },
+  fixture: { en: "Prepared demo · no live data", zh: "预设演示 · 非实时数据" },
   fixtureLong: {
-    en: "Every conversation, price, review and account in this demo is a fixed sample. Nothing here reads live inventory or places a real order.",
-    zh: "这个 Demo 里的所有对话、价格、评论和账户都是固定示例。不读取任何实时库存，也不会下真实订单。",
+    en: "The conversations, prices, reviews and account details here are fixed examples. The demo does not read live inventory or place orders.",
+    zh: "这里的对话、价格、评论和账户信息都是固定示例。Demo 不读取实时库存，也不会下单。",
   },
   localTime: { en: "Demo time 14:20", zh: "Demo 时间 14:20" },
 
   ability: {
-    ask: { en: "Ask the vague thing clearly, then turn it into a plan.", zh: "把模糊的想法问清楚，再落成行程。" },
-    canvas: { en: "Every change is explained first, then waits for your confirmation.", zh: "行程的每一次变化都先解释，再由你确认。" },
-    copilot: { en: "Remember your pace, budget and allergies, so you do not repeat yourself.", zh: "记住你的节奏、预算和忌口，下一次不用重讲。" },
-    explore: { en: "See the place clearly before you commit to it.", zh: "先看清楚一个地方，再决定要不要去。" },
-    tools: { en: "The errands a trip needs, without leaving the trip.", zh: "行程里要办的杂事，不用离开行程去办。" },
-    today: { en: "What to do right now, and what to do if it breaks.", zh: "此刻该做什么，出问题时又该做什么。" },
+    ask: { en: "Tell VisePanda what you have in mind. It will ask for the missing details and build a plan.", zh: "先说说你的想法。VisePanda 会把缺的信息问清楚，再整理成行程。" },
+    canvas: { en: "See the reason for each change, then decide whether to accept it.", zh: "每次改动先讲清原因，再由你决定。" },
+    copilot: { en: "Keep your pace, budget and allergies on hand for the next conversation.", zh: "旅行节奏、预算和忌口会留在画像里，下次不用重讲。" },
+    explore: { en: "Check the practical details before adding a place to your trip.", zh: "地点加进行程前，先把实际信息看清楚。" },
+    tools: { en: "Use the small tools that make a day of travel easier.", zh: "旅行中的小事，可以直接在这里处理。" },
+    today: { en: "See what comes next and what to do when the day changes.", zh: "看看下一步做什么，计划有变时也能及时调整。" },
   } satisfies Record<string, Localized>,
 
   shell: {
@@ -89,7 +89,7 @@ export const DEMO_UI = {
     mapCaption: { en: "Stops in order, with the moves between them", zh: "按顺序排列的节点与移动" },
     generating: { en: "Generating Trip Canvas", zh: "正在生成 Trip Canvas" },
     emptyTitle: { en: "No trip yet", zh: "还没有行程" },
-    uploadTypes: { en: "PDF · image · link · plain text — nothing is uploaded in this demo", zh: "PDF · 图片 · 链接 · 纯文本——Demo 不会真的上传" },
+    uploadTypes: { en: "PDF · image · link · plain text. This demo does not upload files.", zh: "支持 PDF、图片、链接和纯文本。Demo 不会真的上传文件。" },
   } satisfies Record<string, Localized>,
 
   chat: {
@@ -106,15 +106,15 @@ export const DEMO_UI = {
     another: { en: "Another option", zh: "换个方案" },
     wrong: { en: "This looks wrong", zh: "这条不对" },
     copied: { en: "Copied to clipboard (demo state only)", zh: "已复制（仅为 Demo 状态）" },
-    wrongNote: { en: "Marked as wrong. Copilot recorded it and will avoid this pattern.", zh: "已标为不对。Copilot 记下了，之后会避开这个模式。" },
-    anotherNote: { en: "Loaded the second preset answer for this turn.", zh: "已切换到这一轮的第二个预置回答。" },
+    wrongNote: { en: "Marked as wrong. Copilot will avoid using the same pattern next time.", zh: "已标记为不准确。Copilot 下次会避开同样的处理方式。" },
+    anotherNote: { en: "Showing another prepared answer.", zh: "已换成另一个预设回答。" },
   } satisfies Record<string, Localized>,
 
   copilot: {
     memory: { en: "Memory", zh: "记忆" },
     tools: { en: "Tools", zh: "工具" },
-    memoryTitle: { en: "A trip profile that learns over time", zh: "越聊越懂你的旅行方式" },
-    toolsTitle: { en: "The errands a trip actually needs", zh: "行程里真正要办的杂事" },
+    memoryTitle: { en: "The details you should not have to repeat", zh: "这些旅行习惯，不用每次重讲" },
+    toolsTitle: { en: "Tools for the practical parts of the trip", zh: "旅行中的具体问题，在这里处理" },
     source: { en: "Source", zh: "来源" },
     updated: { en: "Updated", zh: "更新" },
     impact: { en: "Already changed", zh: "已经改变了" },
@@ -126,7 +126,7 @@ export const DEMO_UI = {
     resume: { en: "Resume long-term memory", zh: "恢复长期记忆" },
     paused: { en: "Long-term memory is paused. Ask will stop quoting your profile.", zh: "长期记忆已暂停，Ask 将不再引用你的画像。" },
     exportTitle: { en: "Export my profile", zh: "导出我的画像" },
-    exportBody: { en: "A static preview of what you would take with you.", zh: "你可以带走的内容的静态预览。" },
+    exportBody: { en: "A static preview of the profile data available for export.", zh: "这里预览可以导出的画像数据。" },
     preview: { en: "Before and after", zh: "改动前后" },
     before: { en: "Before", zh: "改动前" },
     after: { en: "After", zh: "改动后" },
@@ -135,7 +135,7 @@ export const DEMO_UI = {
   } satisfies Record<string, Localized>,
 
   explore: {
-    title: { en: "Places, seen clearly", zh: "把地方看清楚" },
+    title: { en: "Check a place before you add it", zh: "加进行程前，先看看这个地方" },
     filters: { en: "Filters", zh: "筛选" },
     anyPrice: { en: "Any price", zh: "不限价位" },
     intlCard: { en: "Takes international cards", zh: "接受境外卡" },
@@ -145,7 +145,7 @@ export const DEMO_UI = {
     reset: { en: "Reset", zh: "重置" },
     results: { en: "results", zh: "个结果" },
     noResults: { en: "No place matches all of these filters", zh: "没有同时满足这些筛选的地点" },
-    noResultsBody: { en: "Loosen one filter, or ask VisePanda to look wider.", zh: "放宽一个条件，或让 VisePanda 扩大范围。" },
+    noResultsBody: { en: "Remove one filter, or ask VisePanda to search more broadly.", zh: "可以少选一个条件，或者让 VisePanda 扩大搜索范围。" },
     payment: { en: "Payment", zh: "支付" },
     language: { en: "Language & service", zh: "语言与服务" },
     entry: { en: "Entry & booking", zh: "入场与预约" },
@@ -153,8 +153,8 @@ export const DEMO_UI = {
     ask: { en: "Ask VisePanda about this", zh: "就这个地点提问" },
     add: { en: "Add to Trip Canvas", zh: "加入 Trip Canvas" },
     added: { en: "Added to Trip Canvas as a proposal", zh: "已作为提案加入 Trip Canvas" },
-    citySoonTitle: { en: "This city is being prepared", zh: "这个城市正在整理" },
-    citySoonBody: { en: "Shanghai has the complete category, filter and POI flow today.", zh: "目前上海已开放完整的分类、筛选和 POI 详情。" },
+    citySoonTitle: { en: "This city is not ready yet", zh: "这个城市还没准备好" },
+    citySoonBody: { en: "For now, the full category, filter and place-detail flow is available for Shanghai.", zh: "目前只有上海开放了完整的分类、筛选和地点详情。" },
     poiCount: { en: "places", zh: "个地点" },
     ready: { en: "Ready", zh: "已开放" },
     preparing: { en: "In preparation", zh: "整理中" },
@@ -213,11 +213,11 @@ export const DEMO_UI = {
     loading: { en: "Working…", zh: "处理中…" },
     partial: { en: "Partly parsed", zh: "部分解析成功" },
     retry: { en: "Fill it in by hand", zh: "手工补充" },
-    offline: { en: "Offline · showing what works without a connection", zh: "离线 · 只展示无需联网的部分" },
+    offline: { en: "Offline · showing saved information", zh: "当前离线 · 显示已保存信息" },
     normal: { en: "Connected", zh: "已联网" },
     simulateOffline: { en: "Preview offline", zh: "预览离线状态" },
     simulatePartial: { en: "Preview partial failure", zh: "预览部分失败" },
-    offlineBody: { en: "Saved cards and bilingual addresses remain available. Live rechecks, provider handoffs and new lookups wait for a connection.", zh: "已保存的卡片和双语地址仍可使用；实时复核、渠道跳转和新查询需等待网络恢复。" },
-    partialBody: { en: "Four results are ready. One provider did not answer, so its field stays marked for recheck instead of being guessed.", zh: "4 条结果可用；1 个渠道没有响应，该字段保持需复核，不会被猜测填充。" },
+    offlineBody: { en: "Saved cards and bilingual addresses still work. Rechecks, channel handoffs and new searches will resume when the connection returns.", zh: "已保存的卡片和双语地址仍然可以使用。网络恢复后，才能继续复核、跳转渠道或发起新查询。" },
+    partialBody: { en: "Four results are ready. One provider did not answer, so that field remains marked for recheck.", zh: "已有 4 条结果可用。还有 1 个渠道没有响应，对应字段会继续标记为需复核。" },
   } satisfies Record<string, Localized>,
 };

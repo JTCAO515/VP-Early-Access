@@ -13,7 +13,7 @@ export type SimCheck = {
 
 /** The nine checks from the plan, section 8.1. */
 export const SIM_CHECKS: SimCheck[] = [
-  { id: "route", label: { en: "Route feasibility", zh: "路线可行性" }, verdict: "pass", detail: { en: "Every pair of adjacent stops is reachable as planned.", zh: "相邻节点之间都走得通。" } },
+  { id: "route", label: { en: "Route feasibility", zh: "路线可行性" }, verdict: "pass", detail: { en: "The planned route connects each stop.", zh: "按当前路线，相邻地点之间都能顺利到达。" } },
   { id: "transfer", label: { en: "Transfer time", zh: "转场时间" }, verdict: "warn", detail: { en: "Day 2 leaves 8 minutes of buffer between the café and dinner.", zh: "Day 2 咖啡馆到晚餐之间只剩 8 分钟缓冲。" }, alternatives: [{ en: "Shorten the café stop by 15 minutes", zh: "咖啡馆缩短 15 分钟" }, { en: "Move dinner 20 minutes later", zh: "晚餐后移 20 分钟" }] },
   { id: "last", label: { en: "First and last departures", zh: "首末班" }, verdict: "fail", detail: { en: "The Shanghai → Xi'an leg departs before your dinner ends.", zh: "上海 → 西安 这段的末班车早于你的晚餐结束时间。" }, evidence: [{ kind: "official", label: { en: "Rail official channel", zh: "铁路官方渠道" }, checked: { en: "Demo recheck: 2d ago", zh: "Demo 复核：2 天前" } }], alternatives: [{ en: "Move the leg to the next morning", zh: "这段改到次日上午" }, { en: "Move dinner two hours earlier", zh: "晚餐提前两小时" }] },
   { id: "hours", label: { en: "Opening hours and closed days", zh: "开放时间与闭馆日" }, verdict: "warn", detail: { en: "The museum's last entry is earlier than its closing time.", zh: "美术馆的最后入场早于闭馆时间。" }, alternatives: [{ en: "Arrive 45 minutes earlier", zh: "提前 45 分钟到" }, { en: "Move it to the free morning", zh: "改到空着的上午" }] },
@@ -44,7 +44,7 @@ export const TODAY = {
     { id: "unwell", title: { en: "Someone feels unwell", zh: "身体不适" }, body: { en: "Cut the afternoon to one indoor stop and surface the medical channel.", zh: "下午缩减为一个室内节点，并给出医疗渠道。" } },
   ],
   note: {
-    en: "Every recovery path goes through the diff. Nothing is applied to your Canvas automatically.",
-    zh: "每条恢复路径都走 Diff 流程，不会自动改你的 Canvas。",
+    en: "Recovery plans are added to the diff first. The Canvas changes only after you approve them.",
+    zh: "应变方案会先进入 Diff。确认之后，Canvas 才会修改。",
   } as Localized,
 };

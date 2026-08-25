@@ -19,7 +19,7 @@ export default function DishDrawer({ lang, onClose, onToast }: { lang: Lang; onC
           <strong>{dish.name[lang]}</strong>
           {dish.safe ? null : (
             <p className="vp-allergen">
-              {lang === "zh" ? "触碰硬约束：花生" : "Hits a hard constraint: peanut"}
+              {lang === "zh" ? "这道菜含花生，与你的过敏设置冲突。" : "This dish contains peanut and conflicts with your allergy setting."}
               <button onClick={() => onToast(lang === "zh" ? "已给出替代菜品" : "Replacement suggested")}>
                 {lang === "zh" ? "替换建议" : "Suggest a replacement"}
               </button>
@@ -37,7 +37,7 @@ export default function DishDrawer({ lang, onClose, onToast }: { lang: Lang; onC
       <div className="vp-order-card">
         <small>{lang === "zh" ? "点菜卡（出示给店员）" : "Ordering card (show to staff)"}</small>
         <strong>我对花生过敏，请不要加花生或花生油。</strong>
-        <em>{lang === "zh" ? "Demo 静态内容，点餐前仍需与店员确认。" : "Static demo content. Still confirm with staff before ordering."}</em>
+        <em>{lang === "zh" ? "这是预设示例。点餐前仍需与店员确认。" : "This is a prepared example. Confirm with staff before ordering."}</em>
       </div>
     </aside>
   );
