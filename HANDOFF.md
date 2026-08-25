@@ -1,4 +1,4 @@
-# HANDOFF — VP Early Access hero map and product demo rebuild
+# HANDOFF — VP Early Access hero map, product demo rebuild and demo shell
 
 - Objective: make the hero map read as a real reference map, and rebuild the interactive product Demo on a shared fixture layer so every claim carries a state, a source and a recheck time.
 - Public CTA: unchanged — every Early Access link still points directly to `https://form.jotform.com/cjttttt/visepanda-early-access`.
@@ -11,6 +11,16 @@
 - `lib/map-geometry.ts` stays generated-only from `scripts/build-map.mjs`.
 - City markers project against the admin-0 bounds, so the 37 hero points did not move.
 
+## Latest slice (`5200b0c`)
+
+- Execution tools left Copilot and became a top-level **Tools** tab. Copilot holds long-term memory only.
+- The demo has a **full-screen mode**: the browser chrome goes fixed, the page behind it locks, and Escape or the header button returns. The frame keeps its footprint so the page does not jump.
+- **Open the demo** sits beside Join early access in the nav and the hero, and opens the demo full screen.
+- A **capability section** (`#capabilities`) puts six of the demo's claims on the page; each card deep-links into the demo surface where that claim actually lives.
+- Type scale moved up one step throughout the demo; the 7–9px tier was unreadable in the frame.
+- Scrolling fixed: the shell clamps its grid row, the sidebar pins the User row and scrolls only the chat list, and everything under the Canvas tab bar scrolls as one region.
+- Every chat opens on at least two exchanges.
+
 ## New contracts
 
 - `lib/demo/` is the single source of truth for the Demo. Superseded fixtures were deleted from `lib/copy.ts`; do not put Demo content back there.
@@ -19,6 +29,8 @@
 - Hard constraints (peanut allergy, step-free access) are never overridden automatically.
 - Each Copilot tool renders its own boundary line. Ride hailing must keep stating that it claims no partnership and requests no car.
 - Demo art is stroke-only SVG in `components/demo/art.tsx`, 32x32 for glyphs and 64x32 for scenes. No bitmaps, no third-party imagery.
+- The demo shell clamps its grid row; every surface scrolls internally. Do not put a `min-height` back on `.demo-app-shell`.
+- Full-screen state lives in `EarlyAccessPage`, not in `ProductDemo`, because the nav, the hero and the capability cards all open it.
 
 ## Delivered
 

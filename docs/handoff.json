@@ -1,39 +1,44 @@
 {
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
-  "lastUpdated": "2026-08-25T02:00:00Z",
-  "currentPhase": "product-demo-rebuild",
-  "status": "map-and-demo-shipped; S7/S13 partial, 430x932 unverified",
+  "lastUpdated": "2026-08-25T03:30:00Z",
+  "currentPhase": "demo-shell-polish",
+  "status": "shipped; S7/S13 partial, 430x932 and reduced-motion unverified",
   "objective": "Make the Early Access hero map read as a real reference map, and rebuild the interactive product demo on a shared fixture layer so every claim carries a state, a source and a recheck time.",
   "owner": "JTCAO515",
   "fromAgent": "claude-code",
   "intendedNextAgent": "codex",
   "changedFiles": [
-    "scripts/build-map.mjs",
-    "lib/map-geometry.ts",
-    "lib/landmarks.ts",
+    "HANDOFF.md",
+    "app/globals.css",
     "components/ChinaMap.tsx",
-    "lib/demo/types.ts",
-    "lib/demo/canvas.ts",
-    "lib/demo/chats.ts",
-    "lib/demo/tools.ts",
-    "lib/demo/memory.ts",
-    "lib/demo/explore.ts",
-    "lib/demo/today.ts",
-    "lib/demo/ui.ts",
-    "components/demo/parts.tsx",
-    "components/demo/art.tsx",
+    "components/DemoFeatures.tsx",
+    "components/EarlyAccessPage.tsx",
+    "components/ProductDemo.tsx",
     "components/demo/AskSurface.tsx",
     "components/demo/CopilotSurface.tsx",
+    "components/demo/DishDrawer.tsx",
     "components/demo/ExploreSurface.tsx",
     "components/demo/TodaySurface.tsx",
+    "components/demo/ToolsSurface.tsx",
     "components/demo/UserSurface.tsx",
-    "components/ProductDemo.tsx",
-    "lib/copy.ts",
-    "app/globals.css",
-    "docs/interactive-product-demo-plan.md",
+    "components/demo/art.tsx",
+    "components/demo/parts.tsx",
     "docs/handoff.json",
-    "HANDOFF.md"
+    "docs/interactive-product-demo-plan.md",
+    "lib/copy.ts",
+    "lib/demo/canvas.ts",
+    "lib/demo/chats.ts",
+    "lib/demo/explore.ts",
+    "lib/demo/features.ts",
+    "lib/demo/memory.ts",
+    "lib/demo/today.ts",
+    "lib/demo/tools.ts",
+    "lib/demo/types.ts",
+    "lib/demo/ui.ts",
+    "lib/landmarks.ts",
+    "lib/map-geometry.ts",
+    "scripts/build-map.mjs"
   ],
   "architectureContracts": [
     "lib/map-geometry.ts is generated only by scripts/build-map.mjs from Natural Earth 1:50m admin-0 and admin-1 GeoJSON; never hand-edit it.",
@@ -48,7 +53,11 @@
     "No Canvas change may apply without passing through the diff. There is no silent-update path.",
     "Hard constraints (peanut allergy, step-free access) are never overridden automatically anywhere in the demo.",
     "Each Copilot tool renders its own boundary line. Ride hailing must keep stating that it claims no partnership and requests no car.",
-    "Demo art is stroke-only SVG in components/demo/art.tsx on a 32x32 (glyph) or 64x32 (scene) grid. No bitmaps, no third-party imagery."
+    "Demo art is stroke-only SVG in components/demo/art.tsx on a 32x32 (glyph) or 64x32 (scene) grid. No bitmaps, no third-party imagery.",
+    "Execution tools are a top-level Tools tab, not a Copilot mode. Copilot holds long-term memory only.",
+    "The demo shell clamps its grid row; every surface scrolls internally. Do not reintroduce a min-height on .demo-app-shell.",
+    "Full screen is driven from EarlyAccessPage so the nav, the hero and the capability cards can all open the demo. ProductDemo does not own that state.",
+    "Every chat opens on at least two exchanges (openingShown in AskSurface)."
   ],
   "assumptions": [
     "Operator approved hand-drawn SVG landmark line art over sourced photography, so no third-party image licence is involved.",
@@ -62,79 +71,73 @@
     {
       "command": "pnpm typecheck",
       "status": "passed",
-      "summary": "Strict TypeScript passed across the new lib/demo and components/demo modules.",
+      "summary": "Strict TypeScript passed.",
       "artifact": null
     },
     {
       "command": "pnpm build",
       "status": "passed",
-      "summary": "Next.js 16.2.6 production build compiled and prerendered all three routes.",
+      "summary": "Production build compiled and prerendered all three routes.",
       "artifact": null
     },
     {
-      "command": "Hero map, desktop and mobile, both languages",
+      "command": "Demo shell at 1440x900, English and Chinese",
       "status": "passed",
-      "summary": "31 province paths, 4 outlines, 37 markers, lens magnification with province/city/landmark labels; lens correctly suppressed on a coarse pointer.",
+      "summary": "Sidebar keeps the User row pinned with 11 chats; the chat list is the only scrolling region; the Canvas body scrolls with the diff open (1406px content in a 690px region); Tools is its own tab with 5 tools; Copilot shows 12 memory items; the rail-vs-air comparison renders with the profile match highlighted.",
       "artifact": null
     },
     {
-      "command": "Landmark contact sheet review of all 37 glyphs",
+      "command": "Full screen, desktop and mobile",
       "status": "passed",
-      "summary": "Reviewed at 96px; five glyphs redrawn after the first pass and re-reviewed.",
+      "summary": "Header button and hero button both enter full screen; body scroll locks; Escape exits and restores scroll; the frame keeps its footprint so the page does not jump.",
       "artifact": null
     },
     {
-      "command": "Demo interaction pass at 1440x900, English and Chinese",
+      "command": "Opening turns per chat",
       "status": "passed",
-      "summary": "11 chats render; diff opens with 3 entries and per-entry accept/reject; Copilot Tools shows 5 tools with 7 and 8 screens verified; Explore POI drawer renders 4 matrices; Today shows 4 recovery paths and 9 simulator checks with a 2/4/3 summary; User shows 5 tabs including Privacy & Data.",
+      "summary": "Every chat opens on 4 or 5 messages; New Chat correctly opens on its single empty-state greeting.",
       "artifact": null
     },
     {
-      "command": "Demo at 375x812",
+      "command": "375x812",
       "status": "passed",
-      "summary": "No horizontal overflow (scrollWidth 375 = innerWidth 375); sidebar, canvas, diff, tools, recovery and matrices all reflow to single column.",
+      "summary": "No horizontal overflow inline or in full screen; the chat list becomes a horizontal strip; the nav demo button hides alongside the nav CTA as the existing design intends.",
       "artifact": null
     },
     {
-      "command": "Browser console on a fresh load and after interaction",
+      "command": "Browser console in a clean tab",
       "status": "passed",
-      "summary": "No console errors in a clean tab. Earlier dependency-array warnings were Fast Refresh artifacts and did not reproduce.",
+      "summary": "No errors. A table-row whitespace hydration warning was found and fixed; earlier repeated errors were a stale Turbopack buffer and did not reproduce after a server restart.",
       "artifact": null
     },
     {
-      "command": "Production smoke test of the hero map slice",
+      "command": "Production smoke test",
       "status": "passed",
-      "summary": "earlyaccess.go2china.space returned 200 with 31 province paths and the lm-* symbols; the deployed stylesheet carries the new rules.",
+      "summary": "earlyaccess.go2china.space serves demo-frame, six feature cards, the nav and hero demo buttons, the chat scroll region and the full-screen control.",
       "artifact": "https://earlyaccess.go2china.space/"
-    },
-    {
-      "command": "Production smoke test of the demo rebuild",
-      "status": "not-run",
-      "summary": "Not yet pushed at the time of writing; run after the deploy completes.",
-      "artifact": null
     },
     {
       "command": "prefers-reduced-motion regression",
       "status": "not-run",
-      "summary": "Guards were rewritten for the map and the demo skeleton shimmer but not executed under an emulated reduced-motion setting.",
+      "summary": "Guards exist but were not executed under an emulated reduced-motion setting.",
       "artifact": null
     },
     {
       "command": "430x932 mobile viewport",
       "status": "not-run",
-      "summary": "Only 375x812 was checked; the plan lists 430x932 as a standing requirement.",
+      "summary": "Only 375x812 was checked.",
       "artifact": null
     },
     {
       "command": "Frozen waitlist API regression matrix",
       "status": "not-run",
-      "summary": "Not rerun; neither slice touched the API, validation, rate limit or provider path.",
+      "summary": "Not rerun; untouched.",
       "artifact": null
     },
     {
       "command": "Live JotForm submission",
       "status": "not-run",
-      "summary": "Not submitted; public CTAs still link directly to the operator-provided JotForm URL.",
+      "summary": "Not submitted.",
       "artifact": null
     }
   ],
@@ -147,8 +150,8 @@
   ],
   "operatorActions": [
     "Confirm the public JotForm URL remains current.",
-    "Confirm that execution tools belong in Copilot only, or say whether Explore should also link to them.",
-    "Decide whether S7 (per-item editing of parsed import results) and S13 (partial-failure and offline degradation states) are worth another slice."
+    "Decide whether S7 (editing individual parsed import results) and S13 (partial-failure and offline degradation states) are worth another slice.",
+    "Say whether the capability section should sit above or below the demo on the page; it currently sits above."
   ],
   "mandatoryReadingOrder": [
     "docs/interactive-product-demo-plan.md",
@@ -158,10 +161,10 @@
     "lib/landmarks.ts",
     "scripts/build-map.mjs"
   ],
-  "rollback": "Revert 593d76b for the demo rebuild, f82abc9 for the landmark glyphs and 19dd221 for the map. All three are isolated from the waitlist API and the JotForm CTA.",
+  "rollback": "Revert 5200b0c for the shell polish, 593d76b for the demo rebuild, f82abc9 for the landmark glyphs and 19dd221 for the map.",
   "nextAction": {
-    "description": "Verify the demo rebuild on production after the deploy, then close out S7 and S13 if the operator wants them.",
-    "expectedObservation": "earlyaccess.go2china.space returns 200 and renders 11 chats, the diff banner and the Copilot Tools list.",
-    "command": "curl -s https://earlyaccess.go2china.space/ | grep -c vp-tool-list"
+    "description": "Run the two outstanding checks — 430x932 and prefers-reduced-motion — then close out S7 and S13 if the operator wants them.",
+    "expectedObservation": "No horizontal overflow at 430x932, and no autoplay or shimmer under reduced motion.",
+    "command": "pnpm check"
   }
 }

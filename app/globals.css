@@ -1314,7 +1314,13 @@ a { color: inherit; }
 .vp-map-pin i { display: grid; place-items: center; width: 15px; height: 15px; border: 2px solid #fff; border-radius: 50%; background: #9b6cda; color: #fff; font-size: 9px; font-style: normal; font-weight: 800; box-shadow: 0 3px 10px rgba(76,42,111,.3); }
 .vp-map-pin.state-recheck i { background: #c9861f; }
 .vp-map-pin.state-inferred i { background: #857b88; }
-.vp-map-pin b { padding: 2px 6px; border-radius: 6px; background: rgba(255,255,255,.9); font-size: 9px; white-space: nowrap; }
+.vp-map-pin b { padding: 2px 6px; border-radius: 6px; border: 1px solid rgba(42,24,46,.08); background: rgba(255,255,255,.95); font-size: 9px; white-space: nowrap; box-shadow: 0 2px 6px rgba(42,24,46,.08); }
+/* Stagger the labels so a dense day does not stack them on top of each other. */
+.vp-map-pin:nth-of-type(even) { flex-direction: row-reverse; }
+.vp-map-pin:nth-of-type(3n) b { transform: translateY(-15px); }
+.vp-map-pin:nth-of-type(3n+2) b { transform: translateY(15px); }
+.vp-map-pin:hover { z-index: 3; }
+.vp-map-pin:hover b { background: #2a182e; border-color: #2a182e; color: #fff; }
 
 /* ── Demo · conversation ──────────────────────────────────────────────── */
 .vp-recall { display: grid; gap: 2px; margin-top: 7px; padding: 8px 10px; border: 1px dashed #d5c6ec; border-radius: 10px; background: #faf7fe; text-align: left; }
