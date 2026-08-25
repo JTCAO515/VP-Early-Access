@@ -12,6 +12,7 @@
   "productionBaselineCommit": "bac38b1",
   "changedFiles": [
     "AGENTS.md",
+    "app/layout.tsx",
     "README.md",
     "HANDOFF.md",
     "app/globals.css",

@@ -5,14 +5,14 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://earlyaccess
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "VisePanda — Early Access",
+  title: "VisePanda | Early Access",
   description:
-    "VisePanda validates, optimises and sequences your China trip, so the plan you leave home with actually works. Join the early access list.",
+    "VisePanda keeps routes, daily plans and practical travel details in one place. Join the Early Access list for an invitation.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "VisePanda — Early Access",
+    title: "VisePanda | Early Access",
     description:
-      "China, perfectly connected. Join the VisePanda early access list — iOS and Android apps in development.",
+      "Plan China without the loose ends. VisePanda for iOS and Android is in development. Join the Early Access list.",
     url: siteUrl,
     siteName: "VisePanda",
     type: "website",
