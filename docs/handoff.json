@@ -1,15 +1,15 @@
 {
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
-  "lastUpdated": "2026-08-25T05:04:43Z",
+  "lastUpdated": "2026-08-25T08:00:19Z",
   "currentPhase": "shareable-standalone-demo",
-  "status": "implemented; pending-merge-and-production-verification",
+  "status": "merged-to-main; deployed-and-production-verified",
   "objective": "Expose the existing immersive Product Demo as a standalone shareable route at /demo without duplicating components or fixture data.",
   "owner": "JTCAO515",
   "fromAgent": "codex",
   "intendedNextAgent": "operator-review",
   "branch": "main",
-  "releaseCommit": "0a4c420",
+  "releaseCommit": "cc8c237",
   "changedFiles": [
     "AGENTS.md",
     "app/layout.tsx",
@@ -101,6 +101,12 @@
       "artifact": "/tmp/vp-demo-mobile.png"
     },
     {
+      "command": "Standalone /demo production smoke",
+      "status": "passed",
+      "summary": "The custom-domain route returned HTTP 200. Desktop and 390x844 mobile passed direct navigation, reload, EN/Chinese switching, Tools/Explore navigation and return-to-home checks without page overflow or console errors.",
+      "artifact": "https://earlyaccess.go2china.space/demo"
+    },
+    {
       "command": "Map city/glyph invariant",
       "status": "passed",
       "summary": "50 cities, 50 glyph keys, no missing or extra ids.",
@@ -150,7 +156,7 @@
     }
   ],
   "operatorActions": [
-    "Share and review https://earlyaccess.go2china.space/demo after deployment.",
+    "Share https://earlyaccess.go2china.space/demo as the standalone product Demo.",
     "Use docs/interactive-demo-implementation-report.md to plan the formal product implementation.",
     "Confirm the public JotForm URL remains current."
   ],
@@ -161,7 +167,7 @@
     "The competitor table is category-level positioning, not a sourced named-provider market study.",
     "Production smoke passed, but long-term product outcome and external-service availability are not measured."
   ],
-  "rollback": "Revert 0a4c420, 85d110b and 45d1bf6 to return to production baseline bac38b1. Waitlist API, JotForm destination and product behaviour are unchanged.",
+  "rollback": "Revert cc8c237 to remove the standalone /demo route and restore the homepage Demo links. The embedded ProductDemo, waitlist API and JotForm destination are otherwise unchanged.",
   "mandatoryReadingOrder": [
     "README.md",
     "docs/interactive-product-demo-plan.md",
@@ -170,8 +176,8 @@
     "docs/codex-kickoff.md"
   ],
   "nextAction": {
-    "description": "Merge the standalone Demo route to main and verify /demo on desktop and mobile after Vercel succeeds.",
-    "expectedObservation": "Direct navigation and refresh render the immersive Demo, language switching works, and the back link returns to the Early Access page.",
-    "command": "curl -I https://earlyaccess.go2china.space/demo"
+    "description": "Use the standalone Demo URL for Early Access sharing and use the implementation report when planning the formal product build.",
+    "expectedObservation": "Recipients can open the immersive Demo directly and return to the Early Access site from its browser bar.",
+    "command": "open https://earlyaccess.go2china.space/demo"
   }
 }

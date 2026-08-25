@@ -22,12 +22,14 @@
 ## Current working slice: shareable `/demo`
 
 - Route: `https://earlyaccess.go2china.space/demo`.
+- Release commit: `cc8c237` on GitHub `main`; Vercel production deployment passed.
 - Reuses the existing `ProductDemo` and `lib/demo/` fixture layer.
 - Standalone mode stays immersive, offers EN/中文 switching and links back to the Early Access page.
 - Main nav and Hero Demo links now open `/demo`; capability cards keep their existing in-page deep links.
 - Embedded Demo behaviour, JotForm CTA and frozen waitlist API remain unchanged.
 - Local production build passed direct load, reload, EN/中文 switching, Explore navigation and return-to-home checks.
 - Desktop 1280×720 and mobile 390×844 rendered without page overflow or console errors.
+- Production returned HTTP 200 and passed the same desktop/mobile route, interaction, reload and back-link checks.
 
 - Release commit: `799760b` on GitHub `main`
 - Objective: expand the Hero map to 50 destinations, complete every product-plan item previously marked pending, add an honest competitor-category comparison and reconcile the repository documentation.
