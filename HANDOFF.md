@@ -1,8 +1,8 @@
 # HANDOFF — 50-city map, completed Demo states and category comparison
 
-- Branch: `codex/ea-50-cities-spec-completion`
+- Release commit: `799760b` on GitHub `main`
 - Objective: expand the Hero map to 50 destinations, complete every product-plan item previously marked pending, add an honest competitor-category comparison and reconcile the repository documentation.
-- Status: implemented and locally accepted; not merged or deployed.
+- Status: implemented, merged to `main`, deployed by Vercel and production-smoke accepted.
 - Frozen boundaries preserved: public JotForm CTA, legacy waitlist API contract, no secrets, no real transaction/provider action, VP-V4 read-only.
 
 ## Delivered
@@ -54,7 +54,7 @@
 - Map browser checks — 50 markers, 50 accessible controls, 50 SVG symbols, 31 province paths and four national outlines; Kashgar mouse activation and Suzhou keyboard activation showed the correct glyph/place/weather callout.
 - Autoplay advanced; emulated reduced motion kept the active city fixed.
 - Full-screen enter/Escape exit restored body scrolling.
-- Production deployment — not run; this branch has not been merged.
+- Production deployment — passed: `earlyaccess.go2china.space` renders 50 markers/controls/symbols, the comparison section and the completed Demo. Kashgar click/weather, full-screen, tour Diff and 430×932 mobile passed with no console errors.
 - Frozen waitlist API regression — not run; untouched.
 - Live JotForm submission — not run; no email was transmitted.
 
@@ -75,12 +75,12 @@ Above-the-fold copy and CTA order are unchanged. No material visual mismatch rem
 - Dense eastern-city clusters rely on the lens; all markers are clickable but not all labels can be visible simultaneously.
 - Open-Meteo is an external dependency. Failure still omits the weather row rather than inventing a value.
 - The competitor section is positioning copy, not a sourced market study; keep it category-level unless a research task adds citations.
-- Public production behaviour is unverified until the branch is merged and Vercel completes.
+- Production observation is a smoke test, not a long-term product outcome measurement.
 
 ## Rollback
 
-Revert the single implementation commit from this branch. The generated map geometry, waitlist API and public JotForm destination are not changed by the rollback.
+Revert `799760b`. The generated map geometry, waitlist API and public JotForm destination are not changed by the rollback.
 
 ## Next action
 
-Operator reviews the branch and authorizes merge to `main`; after Vercel succeeds, run the same production smoke and interaction matrix against `https://earlyaccess.go2china.space/`.
+Operator reviews the production experience and confirms that the public JotForm URL remains current.

@@ -1,14 +1,15 @@
 {
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
-  "lastUpdated": "2026-08-25T03:39:20Z",
+  "lastUpdated": "2026-08-25T03:46:37Z",
   "currentPhase": "50-city-and-spec-completion",
-  "status": "implemented-and-locally-accepted; not-merged-or-deployed",
+  "status": "merged-deployed-and-production-smoke-passed",
   "objective": "Expand the Hero map to 50 destinations with matching landmark glyphs, complete all formerly pending Demo states, add an honest competitor-category comparison and reconcile the repository documentation.",
   "owner": "JTCAO515",
   "fromAgent": "codex",
   "intendedNextAgent": "operator-review",
-  "branch": "codex/ea-50-cities-spec-completion",
+  "branch": "main",
+  "releaseCommit": "799760b6632e9ff25fc683a52dd3fd2ec82270f5",
   "changedFiles": [
     "README.md",
     "HANDOFF.md",
@@ -85,9 +86,9 @@
     },
     {
       "command": "Production deployment smoke",
-      "status": "not-run",
-      "summary": "The branch is not merged or deployed.",
-      "artifact": null
+      "status": "passed",
+      "summary": "Vercel reported success. earlyaccess.go2china.space rendered 50 markers, 50 accessible controls, 50 symbols, the competitor section and completed Demo. Kashgar mouse/weather, full screen, tour Diff and 430x932 mobile passed with no console errors.",
+      "artifact": "https://earlyaccess.go2china.space/"
     },
     {
       "command": "Frozen waitlist API regression matrix",
@@ -103,17 +104,16 @@
     }
   ],
   "operatorActions": [
-    "Review the competitor positioning and the explicit OTA inventory limitation.",
-    "Authorize merge of codex/ea-50-cities-spec-completion to main.",
+    "Review the production competitor positioning and the explicit OTA inventory limitation.",
     "Confirm the public JotForm URL remains current."
   ],
   "risks": [
     "Dense eastern-city clusters depend on the pointer lens for labels.",
     "Open-Meteo remains an external dependency; failure omits weather.",
     "The competitor table is category-level positioning, not a sourced named-provider market study.",
-    "Production remains unverified until merge and Vercel deployment."
+    "Production smoke passed, but long-term product outcome and external-service availability are not measured."
   ],
-  "rollback": "Revert the single implementation commit on codex/ea-50-cities-spec-completion. Waitlist API, JotForm destination and generated map geometry are unchanged.",
+  "rollback": "Revert 799760b. Waitlist API, JotForm destination and generated map geometry are unchanged.",
   "mandatoryReadingOrder": [
     "README.md",
     "docs/interactive-product-demo-plan.md",
@@ -122,8 +122,8 @@
     "docs/codex-kickoff.md"
   ],
   "nextAction": {
-    "description": "Operator reviews and authorizes merge to main, then the next agent runs the production browser matrix after Vercel succeeds.",
-    "expectedObservation": "earlyaccess.go2china.space shows 50 map controls, the competitor section and completed Demo states with no console errors or page overflow.",
-    "command": "git diff main...codex/ea-50-cities-spec-completion"
+    "description": "Operator reviews the production experience and confirms that the public JotForm URL remains current.",
+    "expectedObservation": "The page positioning is accepted and each Early Access CTA opens the intended public form.",
+    "command": "curl -I https://form.jotform.com/cjttttt/visepanda-early-access"
   }
 }
