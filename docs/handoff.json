@@ -1,45 +1,90 @@
 {
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
-  "lastUpdated": "2026-08-24T14:10:00Z",
-  "currentPhase": "interactive-product-demo-deployed",
-  "status": "deployed-with-domain-blocker",
-  "objective": "Present VisePanda's planned product depth through an interactive browser-framed Early Access demo covering Chatbot, Trip Canvas, long-term traveler memory, Explore tools and user profile controls.",
+  "lastUpdated": "2026-08-25T00:00:00Z",
+  "currentPhase": "hero-map-detail-and-demo-plan-expansion",
+  "status": "map-shipped-to-production; demo-plan-expansion-awaiting-implementation",
+  "objective": "Make the Early Access hero map read as a real reference map (province borders, cursor magnifier, per-city landmark art) and expand the interactive product demo plan with the field-level detail needed to build and accept the next demo slices.",
   "owner": "JTCAO515",
+  "fromAgent": "claude-code",
+  "intendedNextAgent": "codex",
   "changedFiles": [
-    "components/ProductDemo.tsx",
-    "components/EarlyAccessPage.tsx",
+    "scripts/build-map.mjs",
+    "lib/map-geometry.ts",
+    "lib/landmarks.ts",
     "components/ChinaMap.tsx",
-    "lib/copy.ts",
     "app/globals.css",
-    "public/assets/demo/michael-turner-avatar.png",
     "docs/interactive-product-demo-plan.md",
     "docs/handoff.json",
     "HANDOFF.md"
   ],
+  "architectureContracts": [
+    "lib/map-geometry.ts is generated only by scripts/build-map.mjs from Natural Earth 1:50m admin-0 and admin-1 GeoJSON; never hand-edit it.",
+    "MAP_VIEWBOX.bounds is derived from the admin-0 selection alone so MAP_CITIES projection stays stable when province geometry is regenerated.",
+    "LANDMARK_ART keys must stay 1:1 with MAP_CITIES ids; a missing key renders an empty symbol.",
+    "Landmark glyphs are authored on a 32x32 grid, stroke-only, coloured through currentColor; stroke width is set per usage, not in the symbol.",
+    "The hero map plate never pans, rolls or zooms on its own; only the pointer-driven lens transforms, and only for fine pointers.",
+    "Product Demo copy stays centralized and bilingual in lib/copy.ts.",
+    "The frozen waitlist API, validation, rate limit and the direct JotForm CTA were not touched."
+  ],
+  "assumptions": [
+    "Operator approved hand-drawn SVG landmark line art over sourced photography, so no third-party image licence is involved.",
+    "Operator approved direct implementation of the map slice by Claude rather than dispatching it to Codex.",
+    "Operator approved pushing this slice straight to main, which triggers a Vercel production deploy."
+  ],
   "verification": [
     {
-      "command": "pnpm check",
+      "command": "pnpm typecheck",
       "status": "passed",
-      "summary": "Strict TypeScript and the Next.js production build passed.",
+      "summary": "Strict TypeScript passed after the ChinaMap rewrite and the landmark wiring.",
       "artifact": null
     },
     {
-      "command": "Playwright product-demo interaction matrix",
+      "command": "pnpm build",
       "status": "passed",
-      "summary": "1440x900 and 375x812, English and Chinese: Ask, Canvas, dish drawer, Copilot, Explore, tools and User edit/save passed with no console errors or horizontal overflow.",
-      "artifact": "/tmp/vp-demo-desktop.png"
+      "summary": "Next.js 16.2.6 production build compiled and prerendered all three routes.",
+      "artifact": null
+    },
+    {
+      "command": "Desktop hero map interaction, 1440x900, English and Chinese",
+      "status": "passed",
+      "summary": "31 province paths, 4 country outlines and 37 markers rendered; the lens magnified the region under the pointer 2.6x with province, city and landmark labels; the callout tracked the lens and showed the correct landmark glyph; the base plate dimmed while lensing and the hint pill hid.",
+      "artifact": null
+    },
+    {
+      "command": "Landmark contact sheet review of all 37 glyphs",
+      "status": "passed",
+      "summary": "Rendered every glyph at 96px against the city and place names; Hohhot, Shanghai, Hangzhou, Zhengzhou and Shenzhen were redrawn after the first pass and re-reviewed.",
+      "artifact": null
+    },
+    {
+      "command": "Mobile hero map, 375x812",
+      "status": "passed",
+      "summary": "Coarse pointer disabled the lens and the cursor hint; the static plate, province borders, rotating highlight and the landmark callout all rendered without horizontal overflow.",
+      "artifact": null
+    },
+    {
+      "command": "Browser console errors",
+      "status": "passed",
+      "summary": "No console errors on a fresh load or after lens interaction. One dependency-array warning appeared only across a Fast Refresh boundary and did not reproduce after a full reload.",
+      "artifact": null
+    },
+    {
+      "command": "Production smoke test after deploy",
+      "status": "passed",
+      "summary": "earlyaccess.go2china.space returned 200 with 31 province paths and the lm-* landmark symbols in the HTML, and the deployed stylesheet contains the new province, lens and callout rules.",
+      "artifact": "https://earlyaccess.go2china.space/"
+    },
+    {
+      "command": "prefers-reduced-motion regression on the rewritten map",
+      "status": "not-run",
+      "summary": "The reduced-motion guard was rewritten (autoplay suppressed, marker pulse and callout transition disabled) but not executed under an emulated reduced-motion setting; the browser pane offers no such emulation here.",
+      "artifact": null
     },
     {
       "command": "Frozen waitlist API regression matrix",
       "status": "not-run",
-      "summary": "Not rerun because this slice did not modify the frozen API or provider path; the previous handoff recorded it as passed.",
-      "artifact": null
-    },
-    {
-      "command": "Full China map autoplay and reduced-motion regression",
-      "status": "passed",
-      "summary": "37 markers and four outline paths rendered; five-second autoplay advanced, manual city selection paused playback, and reduced-motion prevented autoplay.",
+      "summary": "Not rerun; this slice did not touch the API, validation, rate limit or provider path.",
       "artifact": null
     },
     {
@@ -49,27 +94,35 @@
       "artifact": null
     },
     {
-      "command": "GitHub/Vercel production status and HTTP smoke test",
-      "status": "passed",
-      "summary": "Commit 1056877 received a successful Vercel status; vp-early-access.vercel.app returned 200 with the new product demo content.",
-      "artifact": "https://vp-early-access.vercel.app/"
-    },
-    {
-      "command": "Custom-domain route smoke test",
-      "status": "blocked",
-      "summary": "https://www.go2china.space/earlyaccess returned HTTP 410. Path routing must be added in the separate project that controls go2china.space; this repository cannot bind a domain path directly.",
-      "artifact": "https://www.go2china.space/earlyaccess"
+      "command": "430x932 mobile viewport",
+      "status": "not-run",
+      "summary": "Only 375x812 was checked this round; the expanded plan lists 430x932 as a standing requirement.",
+      "artifact": null
     }
+  ],
+  "blockers": [],
+  "risks": [
+    "lib/map-geometry.ts grew from about 13 KB to about 43 KB gzipped because it now carries 31 simplified province outlines. Raise EPSILON in scripts/build-map.mjs if the hero payload becomes a problem.",
+    "Province borders come from Natural Earth 1:50m admin-1 and are drawn per province, so shared borders are stroked twice; this is only visible as a slightly denser dashed line.",
+    "The landmark glyphs are stylised interpretations, not surveyed drawings; they must never be presented as photographs of the real places."
   ],
   "operatorActions": [
     "Confirm the public JotForm URL remains current.",
-    "Add an /earlyaccess rewrite or route in the separate Vercel project that controls go2china.space; VP-V4 remains read-only for this task.",
-    "Replace CSS POI and dish image placeholders with approved project-local assets in a later image pass."
+    "Decide whether the expanded demo plan (docs/interactive-product-demo-plan.md sections 10 to 17) should be split into GitHub issues for Codex, and in which order.",
+    "Replace the CSS POI and dish image placeholders inside the Product Demo with approved project-local assets in a later image pass; the hero map no longer needs an image pass."
   ],
-  "rollback": "Revert the interactive product demo commit to restore the prior Early Access feature sections; the waitlist API and direct JotForm CTA remain isolated.",
+  "mandatoryReadingOrder": [
+    "docs/interactive-product-demo-plan.md",
+    "HANDOFF.md",
+    "docs/handoff.json",
+    "components/ChinaMap.tsx",
+    "lib/landmarks.ts",
+    "scripts/build-map.mjs"
+  ],
+  "rollback": "Revert f82abc9 to drop the landmark glyphs and 19dd221 to restore the previous rolling map; both commits are isolated from the waitlist API, the JotForm CTA and the Product Demo.",
   "nextAction": {
-    "description": "Authorize a separate change in the project that controls go2china.space to route /earlyaccess to the deployed Early Access app.",
-    "expectedObservation": "https://www.go2china.space/earlyaccess returns 200 and shows the same release as vp-early-access.vercel.app.",
-    "command": "curl -I https://www.go2china.space/earlyaccess"
+    "description": "Implement slice S1 of the expanded demo plan: the shared status badges from section 2.2 and the evidence/source constructs from section 10, since every later slice depends on them.",
+    "expectedObservation": "Confirmed, Proposed, Inferred and Recheck badges render from one shared component in Canvas, Copilot, POI and User surfaces, and every numeric claim in the demo can be traced to a source with a recheck time.",
+    "command": "pnpm check"
   }
 }
