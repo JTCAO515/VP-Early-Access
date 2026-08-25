@@ -9,6 +9,7 @@ import type { ChatId } from "@/lib/demo/types";
 import { DEMO_UI } from "@/lib/demo/ui";
 import AskSurface from "./demo/AskSurface";
 import CopilotSurface from "./demo/CopilotSurface";
+import DishDrawer from "./demo/DishDrawer";
 import ExploreSurface from "./demo/ExploreSurface";
 import TodaySurface from "./demo/TodaySurface";
 import UserSurface from "./demo/UserSurface";
@@ -127,7 +128,7 @@ export default function ProductDemo({ lang }: { lang: Lang }) {
                   chatId={chatId}
                   onToast={setToast}
                   onOpenMemory={openMemory}
-                  onOpenDishes={() => { setSurface("explore"); setDishOpen(true); }}
+                  onOpenDishes={() => setDishOpen(true)}
                   onOpenTool={openTool}
                 />
               ) : null}
@@ -145,17 +146,13 @@ export default function ProductDemo({ lang }: { lang: Lang }) {
               ) : null}
 
               {surface === "explore" ? (
-                <ExploreSurface
-                  lang={lang}
-                  dishOpen={dishOpen}
-                  setDishOpen={setDishOpen}
-                  onToast={setToast}
-                  onAsk={() => selectChat("shanghai")}
-                />
+                <ExploreSurface lang={lang} onToast={setToast} onAsk={() => selectChat("shanghai")} />
               ) : null}
 
               {surface === "today" ? <TodaySurface lang={lang} onToast={setToast} /> : null}
               {surface === "user" ? <UserSurface lang={lang} onToast={setToast} /> : null}
+
+              {dishOpen ? <DishDrawer lang={lang} onClose={() => setDishOpen(false)} onToast={setToast} /> : null}
 
               {toast ? <div className="demo-toast">{toast}</div> : null}
             </main>
