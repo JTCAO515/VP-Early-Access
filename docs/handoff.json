@@ -1,15 +1,15 @@
 {
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
-  "lastUpdated": "2026-08-25T04:59:55Z",
+  "lastUpdated": "2026-08-25T05:04:43Z",
   "currentPhase": "humanized-public-copy",
-  "status": "implemented-and-locally-accepted; not-merged-or-deployed",
+  "status": "merged-deployed-and-production-smoke-passed",
   "objective": "Install and configure humanizer plus humanizer-zh, rewrite the bilingual public page and visible Demo dialogue, and publish a code-backed Markdown report of every Demo function and layout for formal product development.",
   "owner": "JTCAO515",
   "fromAgent": "codex",
   "intendedNextAgent": "operator-review",
-  "branch": "codex/humanize-homepage-copy",
-  "productionBaselineCommit": "bac38b1",
+  "branch": "main",
+  "releaseCommit": "0a4c420",
   "changedFiles": [
     "AGENTS.md",
     "app/layout.tsx",
@@ -122,6 +122,12 @@
       "artifact": "https://earlyaccess.go2china.space/"
     },
     {
+      "command": "Humanized copy production smoke",
+      "status": "passed",
+      "summary": "Production returned 200 with the new Hero, capability, comparison, Demo and metadata copy. The previous Hero slogan was absent and the corrected 34-screen count was present.",
+      "artifact": "https://earlyaccess.go2china.space/"
+    },
+    {
       "command": "Frozen waitlist API regression matrix",
       "status": "not-run",
       "summary": "Untouched by this slice.",
@@ -135,17 +141,17 @@
     }
   ],
   "operatorActions": [
-    "Merge the approved humanized copy and implementation report to main.",
+    "Use docs/interactive-demo-implementation-report.md to plan the formal product implementation.",
     "Confirm the public JotForm URL remains current."
   ],
   "risks": [
-    "The copy pass is locally verified but not yet visible in production.",
+    "The copy pass is live; future copy changes should continue using the configured humanizer skills and bilingual fact audit.",
     "Dense eastern-city clusters depend on the pointer lens for labels.",
     "Open-Meteo remains an external dependency; failure omits weather.",
     "The competitor table is category-level positioning, not a sourced named-provider market study.",
     "Production smoke passed, but long-term product outcome and external-service availability are not measured."
   ],
-  "rollback": "Revert the humanized-copy commit to return to production baseline bac38b1. Waitlist API, JotForm destination and product behaviour are unchanged.",
+  "rollback": "Revert 0a4c420, 85d110b and 45d1bf6 to return to production baseline bac38b1. Waitlist API, JotForm destination and product behaviour are unchanged.",
   "mandatoryReadingOrder": [
     "README.md",
     "docs/interactive-product-demo-plan.md",
@@ -154,8 +160,8 @@
     "docs/codex-kickoff.md"
   ],
   "nextAction": {
-    "description": "Merge the approved copy and report to main, then run a production bilingual smoke check after Vercel succeeds.",
-    "expectedObservation": "The English and Chinese production page shows the approved copy and the implementation report is present on main.",
-    "command": "git push origin HEAD:main"
+    "description": "Turn docs/interactive-demo-implementation-report.md into scoped implementation issues for the formal VisePanda product.",
+    "expectedObservation": "Each issue names the Demo behaviour to preserve, the production contract to add, its dependencies, checks and rollback.",
+    "command": "sed -n '1,260p' docs/interactive-demo-implementation-report.md"
   }
 }

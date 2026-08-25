@@ -2,8 +2,8 @@
 
 ## Current working slice: humanized public copy
 
-- Branch: `codex/humanize-homepage-copy`
-- Status: implemented and locally accepted; not merged or deployed.
+- Release commits: `45d1bf6` (copy), `85d110b` (implementation report), `0a4c420` (metadata) on GitHub `main`.
+- Status: merged, deployed by Vercel and production-smoke accepted.
 - Installed global skills:
   - `humanizer` from `blader/humanizer` at `e2e92e7b4b8229253ed5c8e81dc65463fdeddda5`;
   - `humanizer-zh` from `ai-zixun/humanizer-zh` at `f75f1ac9735c4f10da1bba0148e0ea7228c5c3b3`.
@@ -17,7 +17,7 @@
 - `pnpm check` and `git diff --check` passed.
 - In-app Browser passed desktop English/Chinese identity, layout, console and interaction checks.
 - Playwright fallback was used after the in-app browser stalled at a 375px viewport. English/Chinese passed at 1440×900, 375×812 and 430×932 with no page overflow or console errors.
-- Production still serves `bac38b1`; the copy branch has not been released.
+- Production serves the humanized copy and updated metadata. The previous Hero slogan is absent from rendered HTML.
 
 - Release commit: `799760b` on GitHub `main`
 - Objective: expand the Hero map to 50 destinations, complete every product-plan item previously marked pending, add an honest competitor-category comparison and reconcile the repository documentation.
@@ -102,4 +102,4 @@ Revert `799760b`. The generated map geometry, waitlist API and public JotForm de
 
 ## Next action
 
-Merge the copy/report branch to `main`; after Vercel succeeds, run a production bilingual smoke check and confirm the report is available in the repository.
+Use `docs/interactive-demo-implementation-report.md` as the reference when breaking the formal product work into implementation issues.
