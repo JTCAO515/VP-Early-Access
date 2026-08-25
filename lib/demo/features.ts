@@ -66,7 +66,7 @@ export const FEATURES: Feature[] = [
       en: "Read a menu, show a Chinese ordering card, confirm a pickup point, check visa rules or prepare an eSIM. Each tool also says where its responsibility ends.",
       zh: "读菜单、出示中文点菜卡、确认上车点、查签证规则或准备 eSIM，都可以在这里完成。每个工具也会说明自己的能力边界。",
     },
-    proof: { en: "5 tools · 36 screens", zh: "5 个工具 · 36 个子屏" },
+    proof: { en: "5 tools · 34 screens", zh: "5 个工具 · 34 个子屏" },
     surface: "tools",
   },
   {

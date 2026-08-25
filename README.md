@@ -89,8 +89,9 @@ Read in this order:
 
 1. `README.md`
 2. `docs/interactive-product-demo-plan.md`
-3. `HANDOFF.md`
-4. `docs/handoff.json`
-5. the owning implementation files named by the handoff
+3. `docs/interactive-demo-implementation-report.md`
+4. `HANDOFF.md`
+5. `docs/handoff.json`
+6. the owning implementation files named by the handoff
 
 `docs/codex-kickoff.md` now records the current execution contract and supersedes its former 12-city/server-side-JotForm brief. Repository and deployed evidence outrank historical chat or commit notes.

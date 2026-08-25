@@ -9,6 +9,8 @@
   - `humanizer-zh` from `ai-zixun/humanizer-zh` at `f75f1ac9735c4f10da1bba0148e0ea7228c5c3b3`.
 - Added repository copy rules in `AGENTS.md`: English uses `humanizer`; Chinese uses neutral `humanizer-zh`; bilingual pairs move together; facts, numbers, CTA targets and Demo boundaries stay unchanged.
 - Rewrote Hero, capability cards, competitor comparison, simulator, mobile section, closing CTA, Demo ability statements and the visible turns in all eleven chats.
+- Added `docs/interactive-demo-implementation-report.md`, a code-backed report of every Demo surface, layout, fixture, interaction, component boundary and recommended path into formal product development.
+- Corrected the public/documented tool count from 36 to the actual 34 screens: Translation 7, Ride 8, Visa 6, Network 7 and Human Handoff 6.
 - Removed narrative em dashes, inflated claims, formulaic contrast, report language and repeated three-part explanations. Standard UI labels and fixture data were kept stable.
 - Fact audit: no product number, price, date, route, hard constraint, source/recheck state, inventory limitation or partnership boundary was added or removed.
 - `pnpm check` and `git diff --check` passed.
@@ -99,4 +101,4 @@ Revert `799760b`. The generated map geometry, waitlist API and public JotForm de
 
 ## Next action
 
-Operator reviews the rewritten copy and authorizes merge to `main`; after Vercel succeeds, run a production bilingual smoke check.
+Merge the copy/report branch to `main`; after Vercel succeeds, run a production bilingual smoke check and confirm the report is available in the repository.

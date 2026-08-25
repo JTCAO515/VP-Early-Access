@@ -1,10 +1,10 @@
 {
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
-  "lastUpdated": "2026-08-25T04:46:26Z",
+  "lastUpdated": "2026-08-25T04:59:55Z",
   "currentPhase": "humanized-public-copy",
   "status": "implemented-and-locally-accepted; not-merged-or-deployed",
-  "objective": "Install and configure humanizer plus humanizer-zh, then rewrite the bilingual public page and visible Demo dialogue so it sounds natural without changing facts, boundaries or CTA behaviour.",
+  "objective": "Install and configure humanizer plus humanizer-zh, rewrite the bilingual public page and visible Demo dialogue, and publish a code-backed Markdown report of every Demo function and layout for formal product development.",
   "owner": "JTCAO515",
   "fromAgent": "codex",
   "intendedNextAgent": "operator-review",
@@ -29,6 +29,7 @@
     "components/demo/art.tsx",
     "docs/codex-kickoff.md",
     "docs/handoff.json",
+    "docs/interactive-demo-implementation-report.md",
     "docs/interactive-product-demo-plan.md",
     "lib/copy.ts",
     "lib/demo/chats.ts",
@@ -55,6 +56,7 @@
     "No Canvas change applies without a visible Diff and confirmation.",
     "Copilot owns long-term memory; Tools is top-level; Explore owns Places only.",
     "No public copy may claim existing OTA, hotel, ticketing or ride-hailing partnerships without evidence.",
+    "The implementation report describes current code and must keep static Demo fixtures separate from production-ready capabilities.",
     "The public JotForm CTA and frozen waitlist API contract remain unchanged."
   ],
   "verification": [
@@ -132,7 +134,7 @@
     }
   ],
   "operatorActions": [
-    "Review and approve the humanized bilingual copy for merge to main.",
+    "Merge the approved humanized copy and implementation report to main.",
     "Confirm the public JotForm URL remains current."
   ],
   "risks": [
@@ -151,8 +153,8 @@
     "docs/codex-kickoff.md"
   ],
   "nextAction": {
-    "description": "Operator reviews the rewritten copy and authorizes merge to main; the next agent then runs a production bilingual smoke check after Vercel succeeds.",
-    "expectedObservation": "The English and Chinese production page shows the approved natural-language copy without layout regressions.",
-    "command": "git diff main...codex/humanize-homepage-copy"
+    "description": "Merge the approved copy and report to main, then run a production bilingual smoke check after Vercel succeeds.",
+    "expectedObservation": "The English and Chinese production page shows the approved copy and the implementation report is present on main.",
+    "command": "git push origin HEAD:main"
   }
 }
