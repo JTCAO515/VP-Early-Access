@@ -1,10 +1,10 @@
 {
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
-  "lastUpdated": "2026-08-25T08:00:19Z",
-  "currentPhase": "shareable-standalone-demo",
-  "status": "merged-to-main; deployed-and-production-verified",
-  "objective": "Expose the existing immersive Product Demo as a standalone shareable route at /demo without duplicating components or fixture data.",
+  "lastUpdated": "2026-08-27T01:45:55Z",
+  "currentPhase": "brand-identity-adoption",
+  "status": "implemented; pending-merge-and-production-verification",
+  "objective": "Apply the supplied VisePanda Logo and visual identity consistently to the Early Access homepage and standalone /demo route without changing product behaviour or fixture boundaries.",
   "owner": "JTCAO515",
   "fromAgent": "codex",
   "intendedNextAgent": "operator-review",
@@ -14,6 +14,7 @@
     "AGENTS.md",
     "app/layout.tsx",
     "app/demo/page.tsx",
+    "components/BrandLogo.tsx",
     "README.md",
     "HANDOFF.md",
     "app/globals.css",
@@ -23,6 +24,7 @@
     "components/EarlyAccessPage.tsx",
     "components/ProductDemo.tsx",
     "components/StandaloneDemoPage.tsx",
+    "public/assets/brand/visepanda-master-logo.png",
     "components/demo/AskSurface.tsx",
     "components/demo/DishDrawer.tsx",
     "components/demo/ExploreSurface.tsx",
@@ -61,7 +63,9 @@
     "Copilot owns long-term memory; Tools is top-level; Explore owns Places only.",
     "No public copy may claim existing OTA, hotel, ticketing or ride-hailing partnerships without evidence.",
     "The implementation report describes current code and must keep static Demo fixtures separate from production-ready capabilities.",
-    "The public JotForm CTA and frozen waitlist API contract remain unchanged."
+    "The public JotForm CTA and frozen waitlist API contract remain unchanged.",
+    "The supplied master Logo keeps its Cream sticker edge and is never recoloured, redrawn or destructively cropped.",
+    "Plum, Gold, Butter and Cream are the public brand palette; Gold remains an accent rather than the only carrier of state."
   ],
   "verification": [
     {
@@ -105,6 +109,12 @@
       "status": "passed",
       "summary": "The custom-domain route returned HTTP 200. Desktop and 390x844 mobile passed direct navigation, reload, EN/Chinese switching, Tools/Explore navigation and return-to-home checks without page overflow or console errors.",
       "artifact": "https://earlyaccess.go2china.space/demo"
+    },
+    {
+      "command": "Brand identity local browser QA",
+      "status": "passed",
+      "summary": "Homepage and /demo loaded the shared local Logo, the homepage map rendered Gold markers and callout treatment, Shanghai activation updated the selected city, and no browser console errors or warnings were recorded.",
+      "artifact": "/tmp/visepanda-logo-512.png"
     },
     {
       "command": "Map city/glyph invariant",
@@ -156,18 +166,19 @@
     }
   ],
   "operatorActions": [
-    "Share https://earlyaccess.go2china.space/demo as the standalone product Demo.",
+    "Merge the brand-identity slice, then review the live homepage and https://earlyaccess.go2china.space/demo on desktop and mobile.",
     "Use docs/interactive-demo-implementation-report.md to plan the formal product implementation.",
     "Confirm the public JotForm URL remains current."
   ],
   "risks": [
+    "The supplied 4K SVG is intentionally not served directly because it embeds a 13 MB raster; retain the local 512px web derivative unless a larger approved surface requires another export.",
     "The copy pass is live; future copy changes should continue using the configured humanizer skills and bilingual fact audit.",
     "Dense eastern-city clusters depend on the pointer lens for labels.",
     "Open-Meteo remains an external dependency; failure omits weather.",
     "The competitor table is category-level positioning, not a sourced named-provider market study.",
     "Production smoke passed, but long-term product outcome and external-service availability are not measured."
   ],
-  "rollback": "Revert cc8c237 to remove the standalone /demo route and restore the homepage Demo links. The embedded ProductDemo, waitlist API and JotForm destination are otherwise unchanged.",
+  "rollback": "Revert the brand-identity commit to restore the prior purple visual tokens and text-only marks. Product behaviour, the embedded ProductDemo, waitlist API and JotForm destination are unchanged.",
   "mandatoryReadingOrder": [
     "README.md",
     "docs/interactive-product-demo-plan.md",
@@ -176,8 +187,8 @@
     "docs/codex-kickoff.md"
   ],
   "nextAction": {
-    "description": "Use the standalone Demo URL for Early Access sharing and use the implementation report when planning the formal product build.",
-    "expectedObservation": "Recipients can open the immersive Demo directly and return to the Early Access site from its browser bar.",
-    "command": "open https://earlyaccess.go2china.space/demo"
+    "description": "Merge the VisePanda visual identity slice and verify the live Logo, brand colours, homepage map and standalone Demo on desktop and mobile.",
+    "expectedObservation": "Both routes use the same master Logo and the published Plum, Gold, Butter and Cream system without changing product behaviour.",
+    "command": "curl -I https://earlyaccess.go2china.space/demo"
   }
 }

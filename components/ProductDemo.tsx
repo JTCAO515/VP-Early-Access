@@ -19,6 +19,7 @@ import TodaySurface from "./demo/TodaySurface";
 import ToolsSurface from "./demo/ToolsSurface";
 import UserSurface from "./demo/UserSurface";
 import { StateBadge } from "./demo/parts";
+import BrandLogo from "./BrandLogo";
 
 export type DemoIntent = { surface: DemoSurface; chatId?: ChatId; nonce: number };
 
@@ -157,7 +158,7 @@ export default function ProductDemo({ lang, fullscreen, onFullscreen = NOOP_FULL
 
             <div className="demo-app-shell">
               <aside className="demo-sidebar">
-                <span className="demo-brand">VisePanda.</span>
+                <span className="demo-brand"><BrandLogo className="demo-brand-logo" size={30} /><span>VisePanda</span></span>
 
                 <nav className="demo-main-nav">
                   {NAV.map((item) => (

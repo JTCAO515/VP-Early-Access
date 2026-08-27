@@ -31,6 +31,15 @@
 - Desktop 1280×720 and mobile 390×844 rendered without page overflow or console errors.
 - Production returned HTTP 200 and passed the same desktop/mobile route, interaction, reload and back-link checks.
 
+## Current working slice: VisePanda visual identity
+
+- Added the approved VisePanda master artwork as a web-optimised local asset at `public/assets/brand/visepanda-master-logo.png`.
+- The supplied 4K SVG is a single embedded-raster export (about 13 MB); the local 512px PNG preserves the master mark for web use while keeping delivery practical.
+- Homepage navigation, Hero and footer now use the mark; the interactive Demo sidebar uses the same source, so `/` and `/demo` share one brand asset.
+- Applied the supplied VIS foundation: Cream and Butter surfaces, Plum for primary fields, Gold for routes, active map markers and CTAs, plus a Nunito Sans / Baloo 2-compatible font stack with Noto Sans CJK fallback.
+- Public product claims, CTA destinations, map data, static Demo fixtures and all existing interactions are unchanged.
+- Local production browser checks passed: homepage and standalone Demo loaded with the Logo, city activation showed the new Gold callout, and console logs remained clear.
+
 - Release commit: `799760b` on GitHub `main`
 - Objective: expand the Hero map to 50 destinations, complete every product-plan item previously marked pending, add an honest competitor-category comparison and reconcile the repository documentation.
 - Status: implemented, merged to `main`, deployed by Vercel and production-smoke accepted.

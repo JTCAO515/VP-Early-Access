@@ -14,6 +14,7 @@ import MobileShowcase from "./MobileShowcase";
 import ProductDemo, { type DemoIntent } from "./ProductDemo";
 import Simulator from "./Simulator";
 import { ArrowRight } from "./icons";
+import BrandLogo from "./BrandLogo";
 
 const JOTFORM_URL = "https://form.jotform.com/cjttttt/visepanda-early-access";
 
@@ -41,7 +42,7 @@ export default function EarlyAccessPage({ weather }: { weather: CityWeather[] })
     <div lang={lang}>
       <nav className="nav">
         <div className="nav-left">
-          <span className="wordmark">{t.brand}</span>
+          <span className="brand-lockup"><BrandLogo className="brand-logo brand-logo-nav" priority size={42} /><span className="wordmark">{t.brand}</span></span>
           <span className="badge">{t.nav.badge[lang]}</span>
         </div>
         <div className="nav-right">
@@ -64,7 +65,7 @@ export default function EarlyAccessPage({ weather }: { weather: CityWeather[] })
 
       <header className="hero">
         <div className="wrap hero-layout">
-          <div className="hero-copy"><h1 className="display">{t.hero.title[lang]}</h1><p className="hero-lede">{t.hero.lede[lang]}</p><p className="hero-note"><span className="dot" />{t.hero.note[lang]}</p><div className="hero-actions"><a href={JOTFORM_URL} target="_blank" rel="noreferrer" className="pill-button hero-cta">{t.nav.cta[lang]} <ArrowRight /></a><Link className="pill-button ghost hero-demo" href="/demo">{DEMO_UI.shell.openDemo[lang]} <ArrowRight /></Link></div></div>
+          <div className="hero-copy"><BrandLogo className="brand-logo brand-logo-hero" priority size={154} /><h1 className="display">{t.hero.title[lang]}</h1><p className="hero-lede">{t.hero.lede[lang]}</p><p className="hero-note"><span className="dot" />{t.hero.note[lang]}</p><div className="hero-actions"><a href={JOTFORM_URL} target="_blank" rel="noreferrer" className="pill-button hero-cta">{t.nav.cta[lang]} <ArrowRight /></a><Link className="pill-button ghost hero-demo" href="/demo">{DEMO_UI.shell.openDemo[lang]} <ArrowRight /></Link></div></div>
           <ChinaMap lang={lang} weather={weather} />
         </div>
       </header>
@@ -97,7 +98,7 @@ export default function EarlyAccessPage({ weather }: { weather: CityWeather[] })
 
       <footer className="footer">
         <div className="wrap footer-inner">
-          <span className="wordmark">{t.brand}</span>
+          <span className="brand-lockup brand-lockup-footer"><BrandLogo className="brand-logo brand-logo-footer" size={52} /><span className="wordmark">{t.brand}</span></span>
           <span>
             © {new Date().getFullYear()} {t.brand}. {t.footer.rights[lang]}
           </span>
