@@ -1,15 +1,15 @@
 {
   "schemaVersion": "2.0",
   "projectId": "vp-early-access",
-  "lastUpdated": "2026-08-27T01:45:55Z",
+  "lastUpdated": "2026-08-27T01:48:00Z",
   "currentPhase": "brand-identity-adoption",
-  "status": "implemented; pending-merge-and-production-verification",
+  "status": "merged-to-main; deployed-and-production-verified",
   "objective": "Apply the supplied VisePanda Logo and visual identity consistently to the Early Access homepage and standalone /demo route without changing product behaviour or fixture boundaries.",
   "owner": "JTCAO515",
   "fromAgent": "codex",
   "intendedNextAgent": "operator-review",
   "branch": "main",
-  "releaseCommit": "cc8c237",
+  "releaseCommit": "ce32dd1",
   "changedFiles": [
     "AGENTS.md",
     "app/layout.tsx",
@@ -117,6 +117,12 @@
       "artifact": "/tmp/visepanda-logo-512.png"
     },
     {
+      "command": "Brand identity production browser QA",
+      "status": "passed",
+      "summary": "earlyaccess.go2china.space and /demo loaded the shared Logo on the custom domain. Shanghai activation updated the selected map city and Gold callout; homepage and Demo had no browser console errors or warnings.",
+      "artifact": "https://earlyaccess.go2china.space/demo"
+    },
+    {
       "command": "Map city/glyph invariant",
       "status": "passed",
       "summary": "50 cities, 50 glyph keys, no missing or extra ids.",
@@ -166,7 +172,7 @@
     }
   ],
   "operatorActions": [
-    "Merge the brand-identity slice, then review the live homepage and https://earlyaccess.go2china.space/demo on desktop and mobile.",
+    "Use the brand-identity homepage and standalone Demo for Early Access sharing.",
     "Use docs/interactive-demo-implementation-report.md to plan the formal product implementation.",
     "Confirm the public JotForm URL remains current."
   ],
@@ -187,8 +193,8 @@
     "docs/codex-kickoff.md"
   ],
   "nextAction": {
-    "description": "Merge the VisePanda visual identity slice and verify the live Logo, brand colours, homepage map and standalone Demo on desktop and mobile.",
-    "expectedObservation": "Both routes use the same master Logo and the published Plum, Gold, Butter and Cream system without changing product behaviour.",
-    "command": "curl -I https://earlyaccess.go2china.space/demo"
+    "description": "Use the shared visual system for future Early Access surfaces and retain the master-mark usage rules when adding product pages.",
+    "expectedObservation": "New surfaces preserve the Cream sticker edge, use Plum/Gold/Butter/Cream purposefully and do not introduce a second logo source.",
+    "command": "open https://earlyaccess.go2china.space/demo"
   }
 }
